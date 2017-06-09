@@ -26,6 +26,7 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
+                        <th>Rev</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@
                         </td>
                         <td>{{ product.description }}</td>
                         <td>{{ product.price }}</td>
+                        <td>{{ product._rev }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -49,6 +51,7 @@
             <h3>{{ product.name }}</h3>
             <div>Description: <b>{{ product.description }}</b></div>
             <div>Price: <b>{{ product.price }}</b></div>
+            <div>Rev: <b>{{ product._rev }}</b></div>
             <div>
                 <router-link to="/">Back to list</router-link>
                 <router-link :to="{name: 'product-edit', params: {product_id: product._id}}">Edit</router-link>
@@ -95,6 +98,10 @@
                     <label for="edit-price">Price</label>
                     <input type="number" id="edit-price" v-model="product.price" />
                 </div>
+                <div>
+                    <label for="edit-rev">Rev</label>
+                    <input type="number" id="edit-rev" v-model="product._rev" />
+                </div>
                 <button type="submit">Save</button>
                 <router-link :to="{name: 'product-view', params: {product_id: product._id}}">Cancel</router-link>
             </form>
@@ -114,38 +121,23 @@
 </body>
 
 <script>
-    // var products = [{id: guid(), name: '', description: '', price: 99}];
-    function getLocalStorage() {
-        var myArray = new Array;
-        var myObject = localStorage.getItem('local-products');
-        if (myObject !== null) {
-            myArray = JSON.parse(myObject);
-        }
-        return myArray;
-    }
-    var products = getLocalStorage();
-    function saveProducts() {
-        localStorage.setItem('local-products', JSON.stringify(products));
-    }
 
-    console.log(JSON.stringify(products));
-    //console.log(products[0]);
-    //console.log(products[1]);
     var db = new PouchDB('local-products');
     var remoteCouch = false;
-    //db.changes({
-    //    since: 'now',
-    //    live: true
-    //}).on('change', getPouchDB);
+
+    db.changes({
+        since: 'now',
+        live: true
+    });
+
     getPouchDB();
 
     function getPouchDB() {
         db.allDocs({
             include_docs: true,
-            descending: true
+            descending: false
         }, function (err, doc) {
             products = showItems(doc.rows)
-
 
             function showItems(items) {
                 console.log('Start...');
@@ -161,206 +153,233 @@
                 return result;
             }
             console.log(JSON.stringify(products));
-        });
 
-    }
-
-    function findProduct(productId) {
-        return products[findProductKey(productId)];
-    };
-
-    function findProductKey(productId) {
-        for (var key = 0; key < products.length; key++) {
-            if (products[key]._id == productId) {
-                return key;
-            }
-        }
-    };
-
-    var ProductList = Vue.extend({
-        template: '#product-list',
-        data: function () {
-            return {
-                products: products,
-                searchKey: ''
-            };
-        },
-        computed: {
-            filteredProducts() {
-                return this.products.filter((product) => {
-                    return product.name.indexOf(this.searchKey) > -1
-                })
-            }
-        }
-    });
-
-    var ProductView = Vue.extend({
-        template: '#product-view',
-        data: function () {
-            return {
-                product: findProduct(this.$route.params.product_id)
-            };
-        }
-    });
-
-    var ProductAdd = Vue.extend({
-        template: '#product-add',
-        data: function () {
-            return {
-                product: {
-                    name: '',
-                    description: '',
-                    price: '',
-                    _rev: '0'
+            // var products = [{id: guid(), name: '', description: '', price: 99}];
+            function getLocalStorage() {
+                var myArray = new Array;
+                var myObject = localStorage.getItem('local-products');
+                if (myObject !== null) {
+                    myArray = JSON.parse(myObject);
                 }
+                return myArray;
             }
-        },
-        methods: {
-            createProduct: function () {
-                var product_id = guid();
-                let product = this.product;
-                products.push({
-                    _id: product_id,
-                    name: product.name,
-                    description: product.description,
-                    price: product.price,
-                    _rev: '0'
-                });
+            //var products = getLocalStorage();
 
-
-                saveProducts();
-
-                var myproducts = {
-                    _id: product_id,
-                    name: product.name,
-                    description: product.description,
-                    price: product.price
-                };
+            function saveProducts(myproducts) {
+                localStorage.setItem('local-products', JSON.stringify(products));
                 db.put(myproducts).then(function (response) {
                     // handle response
                     console.log('Successfull');
                 }).catch(function (err) {
                     console.log(JSON.parse(err));
                 });
-                router.push('/');
             }
-        }
-    });
 
-
-    var ProductEdit = Vue.extend({
-        template: '#product-edit',
-        data: function () {
-            return {
-                product: findProduct(this.$route.params.product_id)
+            //console.log(JSON.stringify(products));
+            //console.log(products[0]);
+            //console.log(products[1]);
+            function findProduct(productId) {
+                return products[findProductKey(productId)];
             };
-        },
-        methods: {
-            updateProduct: function () {
-                let product = this.product;
-                products[findProductKey(product._id)] = {
-                    _id: product._id,
-                    name: product.name,
-                    description: product.description,
-                    price: product.price,
-                    _rev: "0"
-                };
-                saveProducts();
 
-                console.log(product._rev);
-                db.get(product._id, function (err, doc) {
-                    console.log(product._id);
-                    console.log(doc._rev);
-                    var myproducts = {
-                        _id: product._id,
-                        _rev: doc._rev,
-                        name: product.name,
-                        description: product.description,
-                        price: product.price
+            function findProductKey(productId) {
+                for (var key = 0; key < products.length; key++) {
+                    if (products[key]._id == productId) {
+                        return key;
+                    }
+                }
+            };
+
+            var ProductList = Vue.extend({
+                template: '#product-list',
+                data: function () {
+                    return {
+                        products: products,
+                        searchKey: ''
                     };
-                    db.put(myproducts).then(function (response) {
-                        // handle response
-                        console.log('Successfull');
-                    }).catch(function (err) {
-                        console.log(JSON.parse(err));
-                    });
-                    console.log('xz');
+                },
+                computed: {
+                    filteredProducts() {
+                        return this.products.filter((product) => {
+                            return product.name.indexOf(this.searchKey) > -1
+                        })
+                    }
+                }
+            });
+
+            var ProductView = Vue.extend({
+                template: '#product-view',
+                data: function () {
+                    return {
+                        product: findProduct(this.$route.params.product_id)
+                    };
+                }
+            });
+
+            var ProductAdd = Vue.extend({
+                template: '#product-add',
+                data: function () {
+                    return {
+                        product: {
+                            name: '',
+                            description: '',
+                            price: '',
+                            _rev: '0'
+                        }
+                    }
+                },
+                methods: {
+                    createProduct: function () {
+                        //var product_id = guid();
+                        var product_id = new Date().toISOString();
+                        let product = this.product;
+
+
+                        var myproducts = {
+                            _id: product_id,
+                            name: product.name,
+                            description: product.description,
+                            price: product.price
+                        };
+                        saveProducts(myproducts);
+                        products.push(myproducts);
+                        /*products.push({
+                            _id: product_id,
+                            name: product.name,
+                            description: product.description,
+                            price: product.price,
+                            _rev: product._rev
+                        });*/
+/*
+                        db.put(myproducts).then(function (response) {
+                            // handle response
+                            console.log('Successfull');
+                        }).catch(function (err) {
+                            console.log(JSON.parse(err));
+                        });
+                        */
+                        router.push('/');
+                    }
+                }
+            });
+
+
+            var ProductEdit = Vue.extend({
+                template: '#product-edit',
+                data: function () {
+                    return {
+                        product: findProduct(this.$route.params.product_id)
+                    };
+                },
+                methods: {
+                    updateProduct: function () {
+                        let product = this.product;
+                        products[findProductKey(product._id)] = {
+                            _id: product._id,
+                            name: product.name,
+                            description: product.description,
+                            price: product.price,
+                            _rev: product._rev
+                        };
+                        console.log('..');
+                        console.log(product._rev);
+                        //saveProducts();
+
+                        //console.log(this.product._rev);
+                        db.get(product._id, function (err, doc) {
+                            var myproducts = {
+                                _id: product._id,
+                                _rev: doc._rev,
+                                name: product.name,
+                                description: product.description,
+                                price: product.price
+                            };
+                            db.put(myproducts).then(function (response) {
+                                // handle response
+                                console.log('Successfull');
+                            }).catch(function (err) {
+                                console.log(JSON.parse(err));
+                            });
+                            console.log('xz');
+                        });
+
+                        router.push('/view/' + product._id);
+                    }
+                }
+            });
+
+            var ProductDelete = Vue.extend({
+                template: '#product-delete',
+                data: function () {
+                    return {
+                        product: findProduct(this.$route.params.product_id)
+                    };
+                },
+                methods: {
+                    deleteProduct: function () {
+                        let product = this.product;
+                        //products[findProductKey(product._id)] = {
+                        //    name: product.name
+                        //}
+                        console.log(product._rev);
+                        products.splice(findProductKey(this.$route.params.product_id), 1);
+                        //console.log(product_id);
+                        //saveProducts();
+                        db.remove(product._id, product._rev);
+                        router.push('/');
+                    }
+                }
+            });
+
+            // RFC4122 version 4 compliant solution that solves that issue by offsetting the first 13 hex numbers by a hex portion of the timestamp. That way, even if Math.random is on the same seed, both clients would have to generate the UUID at the exact same millisecond (or 10,000+ years later) to get the same UUID:
+            function guid() {
+                var performance,
+                    d = new Date().getTime();
+                if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+                    d += performance.now(); //use high-precision timer if available
+                }
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = (d + Math.random() * 16) % 16 | 0;
+                    d = Math.floor(d / 16);
+                    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
                 });
-
-                router.push('/view/' + product._id);
             }
-        }
-    });
 
-    var ProductDelete = Vue.extend({
-        template: '#product-delete',
-        data: function () {
-            return {
-                product: findProduct(this.$route.params.product_id)
-            };
-        },
-        methods: {
-            deleteProduct: function () {
-                let product = this.product;
-                //products[findProductKey(product._id)] = {
-                //    name: product.name
-                //}
-                console.log(product._rev);
-                products.splice(findProductKey(this.$route.params.product_id), 1);
-                //console.log(product_id);
-                saveProducts();
-                router.push('/');
-            }
-        }
-    });
-
-    // RFC4122 version 4 compliant solution that solves that issue by offsetting the first 13 hex numbers by a hex portion of the timestamp. That way, even if Math.random is on the same seed, both clients would have to generate the UUID at the exact same millisecond (or 10,000+ years later) to get the same UUID:
-    function guid() {
-        var performance,
-            d = new Date().getTime();
-        if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
-            d += performance.now(); //use high-precision timer if available
-        }
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+            var router = new VueRouter({
+                routes: [{
+                    path: '/',
+                    component: ProductList,
+                    name: 'product-list'
+                }, {
+                    path: '/add',
+                    component: ProductAdd,
+                    name: 'product-add'
+                }, {
+                    path: '/view/:product_id',
+                    component: ProductView,
+                    name: 'product-view'
+                }, {
+                    path: '/edit/:product_id',
+                    component: ProductEdit,
+                    name: 'product-edit'
+                }, {
+                    path: '/delete/:product_id',
+                    component: ProductDelete,
+                    name: 'product-delete'
+                }]
+            });
+            var App = {}
+            new Vue({
+                router
+            }).$mount('#app')
         });
     }
-
-    var router = new VueRouter({
-        routes: [{
-            path: '/',
-            component: ProductList,
-            name: 'product-list'
-        }, {
-            path: '/add',
-            component: ProductAdd,
-            name: 'product-add'
-        }, {
-            path: '/view/:product_id',
-            component: ProductView,
-            name: 'product-view'
-        }, {
-            path: '/edit/:product_id',
-            component: ProductEdit,
-            name: 'product-edit'
-        }, {
-            path: '/delete/:product_id',
-            component: ProductDelete,
-            name: 'product-delete'
-        }]
-    });
-    var App = {}
-    new Vue({
-        router
-    }).$mount('#app')
-
     //var db = new PouchDB('pouchnotes');
     //db.destroy();
     //db.replicate.to('https://eldus.cloudant.com/test/');
     //db.replicate.from('https://eldus.cloudant.com/test/');
     //console.log('pouch to cloudant');
+
 </script>
 
 </html>
