@@ -1,4 +1,4 @@
-2017.06.09
+2017.03.18
 
 This is my GitHub home page for learning to write better codes in [HTML5](https://en.wikipedia.org/wiki/HTML5) (Hypertext Markup Language), [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets#CSS_3) (Cascading Style Sheets) and JS [ES5](https://en.wikipedia.org/wiki/ECMAScript#5th_Edition) (JavaScript). Projects here are divided into individual folders. Each project folder contains numerous html/css/js files related to that project.
 
