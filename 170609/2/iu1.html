@@ -1,54 +1,116 @@
 <!DOCTYPE html>
 <html>
 <header>
-    <title>170609</title>
+    <title>170609/2/iu1</title>
     <script src="../../vendors/vue-2.3.4/vue.min.js"></script>
     <script src="../../vendors/vue-router-2.5.3/vue-router.min.js"></script>
 </header>
 
 <body>
-    <div id="app">abc
-  <router-view></router-view>
-</div>
-<!--
-    <div>
-        <h2>Vue.js CRUD Local Storage</h2>
-        <main id="app">
-            <router-view></router-view>
-
-        </main>
-    </div>
+    <h2>Vue.js CRUD Routing</h2>
+    <main id="app">
+        <router-view></router-view>
+    </main>
     <template id="product-list">
         <div>
-            <div>
-                <label for="search-element">Search:</label>
-            </div>
+            <h2>List</h2>
             <div>
                 <router-link :to="{path: '/add'}">Add product</router-link>
-                 <router-link :to="{path: '/view'}">View product</router-link>
+                <router-link :to="{path: '/view'}">View product</router-link>
             </div>
         </div>
     </template>
     <template id="product-add">
-        <div>add
+        <div>
+            <h2>Add</h2>
+            <form v-on:submit="createProduct">
+                <button type="submit">Save</button>
+                <router-link :to="{name: 'product-list'}">Cancel</router-link>
+            </form>
         </div>
     </template>
     <template id="product-view">
-        <div>view
+        <div>
+            <h2>View Form</h2>
+            <div>
+                <router-link to="/">Back to list</router-link>
+                <router-link :to="{path: '/edit'}">Edit</router-link>
+                <router-link :to="{path: '/delete'}">Delete</router-link>
+            </div>
         </div>
     </template>
--->
+    <template id="product-edit">
+        <div>
+            <h2>Edit Form</h2>
+            <form v-on:submit="updateProduct">
+                <button type="submit">Save</button>
+                <router-link :to="{name: 'product-view'}">Cancel</router-link>
+            </form>
+        </div>
+    </template>
+    <template id="product-delete">
+        <div>
+            <h2>Delete Form</h2>
+            <form v-on:submit="deleteProduct">
+                <p>The action cannot be undone.</p>
+                <button type="submit">Delete</button>
+                <router-link :to="{name: 'product-view'}">Cancel</router-link>
+            </form>
+        </div>
+    </template>
 </body>
-<!--
 <script>
+    var globalrefreshcnt = 0;
+    console.log('on');
     var ProductList = Vue.extend({
-        template: '#product-list'
+        template: '#product-list',
+        data: function () {
+            globalrefreshcnt++;
+            console.log(globalrefreshcnt + ' refreshing list...');
+            return {};
+        }
     });
     var ProductAdd = Vue.extend({
-        template: '#product-add'
+        template: '#product-add',
+        data: function () {
+            return {};
+        },
+        methods: {
+            createProduct: function () {
+                alert('Created');
+                router.push('/');
+            }
+        }
     });
     var ProductView = Vue.extend({
-        template: '#product-view'
+        template: '#product-view',
+        data: function () {
+            return {};
+        }
+    });
+    var ProductEdit = Vue.extend({
+        template: '#product-edit',
+        data: function () {
+            return {};
+        },
+        methods: {
+            updateProduct: function () {
+                alert('Updated');
+                router.push('/view');
+            }
+        }
+    });
+    var ProductDelete = Vue.extend({
+        template: '#product-delete',
+        data: function () {
+            return {};
+        },
+        methods: {
+            deleteProduct: function () {
+                alert('Deleted');
+                router.push('/');
+            }
+        }
     });
     var router = new VueRouter({
         routes: [{
@@ -62,7 +124,15 @@
         }, {
             path: '/view',
             component: ProductView,
-            name: 'product-add'
+            name: 'product-view'
+        }, {
+            path: '/edit',
+            component: ProductEdit,
+            name: 'product-edit'
+        }, {
+            path: '/delete/',
+            component: ProductDelete,
+            name: 'product-delete'
         }]
     });
 
@@ -71,44 +141,5 @@
         router
     }).$mount('#app')
 </script>
--->
-<script>
-    const User = {
-        template: '<div>User {{ $route.params.id }}</div>'
-    }
-
-    const router = new VueRouter({
-        routes: [{
-            path: '/user/:id',
-            component: User
-        }]
-    })
-</script>
-<!--
-<script>
-
-                    const NotFound = { template: '<p>Page not found</p>' }
-                    const Home = { template: '<p>home page</p>' }
-                    const About = { template: '<p>about page</p>' }
-                    const routes = {
-                      '/': Home,
-                      '/about': About
-                    }
-                    console.log('x');
-                    new Vue({
-                      el: '#app',
-                      data: {
-                        currentRoute: window.location.pathname
-                      },
-                      computed: {
-                        ViewComponent () {
-                          return routes[this.currentRoute] || NotFound
-                        }
-                      },
-                      render (h) { return h(this.ViewComponent) }
-                    })
-
-</script>
--->
 
 </html>
