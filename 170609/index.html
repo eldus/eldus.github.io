@@ -30,7 +30,7 @@
                 <tbody>
                     <tr v-for="product in filteredProducts">
                         <td>
-                            <router-link :to="{name: 'product-view', params: {product_id: product.id}}">{{ product.name }}</router-link>
+                            <router-link :to="{name: 'product-view', params: {product_id: product._id}}">{{ product.name }}</router-link>
                         </td>
                         <td>{{ product.description }}</td>
                         <td>{{ product.price }}</td>
@@ -48,10 +48,11 @@
             <h3>{{ product.name }}</h3>
             <div>Description: <b>{{ product.description }}</b></div>
             <div>Price: <b>{{ product.price }}</b></div>
+            <div>Rev: <b>{{ product._rev }}</b></div>
             <div>
                 <router-link to="/">Back to list</router-link>
-                <router-link :to="{name: 'product-edit', params: {product_id: product.id}}">Edit</router-link>
-                <router-link :to="{name: 'product-delete', params: {product_id: product.id}}">Delete</router-link>
+                <router-link :to="{name: 'product-edit', params: {product_id: product._id}}">Edit</router-link>
+                <router-link :to="{name: 'product-delete', params: {product_id: product._id}}">Delete</router-link>
             </div>
         </div>
     </template>
@@ -95,7 +96,7 @@
                     <input type="number" id="edit-price" v-model="product.price" />
                 </div>
                 <button type="submit">Save</button>
-                <router-link :to="{name: 'product-view', params: {product_id: product.id}}">Cancel</router-link>
+                <router-link :to="{name: 'product-view', params: {product_id: product._id}}">Cancel</router-link>
             </form>
         </div>
     </template>
@@ -106,14 +107,14 @@
             <form v-on:submit="deleteProduct">
                 <p>The action cannot be undone.</p>
                 <button type="submit">Delete</button>
-                <router-link :to="{name: 'product-view', params: {product_id: product.id}}">Cancel</router-link>
+                <router-link :to="{name: 'product-view', params: {product_id: product._id}}">Cancel</router-link>
             </form>
         </div>
     </template>
 </body>
 
 <script>
-    // var products = [{id: guid(), name: '', description: '', price: 99}];
+    // var products = [{_id: '', name: '', description: '', price: 99}];
     function getLocalStorage() {
         var myArray = new Array;
         var myObject = localStorage.getItem('local-products');
@@ -135,7 +136,7 @@
 
     function findProductKey(productId) {
         for (var key = 0; key < products.length; key++) {
-            if (products[key].id == productId) {
+            if (products[key]._id == productId) {
                 return key;
             }
         }
@@ -172,6 +173,7 @@
         data: function() {
             return {
                 product: {
+                    _rev: '0',
                     name: '',
                     description: '',
                     price: ''
@@ -182,7 +184,8 @@
             createProduct: function() {
                 let product = this.product;
                 products.push({
-                    id: guid(),
+                    _id: new Date().toISOString(),
+                    _rev: product._rev,
                     name: product.name,
                     description: product.description,
                     price: product.price
@@ -202,16 +205,16 @@
         },
         methods: {
             updateProduct: function() {
-                //Obsolete, product is available directly from data...
-                let product = this.product; //var product = this.$get('product');
-                products[findProductKey(product.id)] = {
-                    id: product.id,
+                let product = this.product;
+                products[findProductKey(product._id)] = {
+                    _id: product._id,
+                    _rev: product._rev,
                     name: product.name,
                     description: product.description,
                     price: product.price
                 };
                 saveProducts();
-                router.push('/view/' + product.id);
+                router.push('/view/' + product._id);
             }
         }
     });
@@ -232,25 +235,16 @@
         }
     });
 
-    // RFC4122 version 4 compliant solution that solves that issue by offsetting the first 13 hex numbers by a hex portion of the timestamp. That way, even if Math.random is on the same seed, both clients would have to generate the UUID at the exact same millisecond (or 10,000+ years later) to get the same UUID:
-    function guid() {
-        var performance,
-            d = new Date().getTime();
-        if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
-            d += performance.now(); //use high-precision timer if available
-        }
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = (d + Math.random() * 16) % 16 | 0;
-            d = Math.floor(d / 16);
-            return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-        });
-    }
 
     var router = new VueRouter({
         routes: [{
             path: '/',
             component: ProductList,
             name: 'product-list'
+        }, {
+            path: '/add',
+            component: ProductAdd,
+            name: 'product-add'
         }, {
             path: '/view/:product_id',
             component: ProductView,
@@ -270,5 +264,9 @@
         router
     }).$mount('#app')
 </script>
+<!--
+localStorage.clear(); to delete all Local Storage contents
+db.destroy(); to delete all PouchDB contents
+-->
 
 </html>

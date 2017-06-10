@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>170510/iu1.html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="../vendors/vue-2.3.0/vue.min.js"></script>
+</head>
+
+<body>
+    <h2>Getting Started with VueJS 2</h2>
+    <p><a href="/https://vuejs.org/v2/guide/">Guide Book</a></p>
+    <p>Vue does not support IE8 and below, because it uses ES5 (ECMAScript 5) or Fifth Edition was published on December 2009.</p>
+    <p>Vue can also use the Sixth Edition (published on June 2015) or known as ECMAScript 6 (ES6). ES6 was renamed to ECMAScript 2015 (ES2015).</p>
+    <h4>Declarative Rendering</h4>
+    <div id="app">
+        <p>{{ message }}</p>
+        <p><span v-bind:title="message0">Hover your mouse over me for a few seconds to see my dynamically bound title!</span></p>
+        <p v-if="seen">Now you see me.<br>Go Inspect Element > console > type in: app.seen=false</p>
+    </div>
+    <div id="app-1">
+        <p>{{message0}}</p>
+        <input type="text" v-model="message1"> {{message1}}
+    </div>
+    <h4>Conditionals and Loops</h4>
+    <div id="app-4">
+        <ol>
+            <li v-for="seelist in seelists">
+                {{ seelist.text }}
+            </li>
+        </ol>
+        <p>dummy={{dummy}}
+            <br>Go Inspect Element > console > type in: app4.dummy=999
+            <br>Go Inspect Element > console > type in: app-4.dummy=999
+            <br>Go Inspect Element > console > type in: app999.dummy=999
+            <br>Go Inspect Element > console > type in: app4.dummy999=999
+        </p>
+    </div>
+    <h4>Handling User Input</h4>
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <p><a href="https://vuejs.org/v2/guide/">Guide Book</a>
+</body>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            message0: 'You loaded this page on ' + new Date(),
+            seen: true
+        }
+    })
+    var app1 = new Vue({
+        el: '#app-1',
+        data: {
+            message0: 'Two way Data Binding Example:',
+            message1: '?...'
+        }
+    });
+    var app4 = new Vue({
+        el: '#app-4',
+        data: {
+            dummy: 1,
+            seelists: [{
+                    text: 'Learn JavaScript'
+                },
+                {
+                    text: 'Learn Vue'
+                },
+                {
+                    text: 'Build something awesome'
+                }
+            ]
+        }
+    })
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function() {
+                this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+
+</html>

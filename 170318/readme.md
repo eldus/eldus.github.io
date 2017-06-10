@@ -1,7 +1,7 @@
-## 150323/3 Local Storage
-2015.03.26 [HTML, CSS, JS]
+## 170318 Local Storage
+2017.03.18 [HTML, CSS, JS]
 
-Test it http://eldus.github.io/150323/3
+Test it http://eldus.github.io/170318
 
 #### Delete Local Storage Contents
 
@@ -12,7 +12,6 @@ on chrome
 in View > Developer > Developer Tools [Application]tab
 Storage > Local Storage > http://localhost
 right click, clear
-
 
 #### Reference
 * https://www.webcodegeeks.com/html5/html5-local-storage-example/

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>170510/iu5.html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.10.3/vue.js"></script>
+    
+    <script src="https://rawgit.com/flatiron/director/master/build/director.js"></script>
+</head>
+
+<body>
+    <p>Vue 0.10</p>
+    <div id="main">
+        <div v-view="currentView" v-ref="view"></div>
+    </div>
+    <ul>
+        <li><a href="#/">top</a></li>
+        <li><a href="#/nest/view1">nest/view1</a></li>
+        <li><a href="#/nest/view2">nest/view2</a></li>
+    </ul>
+</body>
+
+<script id="top" type="x-template">
+    <div>top view</div>
+</script>
+
+<script id="nest" type="x-template">
+    <div>
+        <span>nest view</span>
+        <div v-view="subview"></div>
+    </div>
+</script>
+<script>
+    Vue.component('top', Vue.extend({
+        template: "#top",
+    }));
+
+    Vue.component('nest', Vue.extend({
+        template: '#nest',
+        components: {
+            view1: Vue.extend({
+                template: '<span>this is subview 1</span>',
+            }),
+            view2: Vue.extend({
+                template: '<span>this is subview 2</span>',
+            }),
+        },
+        data: {
+            subview: "view1",
+        },
+    }));
+
+    var main = new Vue({
+        el: "#main",
+        data: {
+            currentView: "top",
+        },
+    });
+
+    var router = new Router({
+        '/': function() {
+            main.currentView = 'top'
+        },
+        '/nest/:view': function(view) {
+            main.currentView = 'nest';
+            main.$.view.subview = view;
+        },
+    });
+    router.init();
+</script>
+
+</html>

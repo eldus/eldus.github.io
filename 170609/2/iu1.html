@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>170609</title>
+    <script src="../../vendors/vue-2.3.4/vue.min.js"></script>
+    <script src="../../vendors/vue-router-2.5.3/vue-router.min.js"></script>
+</header>
+
+<body>
+    <div id="app">abc
+  <router-view></router-view>
+</div>
+<!--
+    <div>
+        <h2>Vue.js CRUD Local Storage</h2>
+        <main id="app">
+            <router-view></router-view>
+
+        </main>
+    </div>
+    <template id="product-list">
+        <div>
+            <div>
+                <label for="search-element">Search:</label>
+            </div>
+            <div>
+                <router-link :to="{path: '/add'}">Add product</router-link>
+                 <router-link :to="{path: '/view'}">View product</router-link>
+            </div>
+        </div>
+    </template>
+    <template id="product-add">
+        <div>add
+        </div>
+    </template>
+    <template id="product-view">
+        <div>view
+        </div>
+    </template>
+-->
+</body>
+<!--
+<script>
+    var ProductList = Vue.extend({
+        template: '#product-list'
+    });
+    var ProductAdd = Vue.extend({
+        template: '#product-add'
+    });
+    var ProductView = Vue.extend({
+        template: '#product-view'
+    });
+    var router = new VueRouter({
+        routes: [{
+            path: '/',
+            component: ProductList,
+            name: 'product-list'
+        }, {
+            path: '/add',
+            component: ProductAdd,
+            name: 'product-add'
+        }, {
+            path: '/view',
+            component: ProductView,
+            name: 'product-add'
+        }]
+    });
+
+    var App = {}
+    new Vue({
+        router
+    }).$mount('#app')
+</script>
+-->
+<script>
+    const User = {
+        template: '<div>User {{ $route.params.id }}</div>'
+    }
+
+    const router = new VueRouter({
+        routes: [{
+            path: '/user/:id',
+            component: User
+        }]
+    })
+</script>
+<!--
+<script>
+
+                    const NotFound = { template: '<p>Page not found</p>' }
+                    const Home = { template: '<p>home page</p>' }
+                    const About = { template: '<p>about page</p>' }
+                    const routes = {
+                      '/': Home,
+                      '/about': About
+                    }
+                    console.log('x');
+                    new Vue({
+                      el: '#app',
+                      data: {
+                        currentRoute: window.location.pathname
+                      },
+                      computed: {
+                        ViewComponent () {
+                          return routes[this.currentRoute] || NotFound
+                        }
+                      },
+                      render (h) { return h(this.ViewComponent) }
+                    })
+
+</script>
+-->
+
+</html>
