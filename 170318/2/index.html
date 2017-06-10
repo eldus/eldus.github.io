@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>150323/2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="assets/index.css">
+    <script src="../../vendors/pouchdb-6.2.0/pouchdb.min.js"></script>
+</head>
+
+<body>
+    <section id="todoapp">
+        <header id="header">
+            <h1>TodoMVC - PouchDB 6.2</h1>
+            <input id="new-todo" placeholder="What needs to be done?" autofocus>
+        </header>
+        <section id="main">
+            <ul id="todo-list"></ul>
+        </section>
+        <footer id="footer">
+            <span id="todo-count"></span>
+            <div id="sync-wrapper">
+                <div id="sync-success">Currently syncing</div>
+                <div id="sync-error">There was a problem syncing</div>
+            </div>
+        </footer>
+    </section>
+    <footer id="info">
+        <p>Double-click to edit a todo</p>
+    </footer>
+</body>
+<script src="assets/index.js"></script>
+
+</html>

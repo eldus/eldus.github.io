@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>150323/1/iu1.html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+
+<body>
+    <h1>JSON : Cloudant</h1>
+    <div class="hero-unit">
+        <h1>Poetic quotes</h1>
+        <p>People have turned to poets throughout the ages for inspiration, for humor, and for the ingredients for spicing up their own writing.</p>
+        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    </div>
+    <div class="row-fluid">
+        <div class="span4 featured-quote">
+            <h2>Poet's name</h2>
+            <p>Body of quote here.</p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <!--/span-->
+        <div class="span4 featured-quote">
+            <h2>Poet's name</h2>
+            <p>Body of quote here.</p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <!--/span-->
+        <div class="span4 featured-quote">
+            <h2>Poet's name</h2>
+            <p>Body of quote here.</p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+    <div class="row-fluid">
+        <div class="span4 featured-quote">
+            <h2>Poet's name</h2>
+            <p>Body of quote here.</p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <!--/span-->
+        <div class="span4 featured-quote">
+            <h2>Poet's name</h2>
+            <p>Body of quote here.</p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <!--/span-->
+        <div class="span4 featured-quote">
+            <h2>Poet's name</h2>
+            <p>Body of quote here.</p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <!--/span-->
+</body>
+<script>
+    //Invoked once the main HTML DOM is ready
+    $(document).ready(function() {
+        poq.loadPage();
+    });
+    //Use a namespace to protect the scope of function and variable names
+    var poq = {
+        //Some variables global to the local namespace ("poq")
+        //root: "http://eldus:welcomeme@eldus.cloudant.com/",
+        root: "https://eldus.cloudant.com/",
+        dbroot: "db/",
+        max_quotes: 6,
+
+        //Invoked when the HTML page is first loaded
+        loadPage: function() {
+            var six_latest = poq.root + "poquotes/_design/poquotes/_view/by_year?&limit=" + poq.max_quotes + "&ascending=true&callback=?";
+            $.getJSON(six_latest, poq.handleMainQuotes);
+        },
+
+        //Invoked with the result of the AJAX call to load quote documents
+        handleMainQuotes: function(json) {
+            //Load up to six records, as available
+            quote_count = Math.min(poq.max_quotes, json["total_rows"])
+            for (var i = 0; i < quote_count; i++) {
+                var doc = json["rows"][i]["value"]
+                var year = doc["work"]["year"].toString()
+                var title = doc["work"]["title"].toString()
+                var link = doc["work"]["link"].toString()
+
+                //Create an HTML snippet from the fields of each quote document
+                qblock = $("<div class='span4 featured-quote'></div>")
+                    .append("<h2>" + doc["author"] + "</h2>")
+                    .append("<p style='font-size: 80%; height: 8em;'>" + doc["text"] + "</p>")
+                    .append("<p>" + year + "</p>")
+                    .append("<p><a href='" + link + "'>" + title + "</a></p>")
+                    .append("<p><a class='btn' href='#'>View details &raquo;</a></p>")
+                    //jQuery's eq selector to find the target div corresponding to the loop index
+                $('div.featured-quote:eq(' + i.toString() + ')').replaceWith(qblock);
+            }
+        },
+    }
+</script>
+
+</html>
