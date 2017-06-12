@@ -2,18 +2,16 @@
 <html>
 
 <head>
-    <title>170510</title>
+    <title>170609/4</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="../vendors/todomvc-app-css-2.1.0/index.css">
-    <script type="text/javascript" src="../vendors/vue-2.3.0/vue.min.js"></script>
+    <script type="text/javascript" src="../../vendors/vue-2.3.4/vue.min.js"></script>
 </head>
 
 <body>
+    <p>TodoMVC : VueJS2</p>
     <section class="todoapp">
         <header class="header">
-            <p>TodoMVC : VueJS2</p>
-            <h1>TodoMVC</h1>
             <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
         </header>
         <section class="main" v-show="todos.length" v-cloak>
@@ -34,9 +32,9 @@
       <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
     </span>
             <ul class="filters">
-                <li><a href="#/all" :class="{ selected: visibility == 'all' }">All</a></li>
-                <li><a href="#/active" :class="{ selected: visibility == 'active' }">Active</a></li>
-                <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>
+                <li><a href="#/all" :class="{ selected: visibility == 'all' }">Show all</a></li>
+                <li><a href="#/active" :class="{ selected: visibility == 'active' }">Show only active</a></li>
+                <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Show those completed</a></li>
             </ul>
             <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
       Clear completed
@@ -46,170 +44,191 @@
     <footer class="info">
         <p>Double-click to edit a todo</p>
     </footer>
-
+    <script src="../../vendors/zeelib/ze.console.js"></script>
+    <textarea id="id_ConsoleLog" wrap="off" rows="15" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+    <a href="https://vuejs.org/v2/guide/syntax.html" target="_pop">Template Syntax</a>
+    <a href="https://vuejs.org/v2/guide/computed.html" target="_pop">Computed Properties and Watchers</a>
 </body>
 <script type='text/javascript'>
-    //<![CDATA[
     window.onload = function() {
-            // Full spec-compliant TodoMVC with localStorage persistence
-            // and hash-based routing in ~120 effective lines of JavaScript.
 
-            // localStorage persistence
-            var STORAGE_KEY = 'todos-vuejs-2.0'
-            var todoStorage = {
-                fetch: function() {
-                    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-                    todos.forEach(function(todo, index) {
-                        todo.id = index
-                    })
-                    todoStorage.uid = todos.length
-                    return todos
-                },
-                save: function(todos) {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
-                }
+        // localStorage persistence
+        var STORAGE_KEY = 'todos'
+        var todoStorage = {
+            fetch: function() {
+                console.log('fetch:');
+                var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+                todos.forEach(function(todo, index) {
+                    todo.id = index;
+                    console.log('fetch:'+todo.id);
+                })
+                todoStorage.uid = todos.length
+                return todos
+            },
+            save: function(todos) {
+                console.log('save:');
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
             }
+        }
 
-            // visibility filters
-            var filters = {
-                all: function(todos) {
-                    return todos
-                },
-                active: function(todos) {
-                    return todos.filter(function(todo) {
-                        return !todo.completed
-                    })
-                },
-                completed: function(todos) {
-                    return todos.filter(function(todo) {
-                        return todo.completed
-                    })
-                }
+        // visibility filters
+        var filters = {
+            all: function(todos) {
+                return todos
+            },
+            active: function(todos) {
+                return todos.filter(function(todo) {
+                    return !todo.completed
+                })
+            },
+            completed: function(todos) {
+                return todos.filter(function(todo) {
+                    return todo.completed
+                })
             }
+        }
 
-            // app Vue instance
-            var app = new Vue({
-                // app initial state
-                data: {
-                    todos: todoStorage.fetch(),
-                    newTodo: '',
-                    editedTodo: null,
-                    visibility: 'all'
+        // app Vue instance
+        var app = new Vue({
+            // app initial state
+            data: {
+                todos: todoStorage.fetch(),
+                newTodo: '',
+                editedTodo: null,
+                visibility: 'all'
+            },
+
+            // watch todos change for localStorage persistence
+            watch: {
+                function() {
+                    console.log('watch');
                 },
-
-                // watch todos change for localStorage persistence
-                watch: {
-                    todos: {
-                        handler: function(todos) {
-                            todoStorage.save(todos)
-                        },
-                        deep: true
-                    }
-                },
-
-                // computed properties
-                // http://vuejs.org/guide/computed.html
-                computed: {
-                    filteredTodos: function() {
-                        return filters[this.visibility](this.todos)
+                todos: {
+                    handler: function(todos) {
+                        console.log('watch: todos: handler');
+                        todoStorage.save(todos);
                     },
-                    remaining: function() {
-                        return filters.active(this.todos).length
+                    deep: true
+                }
+
+            },
+
+            // computed properties
+            // http://vuejs.org/guide/computed.html
+            computed: {
+                filteredTodos: function() {
+                    console.log('computed: filteredTodos (v-for="todo in filteredTodos")');
+                    return filters[this.visibility](this.todos)
+                },
+                remaining: function() {
+                    console.log('computed: remaining (span class="todo-count" {{ remaining }} )');
+                    return filters.active(this.todos).length
+                },
+                allDone: {
+                    get: function() {
+                        console.log('computed: get: allDone');
+                        return this.remaining === 0
                     },
-                    allDone: {
-                        get: function() {
-                            return this.remaining === 0
-                        },
-                        set: function(value) {
-                            this.todos.forEach(function(todo) {
-                                todo.completed = value
-                            })
-                        }
-                    }
-                },
-
-                filters: {
-                    pluralize: function(n) {
-                        return n === 1 ? 'item' : 'items'
-                    }
-                },
-
-                // methods that implement data logic.
-                // note there's no DOM manipulation here at all.
-                methods: {
-                    addTodo: function() {
-                        var value = this.newTodo && this.newTodo.trim()
-                        if (!value) {
-                            return
-                        }
-                        this.todos.push({
-                            id: todoStorage.uid++,
-                            title: value,
-                            completed: false
+                    set: function(value) {
+                        console.log('computed: set: allDone');
+                        this.todos.forEach(function(todo) {
+                            todo.completed = value
                         })
-                        this.newTodo = ''
-                    },
+                    }
+                }
+            },
+            // filters can only be used inside mustache interpolations and v-bind expressions, because filters are primarily designed for text transformation purposes.
+            filters: {
+                pluralize: function(n) {
+                    console.log('filters: pluralize ({{ remaining | pluralize }} left)');
+                    return n === 1 ? 'item' : 'items'
+                }
+            },
 
-                    removeTodo: function(todo) {
-                        this.todos.splice(this.todos.indexOf(todo), 1)
-                    },
+            // methods that implement data logic.
+            // note there's no DOM manipulation here at all.
+            methods: {
+                addTodo: function() {
+                    console.log('methods: addTodo');
+                    var value = this.newTodo && this.newTodo.trim()
+                    if (!value) {
+                        return
+                    }
+                    this.todos.push({
+                        id: todoStorage.uid++,
+                        title: value,
+                        completed: false
+                    })
+                    this.newTodo = ''
+                },
 
-                    editTodo: function(todo) {
-                        this.beforeEditCache = todo.title
-                        this.editedTodo = todo
-                    },
+                removeTodo: function(todo) {
+                    console.log('methods: removeTodo');
+                    this.todos.splice(this.todos.indexOf(todo), 1)
+                },
 
-                    doneEdit: function(todo) {
-                        if (!this.editedTodo) {
-                            return
-                        }
-                        this.editedTodo = null
-                        todo.title = todo.title.trim()
-                        if (!todo.title) {
-                            this.removeTodo(todo)
-                        }
-                    },
+                editTodo: function(todo) {
+                    console.log('methods: editTodo');
+                    this.beforeEditCache = todo.title
+                    this.editedTodo = todo
+                },
 
-                    cancelEdit: function(todo) {
-                        this.editedTodo = null
-                        todo.title = this.beforeEditCache
-                    },
-
-                    removeCompleted: function() {
-                        this.todos = filters.active(this.todos)
+                doneEdit: function(todo) {
+                    console.log('methods: doneEdit');
+                    if (!this.editedTodo) {
+                        return
+                    }
+                    this.editedTodo = null
+                    todo.title = todo.title.trim()
+                    if (!todo.title) {
+                        this.removeTodo(todo)
                     }
                 },
 
-                // a custom directive to wait for the DOM to be updated
-                // before focusing on the input field.
-                // http://vuejs.org/guide/custom-directive.html
-                directives: {
-                    'todo-focus': function(el, binding) {
-                        if (binding.value) {
-                            el.focus()
-                        }
+                cancelEdit: function(todo) {
+                    console.log('methods: cancelEdit');
+                    this.editedTodo = null
+                    todo.title = this.beforeEditCache
+                },
+
+                removeCompleted: function() {
+                    console.log('methods: removeCompleted');
+                    this.todos = filters.active(this.todos)
+                }
+            },
+
+            // a custom directive to wait for the DOM to be updated
+            // before focusing on the input field.
+            // http://vuejs.org/guide/custom-directive.html
+            directives: {
+                'todo-focus': function(el, binding) {
+                    if (binding.value) {
+                        el.focus()
                     }
                 }
-            })
-
-            // handle routing
-            function onHashChange() {
-                var visibility = window.location.hash.replace(/#\/?/, '')
-                if (filters[visibility]) {
-                    app.visibility = visibility
-                } else {
-                    window.location.hash = ''
-                    app.visibility = 'all'
-                }
             }
+        })
 
-            window.addEventListener('hashchange', onHashChange)
-            onHashChange()
+        // handle routing
+        function onHashChange() {
+            var visibility = window.location.hash.replace(/#\/?/, '')
+            if (filters[visibility]) {
+                app.visibility = visibility
+            } else {
+                window.location.hash = ''
+                app.visibility = 'all'
+            }
+        }
 
+        window.addEventListener('hashchange', onHashChange)
+        onHashChange()
             // mount
-            app.$mount('.todoapp')
+        app.$mount('.todoapp')
 
-        } //]]>
+    }
+
+    // this synchronous script is going to delay parsing of the DOM by around 0.5 seconds
+    //for (var i = 0; i < 200000000; i++) {}
 </script>
 
 </html>
