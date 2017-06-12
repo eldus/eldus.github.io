@@ -365,7 +365,7 @@ PouchNotesObj.prototype.search = function (searchkey) {
 
 
 /*------ Maybe do in a try-catch ? ------*/
-pn = new PouchNotesObj('pouchnotes');
+pn = new PouchNotesObj('dbnotes');
 
 pn.formobject = document.getElementById('noteform');
 pn.notetable = document.getElementById('notelist');

@@ -111,11 +111,11 @@
 
 <script src="assets/index.js"></script>
 <script>
-    var db = new PouchDB('pouchnotes');
+    var db = new PouchDB('dbnotes');
     //db.destroy();
     //https://eldus:password@eldus.cloudant.com/test/
-    db.replicate.to('https://eldus.cloudant.com/test/');
-    db.replicate.from('https://eldus.cloudant.com/test/');
+    db.replicate.to('https://eldus.cloudant.com/test2/');
+    db.replicate.from('https://eldus.cloudant.com/test2/');
     console.log('allo allo allo');
 </script>
 
