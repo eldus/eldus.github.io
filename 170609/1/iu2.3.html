@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>170510/iu2.html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="../../vendors/vue-2.3.4/vue.js"></script>
+    <script src="../../vendors/zeelib/ze.console.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <input v-model="message" v-on:input="set_data">
+        <p>Reactive input: {{ message }}</p>
+        <p>Echo data from local storage: {{ message1 }}</p>
+        <button v-on:click.once="get_data">Click once only</button>
+        <button v-on:click="get_data">Click unlimited</button>
+        <p>On demand data from storage: {{ omessage }}</p>
+    </div>
+    <div id="demo">
+        <p>Another Vue instance data from local storage: {{ omessage }}</p>
+        <button v-on:click="get_data">click me</button>
+    </div>
+    <p>
+        <a href="https://vuejs.org/v2/api/#el">Dom/el Reference</a>
+    </p>
+
+    <textarea id="id_ConsoleLog" wrap="off" rows="5" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+</body>
+<script>
+    new Vue({
+        el: "#root",
+        data: {
+            message: "",
+            message1: "",
+            omessage: localStorage.getItem('YourItem')
+        },
+        methods: {
+            set_data: function () {
+                console.log('set_' + this.message);
+                localStorage.setItem('YourItem', this.message);
+                this.message1 = localStorage.getItem('YourItem');
+            },
+            get_data: function () {
+                omessage = localStorage.getItem('YourItem');
+                console.log('get_' + omessage);
+                this.omessage = omessage;
+            }
+        }
+
+    })
+    var demo = new Vue({
+        el: '#demo',
+        data: {
+            omessage: ""
+        },
+        methods: {
+            get_data: function () {
+                o1message = localStorage.getItem('YourItem');
+                console.log('get_' + o1message);
+                this.omessage = o1message;
+                //pushes back to data: {omessage}
+            }
+        }
+    })
+</script>
+
+</html>

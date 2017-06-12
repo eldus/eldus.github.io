@@ -14,3 +14,6 @@ Pouchdb provides local storage of data in a browser.  Data is store in a NOSQL d
 #### References:
 * https://pouchdb.com/getting-started.html
 * https://ehealthafrica.github.io/couchdb-best-practices/
+* https://github.com/sadick254/vuepouch
+* http://brianyang.com/pouchdb-tutorial-building-an-offline-app-with-pouchdb-and-couchdb/
+

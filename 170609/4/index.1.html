@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>170609/4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="../../vendors/vue-2.3.4/vue.min.js"></script>
+</head>
+
+<body>
+    <p>TodoMVC : VueJS2</p>
+    <section class="todoapp">
+        <header class="header">
+            <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?" v-model="newTodo" @keyup.enter="addTodo">
+        </header>
+        <section class="main" v-show="todos.length" v-cloak>
+            <input class="toggle-all" type="checkbox" v-model="allDone">
+            <ul class="todo-list">
+                <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed, editing: todo == editedTodo }">
+                    <div class="view">
+                        <input class="toggle" type="checkbox" v-model="todo.completed">
+                        <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
+                        <button class="destroy" @click="removeTodo(todo)"></button>
+                    </div>
+                    <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo == editedTodo" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)">
+                </li>
+            </ul>
+        </section>
+        <footer class="footer" v-show="todos.length" v-cloak>
+            <span class="todo-count">
+      <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
+    </span>
+            <ul class="filters">
+                <li><a href="#/all" :class="{ selected: visibility == 'all' }">Show all</a></li>
+                <li><a href="#/active" :class="{ selected: visibility == 'active' }">Show only active</a></li>
+                <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Show those completed</a></li>
+            </ul>
+            <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
+      Clear completed
+    </button>
+        </footer>
+    </section>
+    <footer class="info">
+        <p>Double-click to edit a todo</p>
+    </footer>
+    <script src="../../vendors/zeelib/ze.console.js"></script>
+    <textarea id="id_ConsoleLog" wrap="off" rows="15" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+    <a href="https://vuejs.org/v2/guide/syntax.html" target="_pop">Template Syntax</a>
+    <a href="https://vuejs.org/v2/guide/computed.html" target="_pop">Computed Properties and Watchers</a>
+</body>
+<script type='text/javascript'>
+    window.onload = function() {
+
+        // localStorage persistence
+        var STORAGE_KEY = 'todos'
+        var todoStorage = {
+            fetch: function() {
+                console.log('fetch:');
+                var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+                todos.forEach(function(todo, index) {
+                    todo.id = index
+                })
+                todoStorage.uid = todos.length
+                return todos
+            },
+            save: function(todos) {
+                console.log('save:');
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+            }
+        }
+
+        // visibility filters
+        var filters = {
+            all: function(todos) {
+                return todos
+            },
+            active: function(todos) {
+                return todos.filter(function(todo) {
+                    return !todo.completed
+                })
+            },
+            completed: function(todos) {
+                return todos.filter(function(todo) {
+                    return todo.completed
+                })
+            }
+        }
+
+        // app Vue instance
+        var app = new Vue({
+            // app initial state
+            data: {
+                todos: todoStorage.fetch(),
+                newTodo: '',
+                editedTodo: null,
+                visibility: 'all'
+            },
+
+            // watch todos change for localStorage persistence
+            watch: {
+                function() {
+                    console.log('watch');
+                },
+                todos: {
+                    handler: function(todos) {
+                        console.log('watch: todos: handler');
+                        todoStorage.save(todos);
+                    },
+                    deep: true
+                }
+
+            },
+
+            // computed properties
+            // http://vuejs.org/guide/computed.html
+            computed: {
+                filteredTodos: function() {
+                    console.log('computed: filteredTodos (v-for="todo in filteredTodos")');
+                    return filters[this.visibility](this.todos)
+                },
+                remaining: function() {
+                    console.log('computed: remaining (span class="todo-count" {{ remaining }} )');
+                    return filters.active(this.todos).length
+                },
+                allDone: {
+                    get: function() {
+                        console.log('computed: get: allDone');
+                        return this.remaining === 0
+                    },
+                    set: function(value) {
+                        console.log('computed: set: allDone');
+                        this.todos.forEach(function(todo) {
+                            todo.completed = value
+                        })
+                    }
+                }
+            },
+            // filters can only be used inside mustache interpolations and v-bind expressions, because filters are primarily designed for text transformation purposes.
+            filters: {
+                pluralize: function(n) {
+                    console.log('filters: pluralize ({{ remaining | pluralize }} left)');
+                    return n === 1 ? 'item' : 'items'
+                }
+            },
+
+            // methods that implement data logic.
+            // note there's no DOM manipulation here at all.
+            methods: {
+                addTodo: function() {
+                    console.log('methods: addTodo');
+                    var value = this.newTodo && this.newTodo.trim()
+                    if (!value) {
+                        return
+                    }
+                    this.todos.push({
+                        id: todoStorage.uid++,
+                        title: value,
+                        completed: false
+                    })
+                    this.newTodo = ''
+                },
+
+                removeTodo: function(todo) {
+                    console.log('methods: removeTodo');
+                    this.todos.splice(this.todos.indexOf(todo), 1)
+                },
+
+                editTodo: function(todo) {
+                    console.log('methods: editTodo');
+                    this.beforeEditCache = todo.title
+                    this.editedTodo = todo
+                },
+
+                doneEdit: function(todo) {
+                    console.log('methods: doneEdit');
+                    if (!this.editedTodo) {
+                        return
+                    }
+                    this.editedTodo = null
+                    todo.title = todo.title.trim()
+                    if (!todo.title) {
+                        this.removeTodo(todo)
+                    }
+                },
+
+                cancelEdit: function(todo) {
+                    console.log('methods: cancelEdit');
+                    this.editedTodo = null
+                    todo.title = this.beforeEditCache
+                },
+
+                removeCompleted: function() {
+                    console.log('methods: removeCompleted');
+                    this.todos = filters.active(this.todos)
+                }
+            },
+
+            // a custom directive to wait for the DOM to be updated
+            // before focusing on the input field.
+            // http://vuejs.org/guide/custom-directive.html
+            directives: {
+                'todo-focus': function(el, binding) {
+                    if (binding.value) {
+                        el.focus()
+                    }
+                }
+            }
+        })
+
+        // handle routing
+        function onHashChange() {
+            var visibility = window.location.hash.replace(/#\/?/, '')
+            if (filters[visibility]) {
+                app.visibility = visibility
+            } else {
+                window.location.hash = ''
+                app.visibility = 'all'
+            }
+        }
+
+        window.addEventListener('hashchange', onHashChange)
+        onHashChange()
+
+        // mount
+        app.$mount('.todoapp')
+
+    }
+
+    // this synchronous script is going to delay parsing of the DOM by around 0.5 seconds
+    for (var i = 0; i < 200000000; i++) {}
+</script>
+</script>
+
+</html>

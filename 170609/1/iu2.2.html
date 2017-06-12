@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>170510/iu2.html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="../../vendors/vue-2.3.4/vue.js"></script>
+</head>
+
+<body>
+    <h2>Composing with Components with VueJS 2</h2>
+    <p><a href="https://vuejs.org/v2/guide/#Composing-with-Components/" target=_blank>Guide Book</a></p>
+    <p>testing Vue reactive plugin</p>
+    <p></p>
+    <div id="component1">
+        <button @click="$myPlugin.state.zzzcount++">+++</button> {{ $myPlugin.state.zzzcount }}
+    </div>
+
+    <div id="component2">
+        <button @click="$myPlugin.state.zzzcount--">---</button> {{ $myPlugin.state.zzzcount }}
+    </div>
+
+</body>
+<script>
+    class MyPluginStore {
+        constructor(data = {}) {
+            this.storeVM = new Vue({
+                data
+            })
+        }
+
+// and use getter to delegate the .state to storeVM.$data
+        get state() {
+            return this.storeVM.$data
+        }
+    }
+
+    const MyPlugin = {
+        Store: MyPluginStore,
+        install(Vue, options) {
+            Vue.mixin({
+                beforeCreate() {
+                    this.$myPlugin = options.store
+                }
+            })
+        }
+    }
+
+    // Install the plugin, and inject a new store instance
+    Vue.use(MyPlugin, {
+        store: new MyPlugin.Store({
+            zzzcount: 99
+        })
+    })
+
+     // Create the instance in the constructor:
+    new Vue({
+        el: '#component1'
+    })
+
+    new Vue({
+        el: '#component2'
+    })
+</script>
+
+</html>

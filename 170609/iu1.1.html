@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>170609/2/iu1</title>
+    <script src="../../vendors/vue-2.3.4/vue.min.js"></script>
+    <script src="../../vendors/vue-router-2.5.3/vue-router.min.js"></script>
+    <script src="../../vendors/pouchdb-6.2.0/pouchdb.min.js"></script>
+</header>
+
+<body>
+    <h2>Vue.js CRUD Routing</h2>
+    <main id="app">
+        <router-view></router-view>
+    </main>
+    <template id="product-list">
+        <div>
+            <div>
+                <label for="search-element">Search:</label>
+                <input v-model="searchKey" id="search-element" requred placeholder="Product Name" />
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+{{ abc }}
+                </tbody>
+            </table>
+            <div>
+                <router-link :to="{path: '/add'}">Add product</router-link>
+            </div>
+        </div>
+    </template>
+    <template id="product-add">
+        <div>
+            <h2>Add new product</h2>
+            <form v-on:submit="createProduct">
+                <div>
+                    <label for="add-name">Name</label>
+                    <input id="add-name" v-model="product.name" required/>
+                </div>
+                <div>
+                    <label for="add-description">Description</label>
+                    <textarea id="add-description" rows="5" v-model="product.description"></textarea>
+                </div>
+                <div>
+                    <label for="add-price">Price</label>
+                    <input type="number" id="add-price" v-model="product.price" />
+                </div>
+                <button type="submit">Save</button>
+                <router-link to="/">Cancel</router-link>
+            </form>
+        </div>
+    </template>
+    <template id="product-view">
+        <div>
+            <h2>View Form</h2>
+            <div>
+                <router-link to="/">Back to list</router-link>
+                <router-link :to="{path: '/edit'}">Edit</router-link>
+                <router-link :to="{path: '/delete'}">Delete</router-link>
+            </div>
+        </div>
+    </template>
+    <template id="product-edit">
+        <div>
+            <h2>Edit Form</h2>
+            <form v-on:submit="updateProduct">
+                <button type="submit">Save</button>
+                <router-link :to="{name: 'product-view'}">Cancel</router-link>
+            </form>
+        </div>
+    </template>
+    <template id="product-delete">
+        <div>
+            <h2>Delete Form</h2>
+            <form v-on:submit="deleteProduct">
+                <p>The action cannot be undone.</p>
+                <button type="submit">Delete</button>
+                <router-link :to="{name: 'product-view'}">Cancel</router-link>
+            </form>
+        </div>
+    </template>
+</body>
+<script>
+    var db = new PouchDB('local-products');
+    var remoteCouch = false;
+    var globalrefreshcnt = 0;
+    var products=[];
+    console.log('on');
+    var ProductList = Vue.extend({
+        template: '#product-list',
+        data: function () {
+            globalrefreshcnt++;
+            console.log(globalrefreshcnt + ' refreshing list...');
+            abc=0;
+            db.allDocs({
+                include_docs: true,
+                descending: true
+            }, function callback(err, doc) {
+                //console.log(JSON.stringify(doc));
+
+                items = doc.rows;
+                console.log(items);
+                console.log(JSON.stringify(items));
+
+                console.log('Start...');
+                var result = [];
+                items.forEach(function (item) {
+                    console.log('x');
+                    result.push(item);
+                });
+
+                console.log('...Stop');
+                products = result;
+                redrawTodosUI(result);
+
+
+            });
+
+    function redrawTodosUI(todos) {
+        console.log('Start redrawTodosUI');
+        products=todos;
+console.log(JSON.stringify(products));
+abc="123";
+    }
+
+
+            return {
+                products: products,
+                searchKey: ''
+            };
+        }
+    });
+
+    function redrawTodosUI(todos) {
+        console.log('Start redrawTodosUI');
+        var ul = document.getElementById('todo-list');
+        ul.innerHTML = '';
+
+        todos.forEach(function(todo) {
+            ul.appendChild(createTodoListItem(todo.doc));
+            console.log(todo.doc);
+        });
+        console.log('Stop redrawTodosUI');
+    };
+
+    var ProductAdd = Vue.extend({
+        template: '#product-add',
+        data: function () {
+            return {
+                product: {
+                    name: '',
+                    description: '',
+                    price: '',
+                    _rev: '0'
+                }
+            }
+        },
+        methods: {
+            createProduct: function () {
+                var product_id = new Date().toISOString();
+                let product = this.product;
+
+                var myproducts = {
+                    _id: product_id,
+                    name: product.name,
+                    description: product.description,
+                    price: product.price
+                };
+                db.put(myproducts).then(function (response) {
+                    console.log('Successfull');
+                }).catch(function (err) {
+                    console.log(JSON.parse(err));
+                });
+                router.push('/');
+            }
+        }
+    });
+    var ProductView = Vue.extend({
+        template: '#product-view',
+        data: function () {
+            return {};
+        }
+    });
+    var ProductEdit = Vue.extend({
+        template: '#product-edit',
+        data: function () {
+            return {};
+        },
+        methods: {
+            updateProduct: function () {
+                alert('Updated');
+                router.push('/view');
+            }
+        }
+    });
+    var ProductDelete = Vue.extend({
+        template: '#product-delete',
+        data: function () {
+            return {};
+        },
+        methods: {
+            deleteProduct: function () {
+                alert('Deleted');
+                router.push('/');
+            }
+        }
+    });
+    var router = new VueRouter({
+        routes: [{
+            path: '/',
+            component: ProductList,
+            name: 'product-list'
+        }, {
+            path: '/add',
+            component: ProductAdd,
+            name: 'product-add'
+        }, {
+            path: '/view',
+            component: ProductView,
+            name: 'product-view'
+        }, {
+            path: '/edit',
+            component: ProductEdit,
+            name: 'product-edit'
+        }, {
+            path: '/delete/',
+            component: ProductDelete,
+            name: 'product-delete'
+        }]
+    });
+
+    var App = {}
+    new Vue({
+        router
+    }).$mount('#app')
+</script>
+
+</html>
