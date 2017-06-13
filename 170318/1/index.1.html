@@ -1,131 +1,593 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html lang="en-us">
 
 <head>
-    <title>170318</title>
+    <title>150323/1 PouchDB</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <style>
-        td,
-        th {
-            font-family: monospace;
-            padding: 4px;
-            background-color: #ccc;
-        }
-
-        label {
-            vertical-align: top;
-        }
-
-        #EntryArea {
-            border: 1px dotted blue;
-            padding: 6px;
-            background-color: #ccc;
-        }
-
-        #items_table {
-            border: 1px dotted blue;
-            padding: 6px;
-            margin-top: 12px;
-        }
-
-        #items_table h2 {
-            font-size: 18px;
-            margin-top: 0px;
-            font-family: sans-serif;
-        }
-    </style>
+    <!--
+    <script src="../../vendors/pouchdb-3.3.1/pouchdb-3.3.1.min.js"></script>
+    -->
+    <script src="../../vendors/pouchdb-6.2.0/pouchdb.min.js"></script>
 </head>
 
-<body onload="doList()">
-    <h1>Key/Value : Local Storage</h1>
-    <p>
-        URL link to:
-        <a href="index.html" target="_blank">Index.html</a>
-    </p>
-    <form name=Storage>
-        <div id="EntryArea">
-            <table>
-                <tr>
-                    <td><b>Key:</b></td>
-                    <td><input type=text name=mykey></td>
-                </tr>
-                <tr>
-                    <td><b>Value:</b></td>
-                    <td><input type=text name=myvalue></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type=button value="Save" onclick="doAdd()">
-                        <input type=button value="Modify" onclick="doEdit()">
-                        <input type=button value="Remove" onclick="doDelete()">
-                    </td>
-                </tr>
+<body>
+    <header>
+        <h1 align=center>CRUD : PouchDB : JS</h1>
+        <nav>
+            <a href="http://www.sitepoint.com/building-offline-first-app-pouchdb/" target="_blank">Read the article</a>
+            <a href="iu1.html" target="_blank">View Iu1</a>
+        </nav>
+    </header>
+    <main>
+        <p class="rel">
+            <button class="clicktarget" type="button" data-action="viewnoteset" data-show="#allnotes" data-hide="section:not(#allnotes)">View Notes</button>
+            <button class="clicktarget" type="button" data-show="#addnote" data-hide="section:not(#addnote)">Add Note</button>
+        </p>
+
+        <section id="addnote">
+            <form id="noteform" method="post" data-show="#allnotes" data-hide="#addnote">
+                <div class="hide" id="buttonwrapper">
+                    <button class="clicktarget edit" type="button">Edit Note</button>
+                    <button class="clicktarget delete" type="button">Delete Note</button>
+                </div>
+                <p>
+                    <input type="hidden" id="_rev" name="_rev" value="">
+                    <input type="hidden" id="_id" name="_id" value="">
+                    <label for="notetitle">Title:</label>
+                    <input type="text" id="notetitle" name="notetitle" placeholder="Untitled Note" value="">
+                </p>
+                <p>
+                    <label for="note">Note text:</label>
+                    <textarea id="note" name="note" cols="50" rows="5" placeholder="Add note text here. This field is required." required></textarea>
+                </p>
+                <p>
+                    <label for="tags">Tags:</label>
+                    <input type="text" id="tags" name="tags">
+                    <span class="guidance">Separate tags with a comma</span>
+                </p>
+
+                <p class="rel">
+                    <input type="file" id="attachment" name="attachment" class="abs">
+                    <label for="attachment" class="btn">Attachment(s):</label>
+                    <span class="filelist"></span>
+                </p>
+
+                <div id="attachments" class="hide">
+                    <h2>Attachments</h2>
+                    <ul id="attachmentlist"></ul>
+                </div>
+
+                <p>
+                    <button type="submit">Save Note</button>
+                </p>
+            </form>
+        </section>
+
+        <section id="allnotes" class="hide">
+            <h2>Recent notes</h2>
+            <form id="searchnotes" method="get">
+                <p>
+                    <label for="q">Search</label>
+                    <input type="search" id="q" name="q">
+                    <button type="submit">Search</button>
+                </p>
+            </form>
+
+            <table id="notelist">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Created</th>
+                        <th>Updated</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
             </table>
+        </section>
+    </main>
+
+    <div id="syncdialog" class="dialog hide" data-action="close">
+        <div>
+            <button type="button" class="close" data-action="close">Close</button>
+            <h1>Sync-ing data</h1>
+            <div class="progressbar">
+                <progress max="100"></progress>
+            </div>
         </div>
-        <div id="items_table">
-            <h2>Local Storage</h2>
-            <table id=list></table>
-            <p>
-                <label><button type=button value="Clear" onclick="doClear()">Clear all data objects (records)</button></label>
-            </p>
+    </div>
+    <div id="errordialog" class="dialog hide" data-action="close">
+        <div>
+            <button type="button" data-action="close"></button>
+            <h1>Error</h1>
+            <div class="msg"></div>
         </div>
-    </form>
+    </div>
+    <footer>
+        <p>Released under an Apache 2.0 license</p>
+    </footer>
 </body>
+
 <script>
-    // ADD_NEW
-    function doAdd() {
-        var mykey = document.forms.Storage.mykey.value;
-        var myvalue = document.forms.Storage.myvalue.value;
-        localStorage.setItem(mykey, myvalue);
-        doList();
-    }
+    var builddate, buildtime, buttonmenu, editbutton,
+        delbutton, hashchanger,
+        pn, PouchNotesObj, showview, svhandler, viewnotes, searchnotes;
 
-    // EDIT
-    function doEdit() {
-        var name = document.forms.Storage.mykey.value;
-        document.forms.Storage.myvalue.value = localStorage.getItem(name);
-        doList();
-    }
+    viewnotes = document.querySelector('[data-show="#allnotes"]');
+    buttonmenu = document.getElementById('buttonwrapper');
+    editbutton = document.querySelector('button[type=button].edit');
+    delbutton = document.querySelector('button[type=button].delete');
 
-    // DELETE
-    function doDelete() {
-        var name = document.forms.Storage.mykey.value;
-        document.forms.Storage.myvalue.value = localStorage.removeItem(name);
-        doList();
-    }
+    showview = document.querySelectorAll('button.clicktarget');
 
-    // LIST
-    function doList() {
-        document.forms.Storage.mykey.value = '';
-        document.forms.Storage.myvalue.value = '';
-        if ('localStorage' in window && window['localStorage'] !== null) {
-            // we can use localStorage object to store data
-            var key = "";
-            var list = "<tr><th>Key</th><th>Value</th></tr>\n";
-            var i = 0;
-            for (i = 0; i <= localStorage.length - 1; i++) {
-                key = localStorage.key(i);
-                list += "<tr><td>" + key + "</td>\n<td>" + localStorage.getItem(key) + "</td></tr>\n";
-            }
-            if (list == "<tr><th>Name</th><th>Value</th></tr>\n") {
-                list += "<tr><td><i>empty</i></td>\n<td><i>empty</i></td></tr>\n";
-            }
-            document.getElementById('list').innerHTML = list;
+    PouchNotesObj = function (databasename, remoteorigin) {
+        'use strict';
+
+        Object.defineProperty(this, 'pdb', {
+            writable: true
+        });
+        Object.defineProperty(this, 'remote', {
+            writable: true
+        });
+        Object.defineProperty(this, 'formobject', {
+            writable: true
+        });
+        Object.defineProperty(this, 'notetable', {
+            writable: true
+        });
+        Object.defineProperty(this, 'searchformobject', {
+            writable: true
+        });
+        Object.defineProperty(this, 'errordialog', {
+            writable: true
+        });
+
+        this.pdb = new PouchDB(databasename);
+        this.remote = remoteorigin + '/' + databasename;
+
+    };
+
+
+    PouchNotesObj.prototype.buildtime = function (timestamp) {
+        var ts = new Date(+timestamp),
+            time = [],
+            pm, ampm;
+
+        pm = (ts.getHours() > 12);
+
+        time[0] = pm ? ts.getHours() - 12 : ts.getHours();
+        time[1] = ('0' + ts.getMinutes()).substr(-2);
+
+        if (time[0] == 12) {
+            ampm = 'pm';
         } else {
-            alert('Cannot store shopping list as your browser do not support local storage');
+            ampm = pm ? 'pm' : 'am';
         }
-    }
 
-    function doClear() {
-        var mcnt = localStorage.length;
-        if (mcnt > 0) {
-            if (confirm('Clear '+mcnt+' record(s) in Local Storage now!')) {
-                localStorage.clear();
-                doList();
+        return ' @ ' + time.join(':') + ampm;
+    };
+
+    PouchNotesObj.prototype.builddate = function (timestamp) {
+        var d = [],
+            date = new Date(timestamp);
+
+        d[0] = date.getFullYear();
+        d[1] = ('0' + (date.getMonth() + 1)).substr(-2);
+        d[2] = ('0' + date.getDate()).substr(-2);
+        return d.join('-');
+    };
+
+    /*
+    Create a function to log errors to the console for
+    development.
+    */
+
+    PouchNotesObj.prototype.reporter = function (error, response) {
+        'use strict';
+        if (console !== undefined) {
+            if (error) {
+                console.log(error);
+            }
+            if (response) {
+                console.log(response);
             }
         }
-    }
+    };
+
+    PouchNotesObj.prototype.showerror = function (error) {
+        var o, txt, msg = this.errordialog.getElementsByClassName('msg')[0];
+        for (o in error) {
+            txt = document.createTextNode(error[o]);
+            msg.appendChild(txt);
+        }
+        this.errordialog.toggleClass('hide');
+    };
+
+    PouchNotesObj.prototype.show = function (selector) {
+        'use strict';
+        var els = document.querySelectorAll(selector);
+        Array.prototype.map.call(els, function (el) {
+            el.classList.remove('hide');
+        });
+    };
+    PouchNotesObj.prototype.hide = function (selector) {
+        'use strict';
+        var els = document.querySelectorAll(selector);
+        Array.prototype.map.call(els, function (el) {
+            el.classList.add('hide');
+        });
+    };
+    PouchNotesObj.prototype.resethash = function () {
+        window.location.hash = '';
+    };
+
+    PouchNotesObj.prototype.savenote = function () {
+        'use strict';
+        var o = {},
+            that = this;
+
+        /*
+        If we have an _id, use it. Otherwise, create a timestamp
+        for to use as an ID. IDs must be strings, so convert with `+ ''`
+        */
+        if (!this.formobject._id.value) {
+            o._id = new Date().getTime() + '';
+        } else {
+            o._id = this.formobject._id.value;
+        }
+
+        if (this.formobject._rev.value) {
+            o._rev = this.formobject._rev.value;
+        }
+
+        /*
+        Build the object based on whether the field has a value.
+        This is a benefit of a schema-free object store type of
+        database. We don't need to include values for every property.
+        */
+
+        o.notetitle = (this.formobject.notetitle.value == '') ? 'Untitled Note' : this.formobject.notetitle.value;
+        o.note = (this.formobject.note.value == '') ? '' : this.formobject.note.value;
+        o.tags = (this.formobject.tags.value == '') ? '' : this.formobject.tags.value;
+        o.modified = new Date().getTime();
+
+        this.pdb.put(o, function (error, response) {
+            if (error) {
+                that.showerror(error);
+            }
+
+            if (response && response.ok) {
+                if (that.formobject.attachment.files.length) {
+                    var reader = new FileReader();
+
+                    /*
+                    Using a closure so that we can extract the
+                    File's data in the function.
+                    */
+                    reader.onload = (function (file) {
+                        return function (e) {
+                            that.pdb.putAttachment(response.id, file.name, response.rev, e.target
+                                .result, file.type);
+                        }
+                    })(that.formobject.attachment.files.item(0));
+
+                    reader.readAsDataURL(that.formobject.attachment.files.item(0));
+                }
+
+                that.viewnoteset();
+                that.formobject.reset();
+
+                that.show(that.formobject.dataset.show);
+                that.hide(that.formobject.dataset.hide);
+
+                viewnotes.dispatchEvent(new MouseEvent('click'));
+            }
+        });
+
+        this.resethash();
+    };
+
+    PouchNotesObj.prototype.viewnote = function (noteid) {
+        'use strict';
+
+        var that = this,
+            noteform = this.formobject;
+
+        this.pdb.get(noteid, {
+            attachments: true
+        }, function (error, response) {
+            var fields = Object.keys(response),
+                o, link, attachments, li;
+
+            if (error) {
+                this.showerror();
+                return;
+            } else {
+
+                fields.map(function (f) {
+                    if (noteform[f] !== undefined && noteform[f].type != 'file') {
+                        noteform[f].value = response[f];
+                    }
+                    if (f == '_attachments') {
+                        attachments = response[f];
+                        for (o in attachments) {
+                            li = document.createElement('li');
+                            link = document.createElement('a');
+                            link.href = 'data:' + attachments[o].content_type + ';base64,' +
+                                attachments[o].data;
+                            link.target = "_blank";
+                            link.appendChild(document.createTextNode(o));
+                            li.appendChild(link);
+                        }
+                        document.getElementById('attachmentlist').appendChild(li);
+
+                    }
+                });
+
+                // fill in form fields with response data.
+                that.show('#addnote');
+                that.hide('section:not(#addnote)');
+                that.show('#attachments');
+            }
+        });
+
+        if (window.location.hash.indexOf(/view/) > -1) {
+            // disable form fields
+            noteform.classList.add('disabled');
+
+            Array.prototype.map.call(noteform.querySelectorAll('input, textarea'), function (i) {
+                if (i.type !== 'hidden') {
+                    i.disabled = 'disabled';
+                }
+            });
+
+            buttonmenu.classList.remove('hide');
+        }
+    };
+
+    PouchNotesObj.prototype.deletenote = function (noteid) {
+        var that = this;
+        /* IDs must be a string */
+
+        this.pdb.get(noteid + '', function (error, doc) {
+            that.pdb.remove(doc, function (e, r) {
+                if (e) {
+                    that.showerror();
+                } else {
+                    viewnotes.dispatchEvent(new MouseEvent('click'));
+                }
+            });
+        });
+    };
+
+    /*
+    TO DO: refactor so we can reuse this function.
+    */
+    PouchNotesObj.prototype.viewnoteset = function (start, end) {
+        var i,
+            that = this,
+            df = document.createDocumentFragment(),
+            options = {},
+            row,
+            nl = this.notetable.querySelector('tbody');
+
+        options.include_docs = true;
+
+        if (start) {
+            options.startkey = start;
+        }
+        if (end) {
+            options.endkey = end;
+        }
+
+        this.pdb.allDocs(options, function (error, response) {
+            /*
+            What's `this` changes when a function is called
+            with map. That's why we're passing `that`.
+            */
+            row = response.rows.map(that.addrow, that);
+            row.map(function (f) {
+                if (f) {
+                    df.appendChild(f);
+                }
+            });
+
+            i = nl.childNodes.length;
+            while (i--) {
+                nl.removeChild(nl.childNodes.item(i));
+            }
+
+            nl.appendChild(df);
+        });
+
+        this.resethash();
+    };
+
+    PouchNotesObj.prototype.addrow = function (obj) {
+        var tr, td, a, o, created;
+
+        a = document.createElement('a');
+        tr = document.createElement('tr');
+        td = document.createElement('td');
+
+        a.href = '#/view/' + obj.id;
+        a.innerHTML = obj.doc.notetitle === undefined ? 'Untitled Note' : obj.doc.notetitle;
+        td.appendChild(a);
+        tr.appendChild(td);
+
+        created = td.cloneNode(false);
+        created.innerHTML = this.builddate(+obj.id) + this.buildtime(+obj.id);
+
+        updated = created.cloneNode();
+        updated.innerHTML = obj.doc.modified ? this.builddate(+obj.doc.modified) + this.buildtime(+obj.doc.modified) :
+            this.builddate(+obj.id) + this.buildtime(+obj.id);
+
+        tr.appendChild(created);
+        tr.appendChild(updated);
+
+        return tr;
+    };
+
+
+    PouchNotesObj.prototype.search = function (searchkey) {
+        var that = this;
+
+        var map = function (doc) {
+            /*
+            Need to do grab the value directly because
+            there isn't a way to pass it any other way.
+            */
+
+            var searchkey, regex;
+            searchkey = document.getElementById('q').value.replace(/[$-\/?[-^{|}]/g, '\\$&');
+            regex = new RegExp(searchkey, 'i');
+
+            if (regex.test(doc.notetitle) || regex.test(doc.note) || regex.test(doc.tags)) {
+                emit(doc._id, {
+                    notetitle: doc.notetitle,
+                    id: doc._id,
+                    modified: doc.modified
+                });
+            }
+        }
+
+        this.pdb.query(map, function (err, response) {
+            if (err) {
+                console.log(err);
+            }
+            if (response) {
+                var df, rows, nl, results;
+
+                results = response.rows.map(function (r) {
+                    r.doc = r.value;
+                    delete r.value;
+                    return r;
+                });
+                nl = that.notetable.getElementsByTagName('tbody')[0];
+                df = document.createDocumentFragment(),
+                    rows = results.map(that.addrow, that);
+                rows.map(function (f) {
+                    if (f) {
+                        df.appendChild(f);
+                    }
+                });
+                nl.innerHTML = '';
+                nl.appendChild(df);
+            }
+        });
+    };
+
+
+    /*------ Maybe do in a try-catch ? ------*/
+    pn = new PouchNotesObj('dbnotes');
+
+    pn.formobject = document.getElementById('noteform');
+    pn.notetable = document.getElementById('notelist');
+    pn.searchformobject = document.getElementById('searchnotes');
+    pn.errordialog = document.getElementById('errordialog');
+
+    pn.searchformobject.addEventListener('submit', function (e) {
+        'use strict';
+        e.preventDefault();
+        pn.search();
+    });
+
+    pn.formobject.addEventListener('submit', function (e) {
+        e.preventDefault();
+        pn.savenote()
+    });
+
+    pn.formobject.addEventListener('reset', function (e) {
+        var disableds = document.querySelectorAll('#noteform [disabled]');
+        e.target.classList.remove('disabled');
+        Array.prototype.map.call(disableds, function (o) {
+            o.removeAttribute('disabled');
+        });
+        pn.hide('#attachments');
+        document.getElementById('attachmentlist').innerHTML = '';
+    });
+
+    window.addEventListener('hashchange', function (e) {
+        var noteid;
+        if (window.location.hash.replace(/#/, '')) {
+            noteid = window.location.hash.match(/\d/g).join('');
+            pn.viewnote(noteid);
+        }
+    });
+
+    svhandler = function (evt) {
+        var attchlist = document.getElementById('attachmentlist');
+
+        if (evt.target.dataset.show) {
+            pn.show(evt.target.dataset.show);
+        }
+        if (evt.target.dataset.hide) {
+            pn.hide(evt.target.dataset.hide);
+        }
+
+        if (evt.target.dataset.action) {
+            pn[evt.target.dataset.action]();
+        }
+
+        if (evt.target.dataset.show === '#addnote') {
+            pn.formobject.reset();
+
+            /* Force reset on hidden fields. */
+            pn.formobject._id.value = '';
+            pn.formobject._rev.value = '';
+        }
+        pn.hide('#attachments');
+        attchlist.innerHTML = '';
+        pn.searchformobject.reset();
+        pn.resethash();
+    };
+
+    /* TO DO: Refactor these click actions to make the functions reusable */
+
+    editbutton.addEventListener('click', function (e) {
+        pn.formobject.classList.remove('disabled');
+
+        Array.prototype.map.call(pn.formobject.querySelectorAll('input, textarea'), function (i) {
+            if (i.type !== 'hidden') {
+                i.removeAttribute('disabled');
+            }
+        });
+    });
+
+    delbutton.addEventListener('click', function (e) {
+        pn.deletenote(+e.target.form._id.value);
+    });
+
+    Array.prototype.map.call(showview, function (ct) {
+        ct.addEventListener('click', svhandler);
+    });
+
+    Array.prototype.map.call(document.getElementsByClassName('dialog'), function (d) {
+        d.addEventListener('click', function (evt) {
+            if (evt.target.dataset.action === 'close') {
+                d.classList.add('hide');
+            }
+        });
+    });
+
+    window.addEventListener('DOMContentLoaded', function (event) {
+        viewnotes.dispatchEvent(new MouseEvent('click'));
+    });
+
+    pn.formobject.addEventListener('change', function (event) {
+        if (event.target.type === 'file') {
+            var fn = event.target.value.split('\\');
+            document.querySelector('.filelist').innerHTML = fn.pop();
+        }
+    });
+
+    // Sync
+    var db = new PouchDB('dbnotes');
+    //db.destroy();
+    //https://eldus:password@eldus.cloudant.com/test/
+    db.replicate.to('https://eldus.cloudant.com/test2/');
+    db.replicate.from('https://eldus.cloudant.com/test2/');
+    console.log('allo allo allo');
 </script>
 
 </html>
