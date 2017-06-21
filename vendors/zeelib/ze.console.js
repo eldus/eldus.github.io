@@ -1,6 +1,6 @@
-window.addEventListener('load', function () {
-    console.log("Ready");
-}, false);
+//window.addEventListener('load', function () {
+    //console.log("Ready");
+//}, false);
 
 var orgConsoleLog = console.log;
 var orgTime = Date.now();

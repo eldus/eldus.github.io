@@ -1,0 +1,43 @@
+</head>
+
+<body>
+    <script type="text/javascript" src="../../vendors/zeelib/ze.console.js"></script>
+
+    <textarea id="id_ConsoleLog" wrap="on" rows="10" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+    <textarea id="id_ConsoleJson" wrap="on" rows="20" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+
+    <p>
+        <button onclick="ConvertGPS()">Convert</button>
+    </p>
+
+    <textarea id="id_ConsoleGPS" wrap="on" rows="20" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+
+</body>
+
+
+<script>
+    function ConvertGPS() {
+        myJson = document.getElementById("id_ConsoleJson").value;
+        dataObjGeolocation = JSON.parse(myJson);
+
+        var last = dataObjGeolocation.datalog.length - 1;
+        console.log(last);
+        myJson1 = '<?xml version="1.0" encoding="UTF-8"?><gpx version="1.1"><trk><name>Track Name</name><time>2012-10-24T23:00:00.000Z</time><trkseg>';
+        for (i = 0; i <= last; i++) {
+            myJson1 += '<trkpt lon="' + dataObjGeolocation.datalog[i].lon + '" lat="' + dataObjGeolocation.datalog[i].lat + '"><time>"' + dataObjGeolocation.datalog[i]._id + '"</time></trkpt>';
+        }
+        myJson1 += '</trkseg></trk></gpx>';
+        //myJson1=JSON.stringify(dataObjGeolocation);
+        var el;
+        el = document.getElementById("id_ConsoleGPS");
+        if (el) {
+            el.innerHTML = myJson1;
+        }
+        var filename = "1.gpx";
+        var blob = new Blob([myJson1], {
+            type: "text/plain;charset=utf-8"
+        });
+        var uriContent="data:text/gpx;filename=1.gpx," + escape(myJson1);
+        window.open(uriContent ,"1.gpx");
+    }
+</script>

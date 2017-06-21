@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <title>Devices</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+</head>
+<script type="text/javascript" src="../vendors/zeelib/ze.console.js"></script>
+
+<body>
+    <textarea id="id_ConsoleLog" wrap="off" rows="15" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+    <p>
+        <div id="aX"></div>
+        <div id="aY"></div>
+        <div id="aZ"></div>
+    </p>
+</body>
+<script>
+    console.log('Ready');
+    if (window.DeviceOrientationEvent) {
+        console.log("DeviceOrientation is supported");
+    } else {
+        console.log("DeviceOrientation is not supported");
+    }
+    if (window.DeviceMotionEvent) {
+        console.log('devicemotion supported');
+        window.addEventListener('devicemotion', function (ev) {
+            var acc = ev.acceleration;
+            //var x = Math.round(event.accelerationIncludingGravity.x * 10) / 10;
+            dmHdlr(Math.round(acc.x * 10) / 10, acc.y, acc.z);
+        }, false);
+    } else {
+        console.log('devicemotion NOT supported');
+    }
+    window.addEventListener("devicemotion", handleMotionEvent, true);
+
+    function handleMotionEvent(event) {
+
+        var x = Math.round(event.accelerationIncludingGravity.x * 10) / 10;
+        var y = Math.round(event.accelerationIncludingGravity.y * 10) / 10;
+        var z = Math.round(event.accelerationIncludingGravity.z * 10) / 10;
+
+
+        //console.log(x + ',' + y + ',' + z);
+    }
+
+    var lastDM = new Date().getTime();
+
+    function dmHdlr(aX, aY, aZ) {
+        var currDM = new Date().getTime();
+        //if (currDM < lastDM + 1000) {return;}
+        lastDM = currDM;
+        // s$('aX').innerHTML
+//console.log(currDM+' '+aX);
+        //s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
+        document.getElementById('aX').innerHTML = aX ? aX.toFixed(3) : '?';
+        document.getElementById('aY').innerHTML = aX ? aX.toFixed(3) : '?';
+        document.getElementById('aZ').innerHTML = aY ? aY.toFixed(3) : '?';
+    }
+</script>
+
+</html>
