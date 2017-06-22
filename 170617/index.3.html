@@ -10,53 +10,105 @@
 <body>
     <textarea id="id_ConsoleLog" wrap="off" rows="15" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
     <p>
-        <div id="aX"></div>
-        <div id="aY"></div>
-        <div id="aZ"></div>
+        Alpha=<label id="aA"></label> Beta=
+        <label id="aB"></label> Gamma=
+        <label id="aG"></label>
     </p>
-</body>
-<script>
-    console.log('Ready');
-    if (window.DeviceOrientationEvent) {
-        console.log("DeviceOrientation is supported");
-    } else {
-        console.log("DeviceOrientation is not supported");
-    }
-    if (window.DeviceMotionEvent) {
-        console.log('devicemotion supported');
-        window.addEventListener('devicemotion', function (ev) {
-            var acc = ev.acceleration;
-            //var x = Math.round(event.accelerationIncludingGravity.x * 10) / 10;
-            dmHdlr(Math.round(acc.x * 10) / 10, acc.y, acc.z);
-        }, false);
-    } else {
-        console.log('devicemotion NOT supported');
-    }
-    window.addEventListener("devicemotion", handleMotionEvent, true);
+    <p>
+        X=<label id="aX"></label> Y=
+        <label id="aY"></label> Z=
+        <label id="aZ"></label>
+    </p>
+    <p>
+        X=<label id="zX"></label> Y=
+        <label id="zY"></label> Z=
+        <label id="zZ"></label>
+    </p>
+    <script>
+        console.log('Ready');
+        var lastDM1 = new Date().getTime();
+        var oA = 0,
+            oB = 0,
+            oG = 0;
+        var lastDM2 = new Date().getTime();
+        var oX = 0,
+            oY = 0,
+            oZ = 0;
+        var lastDM3 = new Date().getTime();
 
-    function handleMotionEvent(event) {
+        if (window.DeviceOrientationEvent) {
+            console.log("deviceorientation is supported");
+            window.addEventListener('deviceorientation', function(ev) {
+                dmHdlr1(ev.alpha, ev.beta, ev.gamma);
+            }, false);
+        } else {
+            console.log("DeviceOrientation is not supported");
+        }
 
-        var x = Math.round(event.accelerationIncludingGravity.x * 10) / 10;
-        var y = Math.round(event.accelerationIncludingGravity.y * 10) / 10;
-        var z = Math.round(event.accelerationIncludingGravity.z * 10) / 10;
+        function dmHdlr1(aA, aB, aG) {
+            var currDM1 = new Date().getTime();
+            if (currDM1 < lastDM1 + 1000) {
+                return;
+            }
+            lastDM1 = currDM1;
+            oA = aA ? aA.toFixed(1) : oA;
+            oB = aB ? aB.toFixed(1) : oB;
+            oG = aG ? aG.toFixed(1) : oG;
+            // $('aX').innerHTML // jQuery
+            document.getElementById('aA').innerHTML = oA;
+            document.getElementById('aB').innerHTML = oB;
+            document.getElementById('aG').innerHTML = oG;
+        }
 
+        if (window.DeviceMotionEvent) {
+            console.log('devicemotion supported');
+            window.addEventListener('devicemotion', function(ev) {
+                //var acc = ev.acceleration;
+                var acc = ev.accelerationIncludingGravity;
+                dmHdlr2(acc.x, acc.y, acc.z);
+            }, false);
+        } else {
+            console.log('devicemotion NOT supported');
+        }
 
-        //console.log(x + ',' + y + ',' + z);
-    }
+        function dmHdlr2(aX, aY, aZ) {
+            var currDM2 = new Date().getTime();
+            if (currDM2 < lastDM2 + 1000) {
+                return;
+            }
+            lastDM2 = currDM2;
+            oX = aX ? aX.toFixed(2) : oX;
+            oY = aY ? aY.toFixed(2) : oY;
+            oZ = aZ ? aZ.toFixed(2) : oZ;
+            document.getElementById('aX').innerHTML = oX;
+            document.getElementById('aY').innerHTML = oY;
+            document.getElementById('aZ').innerHTML = oZ;
+        }
 
-    var lastDM = new Date().getTime();
+        if (window.DeviceMotionEvent) {
+            console.log('devicemotion supported');
+            window.addEventListener('devicemotion', function(ev) {
+                var acc = ev.acceleration;
+                //var acc = ev.accelerationIncludingGravity;
+                dmHdlr3(acc.x, acc.y, acc.z);
+            }, false);
+        } else {
+            console.log('devicemotion NOT supported');
+        }
 
-    function dmHdlr(aX, aY, aZ) {
-        var currDM = new Date().getTime();
-        //if (currDM < lastDM + 1000) {return;}
-        lastDM = currDM;
-        // s$('aX').innerHTML
-//console.log(currDM+' '+aX);
-        //s$('aZ').innerHTML = aZ ? aZ.toFixed(3) : '?';
-        document.getElementById('aX').innerHTML = aX ? aX.toFixed(3) : '?';
-        document.getElementById('aY').innerHTML = aX ? aX.toFixed(3) : '?';
-        document.getElementById('aZ').innerHTML = aY ? aY.toFixed(3) : '?';
-    }
-</script>
+        function dmHdlr3(aX, aY, aZ) {
+            var currDM3 = new Date().getTime();
+            if (currDM3 < lastDM3 + 1000) {
+                return;
+            }
+            lastDM3 = currDM3;
+            oX = aX ? aX.toFixed(2) : oX;
+            oY = aY ? aY.toFixed(2) : oY;
+            oZ = aZ ? aZ.toFixed(2) : oZ;
+            document.getElementById('zX').innerHTML = oX;
+            document.getElementById('zY').innerHTML = oY;
+            document.getElementById('zZ').innerHTML = oZ;
+        }
+    </script>
 
 </html>
