@@ -1,58 +1,132 @@
 <html>
 
 <head>
-    <title>Geolocation</title>
+    <title>Devices</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
 </head>
 <script type="text/javascript" src="../vendors/zeelib/ze.console.js"></script>
 
 <body>
     <textarea id="id_ConsoleLog" wrap="off" rows="15" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
-</body>
-<script>
-    var myObj0 = {
-        "name": "John0",
-        "age": 30,
-        "city": "New York"
-    };
-    console.log('1: '+JSON.stringify(myObj0));
-    var myObj1 = {
-        "name": "John1",
-        "age": 31,
-        "city": "New England"
-    };
+    <p>
+        Alpha=<label id="aA"></label> Beta=
+        <label id="aB"></label> Gamma=
+        <label id="aG"></label>
+    </p>
+    <p>
+        X=<label id="aX"></label> Y=
+        <label id="aY"></label> Z=
+        <label id="aZ"></label>
+    </p>
+    <p>
+        X=<label id="zX"></label> Y=
+        <label id="zY"></label> Z=
+        <label id="zZ"></label>
+    </p>
+    <script>
+        console.log('Ready');
+        var lastDM1 = new Date().getTime();
+        var oA = 0,
+            oB = 0,
+            oG = 0;
+        var lastDM2 = new Date().getTime();
+        var oX = 0,
+            oY = 0,
+            oZ = 0;
+        var lastDM3 = new Date().getTime();
 
-    var finalObj = [];
-    finalObj.push(myObj0);
-    finalObj.push(myObj1);
+        if (navigator.geolocation) {
+            console.log("navigator.geolocation is supported");
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+        } else {
+            console.log("navigator.geolocation is not supported");
+        }
 
-    var myJSON = JSON.stringify(finalObj);
-    // Nested JSON Objects
-    localStorage.setItem("mystring1", myJSON);
-    console.log('2: '+myJSON);
-    regenObj=JSON.parse(myJSON);
-    console.log('2.1: '+regenObj[0].name);
-    var myTop = {
-        "title": "MyNewWorkarea"
-    }
-    myTop.content = finalObj;
-    //save object to localstorage, need to stringify first
-    var myTopJSON = JSON.stringify(myTop);
-    console.log(myTopJSON);
-    localStorage.setItem("mystring2", myTopJSON);
-    // myObj={"title":"MyNewWorkarea","content":[{"name":"John0","age":30,"city":"New York"},{"name":"John1","age":31,"city":"New England"}]}
-    myJSON=localStorage.getItem("mystring2");
-    // read from localstorage, need to un-stringify (.parse) it
-    regenObj=JSON.parse(myJSON);
-    // Nested JSON Objects
-    console.log(regenObj.title);
-    console.log(regenObj.content[0].name);
-    dataObjGeolocation
-    console.log(JSON.stringify(regenObj));
-    var splicedItem=regenObj.content.splice(0, 3);
-    console.log(JSON.stringify(regenObj));
-    console.log(JSON.stringify(splicedItem));
-</script>
+        function showPosition(position) {
+            console.log("navigator.geolocation is supported");
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            console.log(lat + ',' + lon);
+        }
+
+        function showError(error) {
+            console.log("error:"+error.code);
+        }
+
+        if (window.DeviceOrientationEvent) {
+            console.log("deviceorientation is supported");
+            window.addEventListener('deviceorientation', function(ev) {
+                dmHdlr1(ev.alpha, ev.beta, ev.gamma);
+            }, false);
+        } else {
+            console.log("DeviceOrientation is not supported");
+        }
+
+        function dmHdlr1(aA, aB, aG) {
+            var currDM1 = new Date().getTime();
+            if (currDM1 < lastDM1 + 1000) {
+                return;
+            }
+            lastDM1 = currDM1;
+            oA = aA ? aA.toFixed(1) : oA;
+            oB = aB ? aB.toFixed(1) : oB;
+            oG = aG ? aG.toFixed(1) : oG;
+            // $('aX').innerHTML // jQuery
+            document.getElementById('aA').innerHTML = oA;
+            document.getElementById('aB').innerHTML = oB;
+            document.getElementById('aG').innerHTML = oG;
+        }
+
+        if (window.DeviceMotionEvent) {
+            console.log('devicemotion supported');
+            window.addEventListener('devicemotion', function(ev) {
+                //var acc = ev.acceleration;
+                var acc = ev.accelerationIncludingGravity;
+                dmHdlr2(acc.x, acc.y, acc.z);
+            }, false);
+        } else {
+            console.log('devicemotion NOT supported');
+        }
+
+        function dmHdlr2(aX, aY, aZ) {
+            var currDM2 = new Date().getTime();
+            if (currDM2 < lastDM2 + 1000) {
+                return;
+            }
+            lastDM2 = currDM2;
+            oX = aX ? aX.toFixed(2) : oX;
+            oY = aY ? aY.toFixed(2) : oY;
+            oZ = aZ ? aZ.toFixed(2) : oZ;
+            document.getElementById('aX').innerHTML = oX;
+            document.getElementById('aY').innerHTML = oY;
+            document.getElementById('aZ').innerHTML = oZ;
+        }
+
+        if (window.DeviceMotionEvent) {
+            console.log('devicemotion supported');
+            window.addEventListener('devicemotion', function(ev) {
+                var acc = ev.acceleration;
+                //var acc = ev.accelerationIncludingGravity;
+                dmHdlr3(acc.x, acc.y, acc.z);
+            }, false);
+        } else {
+            console.log('devicemotion NOT supported');
+        }
+
+        function dmHdlr3(aX, aY, aZ) {
+            var currDM3 = new Date().getTime();
+            if (currDM3 < lastDM3 + 1000) {
+                return;
+            }
+            lastDM3 = currDM3;
+            oX = aX ? aX.toFixed(2) : oX;
+            oY = aY ? aY.toFixed(2) : oY;
+            oZ = aZ ? aZ.toFixed(2) : oZ;
+            document.getElementById('zX').innerHTML = oX;
+            document.getElementById('zY').innerHTML = oY;
+            document.getElementById('zZ').innerHTML = oZ;
+        }
+    </script>
 
 </html>

@@ -9,6 +9,8 @@ This is my GitHub home page for learning to write better codes in [HTML5](https:
 * 170517 Firebase
 * 170609 VueJS2.3
 * 170613 AngularJS1.6
+* 170617 JSON
+* 170624 Mobile Device Sensors
 
 #### Getting Started:
 A GitHub account for storing and rendering static HTML, CSS and JS codes. Download and install the [GitHub Desktop](https://desktop.github.com) on the personal computer. It provides an organised way to synchronize folders and files between the computer and the remote GitHub host. A simple text editor like [ATOM](https://atom.io), [Brackets](https://brackets.io), or [Visual Studio Code](https://code.visualstudio.com) to create and edit text files on the computer. Use [CodePen](https://codepen.io/pen/), a playground for the front end side of the web, to write and test HTML/CSS/JS Sniplets.

@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>Geolocation</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+</head>
+<script type="text/javascript" src="../vendors/zeelib/ze.console.js"></script>
+
+<body>
+    <textarea id="id_ConsoleLog" wrap="off" rows="15" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+</body>
+<script>
+    var myObj0 = {
+        "name": "John0",
+        "age": 30,
+        "city": "New York"
+    };
+    console.log('1: '+JSON.stringify(myObj0));
+    var myObj1 = {
+        "name": "John1",
+        "age": 31,
+        "city": "New England"
+    };
+
+    var finalObj = [];
+    finalObj.push(myObj0);
+    finalObj.push(myObj1);
+
+    var myJSON = JSON.stringify(finalObj);
+    // Nested JSON Objects
+    localStorage.setItem("mystring1", myJSON);
+    console.log('2: '+myJSON);
+    regenObj=JSON.parse(myJSON);
+    console.log('2.1: '+regenObj[0].name);
+    var myTop = {
+        "title": "MyNewWorkarea"
+    }
+    myTop.content = finalObj;
+    //save object to localstorage, need to stringify first
+    var myTopJSON = JSON.stringify(myTop);
+    console.log(myTopJSON);
+    localStorage.setItem("mystring2", myTopJSON);
+    // myObj={"title":"MyNewWorkarea","content":[{"name":"John0","age":30,"city":"New York"},{"name":"John1","age":31,"city":"New England"}]}
+    myJSON=localStorage.getItem("mystring2");
+    // read from localstorage, need to un-stringify (.parse) it
+    regenObj=JSON.parse(myJSON);
+    // Nested JSON Objects
+    console.log(regenObj.title);
+    console.log(regenObj.content[0].name);
+    dataObjGeolocation
+    console.log(JSON.stringify(regenObj));
+    var splicedItem=regenObj.content.splice(0, 3);
+    console.log(JSON.stringify(regenObj));
+    console.log(JSON.stringify(splicedItem));
+</script>
+
+</html>
