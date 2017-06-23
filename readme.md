@@ -14,8 +14,8 @@ This is my GitHub home page for learning to write better codes in [HTML5](https:
 A GitHub account for storing and rendering static HTML, CSS and JS codes. Download and install the [GitHub Desktop](https://desktop.github.com) on the personal computer. It provides an organised way to synchronize folders and files between the computer and the remote GitHub host. A simple text editor like [ATOM](https://atom.io), [Brackets](https://brackets.io), or [Visual Studio Code](https://code.visualstudio.com) to create and edit text files on the computer. Use [CodePen](https://codepen.io/pen/), a playground for the front end side of the web, to write and test HTML/CSS/JS Sniplets.
 
 #### Use GitHub Pages to "Demo" HTML/CSS/JS codes:
-* On the project root: http://eldus.github.io
-* Or on http://io.github.eldus.com:81 (remote backup)
+* On the project root: https://eldus.github.io
+* Or on https://io.github.eldus.com (remote backup)
 
 > GitHub Pages is designed to host project pages directly from a GitHub repository. GitHub Pages is a static site hosting service and doesn't support server-side code such as, PHP, Ruby, or Python. **Other Limitations:** Github Pages does not permits data to be written back to the host by the javascripts.
 
