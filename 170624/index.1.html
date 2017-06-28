@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title>Devices</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <script type="text/javascript" src="smoothie.js"></script>
+</head>
+<script type="text/javascript" src="../vendors/zeelib/ze.console.js"></script>
+
+<body onload="createTimeline()">
+    <textarea id="id_ConsoleLog" wrap="off" rows="15" style="width:98%;font-family:courier;overflow: scroll;"></textarea>
+
+    <canvas id="chart" width="400" height="100"></canvas>
+</body>
+<script>
+    console.log('Ready');
+
+    var random = new TimeSeries();
+    setInterval(function() {
+        random.append(new Date().getTime(), Math.random() * 10000);
+    }, 500);
+
+    function createTimeline() {
+        var chart = new SmoothieChart();
+        chart.addTimeSeries(random, {
+            strokeStyle: 'rgba(0, 255, 0, 1)',
+            fillStyle: 'rgba(0, 255, 0, 0.2)',
+            lineWidth: 4
+        });
+        chart.streamTo(document.getElementById("chart"), 500);
+    }
+</script>
+
+</html>

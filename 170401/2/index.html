@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello Handlebars</title>
+    <script src="../../vendors/handlebars-4.0.10/handlebars.js"></script>
+</head>
+
+<body>
+
+    <div id="contentDiv"></div>
+    <script id="my-template" type="text/x-handlebars-template">
+        <h1>{{title}}</h1>
+        <div class="body">
+            {{{body}}}
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        var templateInfo = document.getElementById("my-template").innerHTML;
+        var template = Handlebars.compile(templateInfo);
+
+        var context = {
+            title: "My New Post",
+            body: "<h3>This is my first post!!!!</h3>"
+            // need {{{ }}} to handle raw html
+        }
+
+        var templateData = template(context);
+
+        document.getElementById('contentDiv').innerHTML += templateData;
+    </script>
+
+</body>
+
+</html>

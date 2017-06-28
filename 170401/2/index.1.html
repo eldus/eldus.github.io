@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello Handlebars</title>
+    <script src="../../vendors/handlebars-4.0.10/handlebars.js"></script>
+</head>
+
+<body>
+    <!-- Each block help -->
+    <div id="contentDiv"></div>
+    <script id="my-template" type="text/x-handlebars-template">
+        <ul class="people_list">
+            {{#each people}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <script type="text/javascript">
+        var templateInfo = document.getElementById("my-template").innerHTML;
+        var template = Handlebars.compile(templateInfo);
+
+        var context = {
+            people: [
+                "Yehuda Katz",
+                "Alan Johnson",
+                "Charles Jolley"
+            ]
+        }
+
+        var templateData = template(context);
+
+        document.getElementById('contentDiv').innerHTML += templateData;
+    </script>
+
+</body>
+
+</html>
