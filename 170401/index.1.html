@@ -16,7 +16,7 @@
         "age": 30,
         "city": "New York"
     };
-    console.log('1: '+JSON.stringify(myObj0));
+    console.log('1: ' + JSON.stringify(myObj0));
     var myObj1 = {
         "name": "John1",
         "age": 31,
@@ -30,9 +30,9 @@
     var myJSON = JSON.stringify(finalObj);
     // Nested JSON Objects
     localStorage.setItem("mystring1", myJSON);
-    console.log('2: '+myJSON);
-    regenObj=JSON.parse(myJSON);
-    console.log('2.1: '+regenObj[0].name);
+    console.log('2: ' + myJSON);
+    regenObj = JSON.parse(myJSON);
+    console.log('2.1: ' + regenObj[0].name);
     var myTop = {
         "title": "my new workarea"
     }
@@ -42,17 +42,18 @@
     console.log(myTopJSON);
     localStorage.setItem("mystring2", myTopJSON);
     //myObj={"title":"my new","content":[{"name":"John0","age":30,"city":"New York"},{"name":"John1","age":31,"city":"New England"}]}
-    myJSON=localStorage.getItem("mystring2");
+    myJSON = localStorage.getItem("mystring2");
     // read from localstorage, need to un-stringify (.parse) it
-    regenObj=JSON.parse(myJSON);
+    regenObj = JSON.parse(myJSON);
     // Nested JSON Objects
     console.log(regenObj.title);
     console.log(regenObj.content[0].name);
     regenObj.content.push(myObj0);
     console.log(JSON.stringify(regenObj));
-    var splicedItem=regenObj.content.splice(0, 3);
+    var splicedItem = regenObj.content.splice(0, 3);
     console.log(JSON.stringify(regenObj));
     console.log(JSON.stringify(splicedItem));
+
 </script>
 
 </html>

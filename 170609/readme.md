@@ -1,4 +1,4 @@
-## 170609 CRUD with Vue.js
+## 170609 Vue.js CRUD
 [HTML, CSS, JS, VUE]
 
 Test it http://eldus.github.io/170609 or http://io.github.eldus.com:81/170609
