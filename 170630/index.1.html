@@ -7,19 +7,24 @@
     <title>Hello</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-</head>
-
-<body>
-    <div id="root"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 
+</head>
+
+<body>
+    <div id="root"></div>
+
     <script type="text/jsx">
-        function formatName(user) { return user.firstName + ' ' + user.lastName; } const user = { firstName: 'John', lastName: 'Doe'
-        }; const element = (
+        function formatName(user) { return user.firstName + ' ' + user.lastName; }
+
+        const user = { firstName: 'John', lastName: 'Doe'
+        };
+        const element = (
         <p>React + ES2015 , in JSX, yo. Hello, {formatName(user)}!</p>
-        ); ReactDOM.render( element, document.getElementById('root') );
+        );
+        ReactDOM.render( element, document.getElementById('root') );
     </script>
 </body>
 
