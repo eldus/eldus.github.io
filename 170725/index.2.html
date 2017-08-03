@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta name="google-signin-client_id" content="520253257294-n2v5ofr4trponpo24se6d8ufngs466q5.apps.googleusercontent.com">
+</head>
+<body>
+  <div id="my-signin2"></div>
+  <a href="#" onclick="signOut();">Sign out</a>
+  <div id="name"></div>
+  <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+      document.getElementById('name').innerText = "Signed in: " +
+              googleUser.getBasicProfile().getName();
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+    function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        auth2.disconnect();
+      console.log('User signed out.');
+      self.location="index.2.html";
+//window.location.reload(false);
+//location.href = location.href;
+    });
+  }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+</body>
+</html>

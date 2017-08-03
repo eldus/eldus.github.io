@@ -2,7 +2,9 @@
 
 ReactJS is a library.
 
-ReactJS is simple - it defines an idea - view = f(data) - with a lifecycle, and that is where it ends. There is very little to learn about React once you realize that components are functions and JSX is also functions.
+ReactJS is simple and there is very little to learn about React once you realize that components are functions and JSX (a preprocessor step that adds XML syntax to JavaScript) is also functions.
+
+You can use React without JSX but JSX makes React a lot more elegant.
 
 ReactJS is a JavaScript library for building user interfaces.  Here are some of its features:
 
@@ -44,6 +46,16 @@ ReactDOM.render(
   <HelloMessage name="John" />,
   document.getElementById('root')
 );
+```
+
+Or this...
+```
+var HelloMessage = React.createClass({
+    render: function render() {
+        return React.createElement('div', null, 'Hello ', this.props.name);
+    }
+});
+ReactDOM.render(React.createElement(HelloMessage, { name: 'John' }), document.getElementById('app'));
 ```
 
 References:
