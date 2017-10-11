@@ -1,8 +1,8 @@
-## Working with JSON using Javascript (No JQuery)
+# Working with JSON using Javascript (No JQuery)
 
 JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write. It is easy for machines to parse and generate. It is based on a subset of the JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999. JSON is a text format that is completely language independent.
 
-Reference http://json.org, https://jsonlint.com
+Reference <http://json.org>, <https://jsonlint.com>
 
 In JSON, they take on these forms:
 
@@ -14,11 +14,11 @@ An array is an ordered collection of values. An array begins with left bracket [
 
 A value can be a string in double quotes, or a number, or true or false or null, or an **object** or an **array**. These structures can be nested.
 
-#### JSON Track/Training (JTT) Format
+## JSON Track/Training (JTT) Format
 
-Reference https://github.com/dret/JTT
+Reference <https://github.com/dret/JTT>
 
-```
+```bash
 { "JTT" : [
     { "track" : {
         "title" : "Test",
@@ -34,6 +34,7 @@ Reference https://github.com/dret/JTT
     }
 ]}
 ```
+
 GPX Mapping:
 
 latitude -> lat
@@ -43,8 +44,9 @@ time -> time
 temperature -> temperature
 HR -> hr
 
-#### GPX Format:
-```
+## GPX Format:
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <gpx version="1.1">
   <trk>
@@ -61,9 +63,9 @@ HR -> hr
 </gpx>
 ```
 
-#### GeoJSON Format
+## GeoJSON Format
 
-#### Local Storage
+## Local Storage
 
 The storing a object in "Local Storage" will not really give the object back. This is because, when it evaluate the object, it will return the string “[object Object]”.
 
@@ -71,9 +73,9 @@ To save record in "Local Storage" javascript object need to be JSON.stringify. H
 
 To read record store in "Local Storage", JSON needs to converted back wiht JSON.parse(localStorage.getItem("x")) to Javascipt object for manipulation.
 
-To see the list browsers that support JSON. http://caniuse.com/#search=JSON
+To see the list browsers that support JSON. <http://caniuse.com/#search=JSON>
 
-```
+```example
 if (localStorage) {
   // LocalStorage is supported!
 } else {
