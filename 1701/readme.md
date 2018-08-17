@@ -1,4 +1,4 @@
-## 170318 Local Storage
+## 1701 Local Storage
 2017.03.18 [HTML, CSS, JS]
 
 Test it https://eldus.github.io/170318 or https://io.github.eldus.com/170318
