@@ -1,7 +1,7 @@
 ## 170318 Local Storage
 2017.03.18 [HTML, CSS, JS]
 
-Test it http://eldus.github.io/170318
+Test it https://eldus.github.io/170318 or https://io.github.eldus.com/170318
 
 #### Delete Local Storage Contents
 
