@@ -20,9 +20,23 @@
 
 .right { grid-area: right; }
 
-
+.flexbox-header {
+	display: flex;
+}
+.flexbox-header > div:nth-child(3) {
+	margin-left: auto;
+}
 </style>
 <body>
+
+
+<p>Flexbox Header</p>
+<div class="flexbox-header">
+	<div>Home</div>
+	<div>Item 1</div>
+	<div>Item 2</div>
+</div>
+<p>Grid Page</p>
 <div class="grid-container">
   <div class="top">Lorem ipsum dolor sit amet, idque mollis consetetur at vis
   </div>
