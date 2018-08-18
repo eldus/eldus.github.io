@@ -1,12 +1,40 @@
 <html>
 <header>
 <style>
+
+html, body {
+  background-color: #ffeead;
+  margin: 10px;
+}
+	
 .grid-container {
   display: grid;
   height: 100%;
   grid-template-columns: repeat(12,1fr);
   grid-template-rows: 40px 200px 40px;
   grid-gap: 1px;
+}
+
+
+
+.grid-container > div:nth-child(1n) {
+  background-color: #96ceb4;	
+}
+
+.grid-container > div:nth-child(2n) {
+      background-color: #ff6f69;
+}
+	
+.grid-container > div:nth-child(3n) {
+  background-color: #88d8b0;
+}
+
+.grid-container > div:nth-child(4n) {
+      background-color: #ff6f69;
+}
+
+.grid-container > div:nth-child(5n) {
+      background-color: #ffcc5c;
 }
 
 .top { 
