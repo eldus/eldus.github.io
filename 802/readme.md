@@ -2,10 +2,6 @@ Test https://eldus.github.io/802/
 
 Learn CSS Grids
 
-@supports (display: grid) {
-   // code that will only run if CSS Grid is supported by the browser 
-}
-
 Reference:
 * https://scrimba.com/g/gR8PTE Learn CSS Grids by examples
 * https://cssgr.id/
@@ -14,3 +10,4 @@ Reference:
 * http://patrickbrosset.com/lab/2018-01-10-css-alignment-cheatsheet/
 * https://github.com/picturepan2/instagram.css CSS only image filter
 * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout 
+* https://caniuse.com/#search=grid Android browser not supported
