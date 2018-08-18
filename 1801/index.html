@@ -57,7 +57,6 @@
     <script src="./dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
     <script src="./dist/plugins/upload/trumbowyg.upload.js"></script>
     <script src="./dist/plugins/history/trumbowyg.history.js"></script>
-    <script src="./dist/plugins/cleanpaste/trumbowyg.cleanpaste.min.js"></script>
     <script>
         $(document).on('keydown', function (e) {
             if (e.which === 27) {
@@ -65,6 +64,16 @@
             }
         });
 
+        /* Add imagur parameters to upload plugin */
+        var uploadOptions = {
+            serverPath: 'https://api.imgur.com/3/image',
+            fileFieldName: 'image',
+            headers: {
+                'Authorization': 'Client-ID 8495b5efdfaac1a'
+            },
+            urlPropertyName: 'data.link',
+            imageWidthModalEdit: true
+        };
 
         /** Default editor configuration **/
         $('#simple-editor')
@@ -89,16 +98,7 @@
                 $(this).trumbowyg();
             });
 
-        /* Add imagur parameters to upload plugin */
-        var uploadOptions = {
-            serverPath: 'https://api.imgur.com/3/image',
-            fileFieldName: 'image',
-            headers: {
-                'Authorization': 'Client-ID 9e57cb1c4791cea'
-            },
-            urlPropertyName: 'data.link',
-            imageWidthModalEdit: true
-        };
+
         /********************************************************
          * Customized button pane + buttons groups + dropdowns
          * Use upload and base64 plugins
