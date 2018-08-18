@@ -11,7 +11,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #f4f7fa;
+            background-color: #f5f5f5;
             font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
         }
 
@@ -22,29 +22,6 @@
         .container {
             max-width: 640px;
             margin: 0 auto;
-        }
-
-        .dark-section {
-            background: #111;
-            color: #ddd;
-            margin-top: 50px;
-            padding: 50px 0 100px;
-        }
-
-        .dark-section .title {
-            font-weight: normal;
-            text-align: center;
-            font-size: 32px;
-            margin: 20px 0 50px;
-        }
-
-        .form-submit {
-            background: transparent;
-            border: 1px solid #555;
-            color: #ccc;
-            padding: 7px 13px;
-            margin-right: 17px;
-            float: right;
         }
 
         h2 {
@@ -63,10 +40,12 @@
 </head>
 
 <body>
+
     <div class="container">
         <button>Update</button>
-        <div id="simple-editor"></div>
-
+        <div>
+            <textarea id="simple-editor" cols="80" rows="20"></textarea>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
@@ -78,6 +57,7 @@
     <script src="./dist/plugins/preformatted/trumbowyg.preformatted.js"></script>
     <script src="./dist/plugins/upload/trumbowyg.upload.js"></script>
     <script src="./dist/plugins/history/trumbowyg.history.js"></script>
+    <script src="./dist/plugins/cleanpaste/trumbowyg.cleanpaste.min.js"></script>
     <script>
         $(document).on('keydown', function (e) {
             if (e.which === 27) {
@@ -90,9 +70,8 @@
         $('#simple-editor')
             .trumbowyg({
                 btns: [
-                    ['strong', 'em', 'del', 'superscript', 'subscript', 'backColor', 'foreColor',
-                        'removeformat'
-                    ],
+                    ['strong', 'em', 'del', 'superscript', 'subscript', 'backColor', 'foreColor'],
+                    ['removeformat'],
                     ['formatting'],
                     ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
                     ['unorderedList', 'orderedList'],
