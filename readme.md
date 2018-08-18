@@ -5,13 +5,14 @@ This is my GitHub home page for learning to write better codes in [HTML5](https:
 > The project folder is named with a six digits YearMonthDay the project was created (example [170609](https://github.com/eldus/eldus.github.io/tree/master/170909)). To spin-off another similar related topic by creating sub folder inside and with a running single alphanumeric name [170609/1](https://github.com/eldus/eldus.github.io/tree/master/170609/1), 170609/2, etc.
 
 #### Project Folders:
-* 170318 Local Storage and PouchDB
-* 170401 JSON
-* 170609 VueJS2.3
-* 170613 AngularJS1.6
-* 170630 React
-* 170725 Google Signin
-* 170802 PHP JSON
+* 701 Local Storage and PouchDB
+* 702 JSON
+* 703 VueJS2.3
+* 704 AngularJS1.6
+* 705 React
+* 706 Google Signin
+* 708 PHP JSON
+* 708 Etc
 
 #### Getting Started:
 A GitHub account for storing and rendering static HTML, CSS and JS codes. Download and install the [GitHub Desktop](https://desktop.github.com) on the personal computer. It provides an organised way to synchronize folders and files between the computer and the remote GitHub host. A simple text editor like [ATOM](https://atom.io), [Brackets](https://brackets.io), or [Visual Studio Code](https://code.visualstudio.com) to create and edit text files on the computer. Use [CodePen](https://codepen.io/pen/), a playground for the front end side of the web, to write and test HTML/CSS/JS Sniplets.
