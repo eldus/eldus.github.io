@@ -1,4 +1,4 @@
-## 1705 AngularJS
+## 705 AngularJS
 2017.06.13 [HTML, CSS, JS]
 
 AngularJS version 1.0 was released in 2012.  AngularJS forces developers to break their logic into modules, and code becomes more granulated. Angular JS is not Angular!

@@ -1,4 +1,4 @@
-## 1702 Local Storage
+## 702 Local Storage
 2017.04.01 [HTML, CSS, JS]
 
 # Working with JSON using Javascript (No JQuery)

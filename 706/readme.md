@@ -1,4 +1,4 @@
-## 1706 Google + Signin
+## 706 Google + Signin
 2017.06.09 [HTML, CSS, JS]
 
 https://developers.google.com/identity/sign-in/web/sign-in
