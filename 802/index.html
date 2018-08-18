@@ -1,21 +1,42 @@
 <html>
 <header>
 <style>
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
-    max-width: 600px;
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 0.6fr 1.8fr 0.6fr;
+  grid-template-rows: 0.2fr 2.5fr 0.3fr;
+  grid-gap: 1px;
+  grid-template-areas: ". . ." "left middle right" "bottom bottom bottom";
 }
+
+.top { grid-area: 1 / 1 / 2 / 5; }
+
+.bottom { grid-area: bottom; }
+
+.left { grid-area: left; }
+
+.middle { grid-area: middle; }
+
+.right { grid-area: right; }
+
+
 </style>
 <body>
-
-<div class="grid">
-  <div>Lorem ipsum dolor sit amet, idque mollis consetetur at vis, eam at sale atqui. Sapientem qualisque reprehendunt eu his, ne sit oratio accusam. In has ocurreret vulputate, etiam sadipscing ut per, his ad regione singulis scriptorem. Sit an erroribus adipiscing. No amet ridens pri, duo persecuti adolescens no. 1</div>
-  <div>Lorem ipsum dolor sit amet, idque mollis consetetur at vis, eam at sale atqui. Sapientem qualisque reprehendunt eu his, ne sit oratio accusam. In has ocurreret vulputate, etiam sadipscing ut per, his ad regione singulis scriptorem. Sit an erroribus adipiscing. No amet ridens pri, duo persecuti adolescens no. 2</div>
-  <div>Lorem ipsum dolor sit amet, idque mollis consetetur at vis, eam at sale atqui. Sapientem qualisque reprehendunt eu his, ne sit oratio accusam. In has ocurreret vulputate, etiam sadipscing ut per, his ad regione singulis scriptorem. Sit an erroribus adipiscing. No amet ridens pri, duo persecuti adolescens no. 3</div>
-  <div>Lorem ipsum dolor sit amet, idque mollis consetetur at vis, eam at sale atqui. Sapientem qualisque reprehendunt eu his, ne sit oratio accusam. In has ocurreret vulputate, etiam sadipscing ut per, his ad regione singulis scriptorem. Sit an erroribus adipiscing. No amet ridens pri, duo persecuti adolescens no. 4</div>
+<div class="grid-container">
+  <div class="top">Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+  </div>
+  <div class="bottom">Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+  </div>
+  <div class="left">Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+  </div>
+  <div class="middle">Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+  </div>
+  <div class="right">Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+  </div>
 </div>
+
+
 
 </body>
 </html>
