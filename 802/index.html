@@ -8,9 +8,12 @@ html, body {
 }
 	
 .grid-container {
+	display: -ms-grid;
   display: grid;
   height: 100%;
+	-ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
   grid-template-columns: repeat(12,1fr);
+	-ms-grid-rows: 40px 200px 40px;
   grid-template-rows: 40px 200px 40px;
   grid-gap: 3px;
 }
@@ -60,16 +63,23 @@ html, body {
 	
 @media screen and (max-width: 600px) {
     .top {
+			  -ms-grid-row-span: 10; 
         grid-column: span 10;
     }
     
     .left {
         grid-row: 1 / -1;
+			  -ms-grid-column-span: 2; 
         grid-column: span 2;
     }
-	.middle { grid-column: span 8;}
-	.right { grid-column: span 2; }
+	.middle { 
+		-ms-grid-column-span: 8; 
+		grid-column: span 8;}
+	.right { 
+		-ms-grid-column-span: 2; 
+		grid-column: span 2; }
 	.bottom { 
+		-ms-grid-column-span: 10; 
 		grid-column: span 10 ; 
 	}
 }
