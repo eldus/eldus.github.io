@@ -1,6 +1,10 @@
 Test https://eldus.github.io/802/
 
-Learn CSS Grids,
+Learn CSS Grids
+
+@supports (display: grid) {
+   // code that will only run if CSS Grid is supported by the browser 
+}
 
 Reference:
 * https://scrimba.com/g/gR8PTE Learn CSS Grids by examples
