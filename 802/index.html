@@ -15,12 +15,12 @@
 	justify-content: space-evenly;
 }
 
-.left { grid-area: left; }
-.middle { grid-area: middle; }
-.right { grid-area: right; }
+.left { grid-column: 1 / 2 ; }
+.middle { grid-column: 2 / 3 ; }
+.right { grid-column: 4 / -1 ; }
 
 .bottom { 
-	grid-area: bottom; 
+	grid-column: 1 / -1 ; 
 }
 
 .flexbox-header {
