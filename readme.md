@@ -7,7 +7,6 @@ This is my GitHub home page for learning to write better codes in [HTML5](https:
 #### Project Folders:
 * 170318 Local Storage and PouchDB
 * 170401 JSON
-* 170517 Firebase
 * 170609 VueJS2.3
 * 170613 AngularJS1.6
 * 170630 React
