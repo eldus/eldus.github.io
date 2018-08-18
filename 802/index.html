@@ -46,11 +46,18 @@ html, body {
 	justify-content: space-evenly;
 }
 
-.left { grid-column: span 2; }
-.middle { grid-column: span 8;}
-.right { grid-column: span 2; }
+.left { 
+	-ms-grid-column-span: 2; 
+	grid-column: span 2; }
+.middle { 
+	-ms-grid-column-span: 8; 
+	grid-column: span 8;}
+.right { 
+	-ms-grid-column-span: 2; 
+	grid-column: span 2; }
 
 .bottom { 
+	-ms-grid-column-span: 1 / -1; 
 	grid-column: 1 / -1 ; 
 }
 
