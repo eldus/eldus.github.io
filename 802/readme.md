@@ -2,6 +2,10 @@ Test https://eldus.github.io/802/
 
 Learn CSS Grids
 
+Unsupported Browsers
+
+"Internet Explorer" && $version <= "11") || "Chrome" && $version < "57") || "Firefox" && $version < "52") || "Safari" && $version <= "11") || "Opera" && $version < "44"
+
 Reference:
 * https://scrimba.com/g/gR8PTE Learn CSS Grids by examples
 * https://cssgr.id/
