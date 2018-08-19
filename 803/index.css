@@ -144,7 +144,8 @@ h3 {
 }
 
 .footer {
-    padding: 1em 0;
+
+    text-align: center;
 }
 .footer a {
     color: #ccc;
