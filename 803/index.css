@@ -158,23 +158,26 @@ h3 {
 
 @media (min-width: 48em) {
     .content {
+        position: relative;
         padding: 2em 3em 0;
         margin-left: 0%;
     }
 
     .header {
+        position: relative;
         margin: 80% 2em 0;
         text-align: right;
     }
 
     .sidebar {
-        position: fixed;
+        position: relative;
         top: 0;
         bottom: 0;
         margin-left: 75%;
     }
 
     .footer {
+        position: relative;
         text-align: center;
     }
 }

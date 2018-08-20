@@ -1,0 +1,78 @@
+.invisi {
+
+    width: auto;
+}
+.header {
+    background-color: gray;
+    margin: 0;
+    text-align: center;
+
+}
+
+
+.sideleft {
+    display: none;
+visibility: hidden;
+}
+
+.content {
+    background-color: #ffffff;
+
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 46em;
+    min-height: 600px;
+}
+
+.navigation {
+    background-color: gray;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    max-width: 768px;
+    text-align: center;
+}
+
+
+.sideright {
+    background-color: cornflowerblue;
+    text-align: right;
+    width: 80em;
+}
+
+.footer {
+    background-color: silver;
+    text-align: center;
+}
+
+@media (min-width: 80em) {
+    .sideleft {
+        display: block;
+        visibility: visible;
+        width: 256px;
+        background-color: red;
+        color: green;
+        text-align: center;
+    }
+
+    .sideright {
+        background-color: cornflowerblue;
+        text-align: right;
+        width: 256px;
+    }
+}
+
+@media (min-width: 64em) {
+    .sideleft {
+        display: block;
+        visibility: visible;
+        width: 256px;
+        background-color: red;
+        color: green;
+        text-align: center;
+    }
+
+}

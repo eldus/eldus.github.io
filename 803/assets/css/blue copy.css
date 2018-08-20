@@ -29,7 +29,7 @@ textarea,
 
 body {
     min-width: 256px;
-    background-color: #dddddd;
+    background-color: #fff;
     color: #777;
     line-height: 1.6;
 }
@@ -156,20 +156,12 @@ aside a:visited {
 
 /* The content div is placed as a wrapper around all the docs */
 
-.main {
-    background-color: #e91f11;
-    margin: 0 auto;
-    width: 1280px;
-}
-
 .content {
-    background-color: #ffffff;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1em;
     padding-right: 1em;
     max-width: 768px;
-    min-height: 620px;
 }
 
 .content .content-subhead {
@@ -578,6 +570,73 @@ a.pure-button-primary {
  * --------------------------
 */
 
+@media screen and (min-width: 35.5em) {
+    .legal-license {
+        text-align: left;
+        margin: 0;
+    }
+    .legal-copyright,
+    .legal-links,
+    .legal-links li {
+        text-align: right;
+        margin: 0;
+    }
+}
+
+@media screen and (min-width: 48em) {
+    .l-wrap,
+    .l-wrap .content {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .content .l-wrap {
+        margin-left: -2em;
+        margin-right: -2em;
+    }
+    .header,
+    .content {
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+    .header h1 {
+        font-size: 320%;
+    }
+    .header h2 {
+        font-size: 128%;
+    }
+    .content p {
+        font-size: 1.125em;
+    }
+    .code {
+        margin-left: auto;
+        margin-right: auto;
+        border-left-width: 1px;
+        border-right-width: 1px;
+    }
+    .table-responsive {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .table-responsive table {
+        border-left-width: 1px;
+        border-right-width: 1px;
+    }
+}
+
+@media (max-width: 80em) {
+    /* 80em = 1280px */
+    /* Only apply this when the window is smaller. Otherwise, the following
+    case results in extra padding on the left:
+        * Make the window small. (Rotate to portrait on a mobile.)
+        * Tap the menu to trigger the active state.
+        * Make the window large again. (Rotate to landscape on mobile.)
+    */
+    #layout.active {
+        position: relative;
+        left: 256px;
+    }
+}
+
 @media (min-width: 80em) {
     /* 80em = 1280px */
     #layout {
@@ -596,9 +655,10 @@ a.pure-button-primary {
     #layout.active .menu-link {
         left: 256px;
     }
+
 }
 
-@media (min-width: 64em) {
+@media (min-width: 63em) {
     .content {
         position: fixed;
         padding: 2em 3em 0;
@@ -613,7 +673,6 @@ a.pure-button-primary {
         max-width: 256px;
     }
 }
-
 /**
  * Baby Blue theme for RainbowJS
  *
