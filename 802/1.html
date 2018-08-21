@@ -41,20 +41,6 @@
       justify-content: space-evenly;
     }
 
-    .top>div:nth-child(1) {
-      margin: auto;
-    }
-
-    .top>div:nth-child(2) {
-      margin: auto;
-      color: #298054;
-    }
-
-    .top>div:nth-child(3) {
-      margin: auto;
-      margin-left: auto;
-    }
-
     .left {
       grid-column: span 2;
     }
@@ -71,6 +57,13 @@
       grid-column: 1 / -1;
     }
 
+    .flexbox-header {
+      display: flex;
+    }
+
+    .flexbox-header>div:nth-child(3) {
+      margin-left: auto;
+    }
 
     @media screen and (max-width: 600px) {
       .grid-container {
@@ -97,6 +90,13 @@
 
   <body>
 
+
+    <p>Flexbox Header</p>
+    <div class="flexbox-header">
+      <div>Home</div>
+      <div>Item 1</div>
+      <div>Item 2</div>
+    </div>
     <p>Grid Page</p>
     <div class="grid-container">
       <div class="top">
