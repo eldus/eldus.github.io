@@ -1,98 +1,122 @@
 <html>
 <header>
-<style>
+  <style>
+    html,
+    body {
+      background-color: #ffeead;
+      margin: 10px;
+    }
 
-html, body {
-  background-color: #ffeead;
-  margin: 10px;
-}
-	
-.grid-container {
-  display: grid;
-  height: 100%;
-  grid-template-columns: repeat(12,1fr);
-  grid-template-rows: 40px 200px 40px;
-  grid-gap: 3px;
-}
+    .grid-container {
+      display: grid;
+      height: 100%;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 40px 200px 40px;
+      grid-gap: 3px;
+    }
 
-.grid-container > div:nth-child(1n) {
-  background-color: #96ceb4;	
-}
+    .grid-container>div:nth-child(1n) {
+      background-color: #96ceb4;
+    }
 
-.grid-container > div:nth-child(2n) {
+    .grid-container>div:nth-child(2n) {
+      background-color: #f1120a;
+    }
+
+    .grid-container>div:nth-child(3n) {
+      background-color: #88d8b0;
+    }
+
+    .grid-container>div:nth-child(4n) {
       background-color: #ff6f69;
-}
-	
-.grid-container > div:nth-child(3n) {
-  background-color: #88d8b0;
-}
+    }
 
-.grid-container > div:nth-child(4n) {
-      background-color: #ff6f69;
-}
-
-.grid-container > div:nth-child(5n) {
+    .grid-container>div:nth-child(5n) {
       background-color: #ffcc5c;
-}
+    }
 
-.top {
-	display: flex;
-	grid-column: 1 / -1 ; 
-	justify-content: space-evenly;
-}
+    .top {
+      display: flex;
+      grid-column: 1 / -1;
+      justify-content: space-evenly;
+    }
 
-.left {grid-column: span 2; }
-.middle {grid-column: span 8;}
-.right {grid-column: span 2;}
-
-.bottom {grid-column: 1 / -1 ;}
-
-.flexbox-header {
-	display: flex;
-}
-.flexbox-header > div:nth-child(3) {
-	margin-left: auto;
-}
-	
-@media screen and (max-width: 600px) {
-    .top {grid-column: span 10;}
     .left {
+      grid-column: span 2;
+    }
+
+    .middle {
+      grid-column: span 8;
+    }
+
+    .right {
+      grid-column: span 2;
+    }
+
+    .bottom {
+      grid-column: 1 / -1;
+    }
+
+    .flexbox-header {
+      display: flex;
+    }
+
+    .flexbox-header>div:nth-child(3) {
+      margin-left: auto;
+    }
+
+    @media screen and (max-width: 600px) {
+      .grid-container {
+        grid-template-rows: 40px 200px 40px 40px;
+      }
+      .top {
+        grid-column: span 10;
+      }
+      .left {
         grid-row: 1 / -1;
         grid-column: span 2;
+      }
+      .middle {
+        grid-column: span 10;
+      }
+      .right {
+        grid-column: span 10;
+      }
+      .bottom {
+        grid-column: span 10;
+      }
     }
-	.middle {grid-column: span 8;}
-	.right {grid-column: span 2; }
-	.bottom {grid-column: span 10 ;}
-}
-</style>
-<body>
+  </style>
+
+  <body>
 
 
-<p>Flexbox Header</p>
-<div class="flexbox-header">
-	<div>Home</div>
-	<div>Item 1</div>
-	<div>Item 2</div>
-</div>
-<p>Grid Page</p>
-<div class="grid-container">
-  <div class="top">
-	<div>Home</div>
-	<div>Item 1</div>
-	<div>Item 2</div>
-  </div>
+    <p>Flexbox Header</p>
+    <div class="flexbox-header">
+      <div>Home</div>
+      <div>Item 1</div>
+      <div>Item 2</div>
+    </div>
+    <p>Grid Page</p>
+    <div class="grid-container">
+      <div class="top">
+        <div>Home</div>
+        <div>Item 1</div>
+        <div>Item 2</div>
+      </div>
 
-  <div class="left">LLL Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-  </div>
-  <div class="middle">MMM Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-  </div>
-  <div class="right">RRR Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-  </div>
-  <div class="bottom">BBB Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-  </div>
-</div>
+      <div class="left">LLL Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+      </div>
+      <div class="middle">MMM Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+      </div>
+      <div class="right">RRR Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+      </div>
+      <div class="bottom">BBB Lorem ipsum dolor sit amet, idque mollis consetetur at vis
+      </div>
+    </div>
 
 
 
-</body>
+  </body>
+
 </html>
