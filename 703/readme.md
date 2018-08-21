@@ -3,7 +3,7 @@
 
 [HTML, CSS, JS, VUE]
 
-Test it http://eldus.github.io/170609 or http://io.github.eldus.com:81/170609
+Test it http://eldus.github.io/703 or https://io.github.eldus.com/703
 
 Vue.js is optimized for DOM manipulation. Vue.js uses component driven model to manipulate document object model. VueJS do not require jQuery.
 
