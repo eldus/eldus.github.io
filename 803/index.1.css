@@ -1,25 +1,16 @@
-.invisi {
-
-    width: auto;
-}
 .header {
     background-color: gray;
     margin: 0;
     text-align: center;
-
 }
-
 
 .sideleft {
     display: none;
-visibility: hidden;
 }
 
 .content {
-    background-color: #ffffff;
-
-    margin-left: auto;
-    margin-right: auto;
+    background-color: floralwhite;
+    margin: auto;
     padding-left: 1em;
     padding-right: 1em;
     width: 46em;
@@ -36,7 +27,6 @@ visibility: hidden;
     text-align: center;
 }
 
-
 .sideright {
     background-color: cornflowerblue;
     text-align: right;
@@ -49,18 +39,10 @@ visibility: hidden;
 }
 
 @media (min-width: 80em) {
-    .sideleft {
-        display: block;
-        visibility: visible;
-        width: 256px;
-        background-color: red;
-        color: green;
-        text-align: center;
-    }
-
     .sideright {
         background-color: cornflowerblue;
         text-align: right;
+        left: 58em;
         width: 256px;
     }
 }
@@ -74,5 +56,4 @@ visibility: hidden;
         color: green;
         text-align: center;
     }
-
 }
