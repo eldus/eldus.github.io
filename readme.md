@@ -2,7 +2,7 @@
 
 This is my GitHub home page for learning to write better codes in [HTML5](https://en.wikipedia.org/wiki/HTML5) (Hypertext Markup Language), [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets#CSS_3) (Cascading Style Sheets) and JS [ES5](https://en.wikipedia.org/wiki/ECMAScript#5th_Edition) (JavaScript). Projects here are divided into individual folders. Each project folder contains numerous html/css/js files related to that project.
 
-> The project folder is named with a six digits YearMonthDay the project was created (example [170609](https://github.com/eldus/eldus.github.io/tree/master/170909)). To spin-off another similar related topic by creating sub folder inside and with a running single alphanumeric name [170609/1](https://github.com/eldus/eldus.github.io/tree/master/170609/1), 170609/2, etc.
+> The project folder is named with a six digits YearMonthDay the project was created (example [705](https://github.com/eldus/eldus.github.io/tree/master/705)). To spin-off another similar related topic by creating sub folder inside and with a running single alphanumeric name [705/1](https://github.com/eldus/eldus.github.io/tree/master/705/1), 705/2, etc.
 
 #### Project Folders:
 * 701 Local Storage and PouchDB
