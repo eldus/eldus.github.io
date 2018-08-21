@@ -15,3 +15,4 @@ Reference:
 * https://github.com/picturepan2/instagram.css CSS only image filter
 * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout 
 * https://caniuse.com/#search=grid browser that supports CSS Grid
+* https://css-tricks.com/things-ive-learned-css-grid-layout/
