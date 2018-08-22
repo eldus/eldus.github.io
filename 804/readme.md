@@ -6,4 +6,10 @@ What are PHP’s strengths? Wonderfully diverse built-in functionality that is d
 
 What are PHP’s weaknesses? The syntax is awful.
 
+Templating with Mustache
+* {{ name }}
+* {{{ html tags }}}
+
+https://github.com/bobthecow/mustache.php/wiki/Mustache-Tags
+
 Reference:
