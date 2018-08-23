@@ -9,8 +9,8 @@ $array_3 =
 	["breadcrumb-itemlink" => "/1524487.page", "breadcrumb-itemtitle" => "M2 ABC"],
 	["breadcrumb-itemlink" => "/2339111.page", "breadcrumb-itemtitle" => "A. Android TV"]
 ]];
-$merge=$array_1+$array_2;
-$merge=array_merge($array_1,$array_2);
+$merge = $array_1 + $array_2;
+$merge = array_merge($array_1, $array_2);
 //$merge = array_merge($array_1, $array_2, $array_3);
 $Template_Tpl = Template($tplfile, $merge);
 echo $Template_Tpl;
