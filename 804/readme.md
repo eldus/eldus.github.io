@@ -10,6 +10,34 @@ Templating with Mustache
 * {{ name }}
 * {{{ html tags }}}
 
+Handling PHP Arrays...
+instead of this
+```
+$c=4;
+$i=1;
+$myarray = array();
+while($i <= $c):
+    array_push($myarray, array('key' => 'value'));
+    $i++;
+endwhile;
+echo '<pre><code>';
+var_dump($myarray);
+echo '</code></pre>';
+```
+use the shorthand function:
+```
+$myarray = array();
+for($i=0;$i<4;$i++){
+  $myarray["item"] = "1 items";
+}
+```
+another example:
+```
+for($i=1; $i < 10; $i++) {
+    $option[$i] = $i;
+}
+```
+
 https://github.com/bobthecow/mustache.php/wiki/Mustache-Tags
 
 Reference:
