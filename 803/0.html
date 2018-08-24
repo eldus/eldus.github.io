@@ -1,0 +1,81 @@
+<html>
+<header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .hg__header {
+            grid-area: header;
+            background-color: slategrey;
+        }
+        .hg__footer {
+            grid-area: footer;
+            background-color: silver;
+        }
+
+        .hg__main {
+            grid-area: main;
+            background-color: white;
+        }
+
+        .hg__left {
+            grid-area: navigation;
+            background-color: skyblue;
+        }
+
+        .hg__right {
+            grid-area: ads;
+            background-color: beige;
+        }
+
+        .hg {
+            display: grid;
+            grid-template-areas:
+            "navigation header header"
+            "navigation main ads"
+            "footer footer footer";
+            grid-template-columns: 256px 1fr 256px;
+            grid-template-rows: 40px 1fr 30px;
+            min-height: 100vh;
+        }
+        body {
+            background-color:aliceblue;
+            margin: 0 auto;
+            width: 80em;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+
+        }
+
+        @media screen and (max-width: 1280px) {
+            .hg {
+                grid-template-areas:
+                "navigation header"
+                "navigation main"
+                "navigation ads"
+                "footer footer";
+                grid-template-columns: 256px 1fr;
+                grid-template-rows: 40px 1fr 50px 30px;
+            }
+        }
+        @media screen and (max-width: 1024px) {
+            .hg {
+                grid-template-areas: "header" "navigation" "main" "ads" "footer";
+                grid-template-columns: 100%;
+                grid-template-rows: 40px 80px 1fr 50px 30px;
+            }
+        }
+    </style>
+
+</header>
+
+<body class="hg">
+
+    <header class="hg__header">Title</header>
+    <main class="hg__main">Content</main>
+    <aside class="hg__left">Menu</aside>
+    <aside class="hg__right">Ads</aside>
+    <footer class="hg__footer">Footer</footer>
+
+</body>
+
+</html>

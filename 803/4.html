@@ -1,0 +1,437 @@
+<style>
+</style>
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- Removed the Critical CSS above until the site is fully functional -->
+
+<link rel="stylesheet" href="4.css">
+<meta name="theme-color" content="#CC4E46">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+
+<meta property="fb:pages" content="174099962709206" />
+<title>Articles | Responsive Web Design</title>
+
+<!-- This site is optimized with the Yoast SEO plugin v8.0 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Articles | Responsive Web Design" />
+<meta property="og:url" content="" />
+<meta property="og:site_name" content="Responsive Web Design" />
+<meta property="article:publisher" content="https://www.facebook.com/ResponsiveWebDesigns/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Articles | Responsive Web Design" />
+<meta name="twitter:site" content="@reswebdes" />
+<meta name="twitter:creator" content="@reswebdes" />
+<!-- / Yoast SEO plugin. -->
+
+
+<style>
+    .subscription-form__email[type=email] {
+        background-color: #59ABA9;
+        border: 1px solid #59ABA9;
+        color: #FFFFFF;
+        float: left;
+        margin-right: 13px;
+        width: 230px;
+        /**
+          * Media query adjustments.
+          *
+          * We restrict the width of the email input at breakpoint 3.
+          */
+    }
+
+    .subscription-form__email[type=email]::-webkit-input-placeholder {
+        color: #C5ECEB;
+    }
+
+    .subscription-form__email[type=email]::-moz-placeholder {
+        color: #C5ECEB;
+    }
+
+    .subscription-form__email[type=email]:-ms-input-placeholder {
+        color: #C5ECEB;
+    }
+
+    .subscription-form__email[type=email]::placeholder {
+        color: #C5ECEB;
+    }
+
+    @media only screen and (min-width: 60em) {
+        .subscription-form__email[type=email] {
+            max-width: 500px;
+            width: 100%;
+        }
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 600;
+    }
+</style>
+
+</head>
+
+<body class="page-template-default page page-id-91">
+    <!-- <a class="skip-link screen-reader-text" href="#content">Skip to content</a> -->
+    <nav class="nav nav--primary" :class="{ open: open, fixed: fixed }" data-app="nav--primary">
+
+        <header class="nav__bar">
+            <a href="/">
+                <span class="nav__logo logo">Responsive Design Is</span>
+            </a>
+        </header>
+
+        <div class="nav__container">
+            <form role="search" method="get" class="search-form" action="/#thing">
+                <input class="search-form__query" type="text" name="s" placeholder="Search the site" />
+                <input class="search-form__submit btn btn--cta" type="submit" value="Search" />
+            </form>
+
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a href="/" class="nav__link">
+                        <h3 class="nav__title">Home</h3>
+                        <p class="nav__desc">It's where the heart is.</p>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/design" class="nav__link">
+                        <h3 class="nav__title">Design</h3>
+                        <p class="nav__desc">Design hints tips and ideas.</p>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/develop" class="nav__link">
+                        <h3 class="nav__title">Develop</h3>
+                        <p class="nav__desc">The practical side of RWD.</p>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/strategy" class="nav__link">
+                        <h3 class="nav__title">Strategy</h3>
+                        <p class="nav__desc">Think about it.</p>
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="/articles" class="nav__link">
+                        <h3 class="nav__title">Articles</h3>
+                        <p class="nav__desc">Our long form writing on RWD.</p>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/resources" class="nav__link">
+                        <h3 class="nav__title">Resources</h3>
+                        <p class="nav__desc">Shortcuts to all things responsive.</p>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/examples" class="nav__link">
+                        <h3 class="nav__title">Examples</h3>
+                        <p class="nav__desc">Inspiration at your fingertips.</p>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/patterns" class="nav__link">
+                        <h3 class="nav__title">Patterns</h3>
+                        <p class="nav__desc">Find something that works for you.</p>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="/podcasts" class="nav__link">
+                        <h3 class="nav__title">Podcast</h3>
+                        <p class="nav__desc">Woah oh ohhhh, listen to the music.</p>
+                    </a>
+                </li>
+                <li class="nav__item"></li>
+            </ul>
+        </div>
+
+        <div class="nav__handle" @click.prevent="toggleMenu">
+            <div class="nav__handle-label" v-text="handle"></div>
+            <div class="nav__handle-container">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <header class="site-header site-header--compact">
+        <a href="/">
+            <span class="site-header__logo logo logo--inverted">Responsive Design.is</span>
+        </a>
+
+        <div class="page-header">
+            <h1 class="page-header__title">Articles</h1>
+            <nav class="nav nav--breadcrumb">
+                <ul class="nav__items">
+                    <li class="nav__item">
+                        <a class="nav__link" href="">Home</a>
+                    </li>
+                    <li class="nav__item">Articles</li>
+                </ul>
+                <!-- .breadcrumbs -->
+            </nav>
+        </div>
+    </header>
+    <!--?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?-->
+
+    <div class="content">
+        <div class="entry grid">
+            <div class="grid__row">
+
+
+                <!-- pagination here -->
+
+                <ul class="flex-grid article-list">
+
+                    <!-- the loop -->
+                    <li>
+                        <div class="resource resource--post">
+                            <div class="resource__image">
+                                <a href="">
+                                    <img src="assets/img/Progressive-WEb-Apps-and-Apple-800x460.png" class="attachment-post-standard size-post-standard wp-post-image"
+                                        alt="" /> </a>
+                            </div>
+                            <div class="resource__content">
+                                <header class="resource__header">
+                                    <h3 class="resource__title">
+                                        <a href="altering-expectations-by-improving-pwa-on-ios/">Altering expectations by improving PWA on iOS</a>
+                                    </h3>
+                                    <date class="resource__meta">July 31st, 2018</date>
+                                </header>
+                                <div class="resource__body">
+                                    <p>In an article this week, Jeremy Keith shares the experience that Clearleft have had while
+                                        designing and deploying the Virgin Holidays app onto mobile. If you have read anything
+                                        that Jeremy has shared in the past year you will know that he&#8217;s is a huge fan
+                                        of the Progressive App approach, in fact he&#8217;s even [&hellip;]</p>
+                                </div>
+                                <footer class="resource__footer">
+                                    <a href="altering-expectations-by-improving-pwa-on-ios/">Read more</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resource resource--post">
+                            <div class="resource__image">
+                                <a href="rwd-weekly-319/">
+                                    <img src="assets/img/Faculty-Good-Work-800x460.jpg" class="attachment-post-standard size-post-standard wp-post-image" /> </a>
+                            </div>
+                            <div class="resource__content">
+                                <header class="resource__header">
+                                    <h3 class="resource__title">
+                                        <a href="rwd-weekly-319/">RWD Weekly #319</a>
+                                    </h3>
+                                    <date class="resource__meta">July 27th, 2018</date>
+                                </header>
+                                <div class="resource__body">
+                                    <p>Hello again and welcome to this week&#8217;s responsive design weekly newsletter. This
+                                        week we look at a number of different tools that will help improve your page load
+                                        time by lazy loading your images. Let&#8217;s get linking. Headline A milestone for
+                                        Chrome security: marking HTTP as “not secure” With the latest release of Chrome 68
+                                        [&hellip;]</p>
+                                </div>
+                                <footer class="resource__footer">
+                                    <a href="rwd-weekly-319/">Read more</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resource resource--post">
+                            <div class="resource__image">
+                                <a href="visual-studio-code-shortcuts-for-web-developers/">
+                                    <img src="assets/img/VS-CODE-Web-Developer-Shortcuts-800x460.png" class="attachment-post-standard size-post-standard wp-post-image"
+                                        alt="" /> </a>
+                            </div>
+                            <div class="resource__content">
+                                <header class="resource__header">
+                                    <h3 class="resource__title">
+                                        <a href="visual-studio-code-shortcuts-for-web-developers/">Visual Studio Code Shortcuts for Web Developers</a>
+                                    </h3>
+                                    <date class="resource__meta">July 24th, 2018</date>
+                                </header>
+                                <div class="resource__body">
+                                    <p>﻿This is a rolling article where new shortcuts will be added as I find them helpful.
+                                        Formatting Code The code formatting is available in VS Code through the following
+                                        shortcuts: On Windows Shift + Alt + F On Mac Shift + Option + F On Ubuntu Ctrl +
+                                        Shift + I Alternatively, you can find [&hellip;]</p>
+                                </div>
+                                <footer class="resource__footer">
+                                    <a href="visual-studio-code-shortcuts-for-web-developers/">Read more</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resource resource--post">
+                            <div class="resource__image">
+                                <a href="rwd-weekly-317/">
+                                    <img src="assets/img/concatenate-800x460.jpg" class="attachment-post-standard size-post-standard wp-post-image"
+                                        alt="" /> </a>
+                            </div>
+                            <div class="resource__content">
+                                <header class="resource__header">
+                                    <h3 class="resource__title">
+                                        <a href="rwd-weekly-317/">RWD Weekly #317</a>
+                                    </h3>
+                                    <date class="resource__meta">July 23rd, 2018</date>
+                                </header>
+                                <div class="resource__body">
+                                    <p>Hello again and welcome to this week&#8217;s responsive design weekly newsletter. This
+                                        week we look at why you might not want to support IE11 with Grids, how you can comment
+                                        better on the web with web mentions, we have live coding tutorials and examples on
+                                        how to delivery some pretty damn impressive data visualisations and [&hellip;]</p>
+                                </div>
+                                <footer class="resource__footer">
+                                    <a href="rwd-weekly-317/">Read more</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resource resource--post">
+                            <div class="resource__image">
+                                <a href="getting-your-website-ready-for-apple-watch-os5/">
+                                    <img src="assets/img/Apple-OS5-Watch-Webkit-800x460.jpg" class="attachment-post-standard size-post-standard wp-post-image"
+                                        alt="" /> </a>
+                            </div>
+                            <div class="resource__content">
+                                <header class="resource__header">
+                                    <h3 class="resource__title">
+                                        <a href="getting-your-website-ready-for-apple-watch-os5/">Getting your website ready for Apple Watch OS5</a>
+                                    </h3>
+                                    <date class="resource__meta">June 8th, 2018</date>
+                                </header>
+                                <div class="resource__body">
+                                    <p>One of the biggest bits of news for web developers/designers like you and I is that WebKit
+                                        was properly being ported across to the Apple Watch and as of Apple Watch OS5 you
+                                        would be able to browse websites. Previously the email links inside of emails would
+                                        ask users to move across to their phone/ipad/computer, [&hellip;]</p>
+                                </div>
+                                <footer class="resource__footer">
+                                    <a href="getting-your-website-ready-for-apple-watch-os5/">Read more</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="resource resource--post">
+                            <div class="resource__image">
+                                <a href="how-do-i-preview-google-search-for-jobs/">
+                                    <img src="assets/img/gsfj-800x460.png" class="attachment-post-standard size-post-standard wp-post-image"
+                                        alt="" /> </a>
+                            </div>
+                            <div class="resource__content">
+                                <header class="resource__header">
+                                    <h3 class="resource__title">
+                                        <a href="how-do-i-preview-google-search-for-jobs/">How do I preview Google Search for Jobs?</a>
+                                    </h3>
+                                    <date class="resource__meta">May 6th, 2018</date>
+                                </header>
+                                <div class="resource__body">
+                                    <p>Google Search for Jobs is going to be the biggest new thing in the recruitment world
+                                        since job boards aggregated all of the jobs into one central location to make the
+                                        candidate journey a little easier. Everyone is up for an easier journey! That ease
+                                        of journey, along with several billion dollardsin the recruitment/talent industry
+                                        [&hellip;]</p>
+                                </div>
+                                <footer class="resource__footer">
+                                    <a href="how-do-i-preview-google-search-for-jobs/">Read more</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- end of the loop -->
+                </ul>
+                <!-- pagination here -->
+
+
+            </div>
+        </div>
+    </div>
+    <div class="subscribe section section--two-col section--secondary section--padded">
+        <div class="grid__row">
+            <header class="section__header">
+                <h2 class="section__title">
+                    <span class="soft-br">Subscribe to</span> our Newsletter</h2>
+            </header>
+            <div class="section__body">
+                <p class="lead">Add your email address and receive an email every Friday covering off everything worth knowing about building
+                    your websites responsively.</p>
+                <form action="//responsivedesignweekly.us4.list-manage.com/subscribe/post?u=559bc631fe5294fc66f5f7f89&amp;id=df65b6d7c8"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="subscription-form"
+                    target="_blank" novalidate="">
+                    <input name="EMAIL" class="subscription-form__email" type="email" placeholder="Enter your email address" />
+                    <input type="hidden" name="LOCATION" value="rwd.is">
+                    <button class="subscription-form__submit btn btn--secondary btn--inverted" id="mc-embedded-subscribe" type="submit" name="subscribe"
+                        onclick="ga('send', 'event', 'RWD Weekly', 'Subscribe', 'Responsive Design Knowledge Hub');">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="site-footer">
+        <nav class="nav nav--secondary">
+            <ul class="nav__items">
+                <li class="nav__item">
+                    <a href="/contact" class="nav__link">Get In Touch</a>
+                </li>
+                <li class="nav__item">
+                    <a href="/stay" class="nav__link">Stay In Touch
+                        <span class="icon icon--exit-arrow"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="nav nav--social">
+            <ul class="nav__items">
+
+                <li class="nav__item">
+                    <a href="https://www.twitter.com/reswebdes" class="nav__link">
+                        <span class="icon icon--twitter"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="https://plus.google.com/u/0/+ResponsiveDesignWeekly" class="nav__link">
+                        <span class="icon icon--GPlus"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="https://www.facebook.com/responsivewebdesigns" class="nav__link">
+                        <span class="icon icon--facebook"></span>
+                    </a>
+                </li>
+                <li class="nav__item">
+                    <a href="https://www.instagram.com/reswebdes" class="nav__link">
+                        <span class="icon icon--instagram"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <p class="site-footer__copyright">&copy; 2018. All rights reserved.
+            </p>
+    </footer>
+
+
+    <!-- Removed Critical CSS Stuff until the site is fully functional -->
+
+
+</body>
+
+</html>
