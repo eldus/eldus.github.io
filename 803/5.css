@@ -1,0 +1,84 @@
+body {
+    font-size: 1em;
+    background-color: #c84c44;
+  }
+
+  .container {
+    /*     width: 960px;*/
+    /* The container has no parent, so I'm going to set it to 100%. If I want to avoid it stretching too far then I can apply a max-width value to it as well.
+    */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header {
+    width: 100%;
+    background-color: #c84c44;
+    float: left;
+    height: 100px;
+  }
+
+  .logo {
+    float: left;
+    width: 10.41666666666667%;
+    padding: 1.041666666666667%;
+  }
+
+  .navigation {
+    float: left;
+    width: 87.5%;
+  }
+
+  .main-nav {
+    width: 95.23809523809524%;
+    padding: 0 2.380952380952381%;
+  }
+
+  .main-nav li {
+    float: left;
+    list-style-type: none;
+    width: 24.75%;
+    text-align: center;
+    border-left: 1px solid #a53d36;
+    border-right: 1px solid #a53d36;
+  }
+
+  .main-nav li a {
+    line-height: 32px;
+    text-decoration: none;
+    background-color: #8e352e;
+    width: 100%;
+    display: block;
+    color: white;
+  }
+
+  .main-nav li a:hover {
+    background-color: #c84c44;
+  }
+
+  .content {
+    padding: 3.125%;
+    max-width: 768px;
+
+    float: left;
+    background: #fff;
+  }
+
+  .sidebar {
+    width: 256px;
+    float: left;
+    padding: 1.041666666666667%;
+    background-color: #a53d36;
+  }
+
+  .footer {
+    float: left;
+    width: 93.75%;
+    background-color: #8e352e;
+    padding: 3.125%;
+    color: white;
+  }
+  .footer a {
+    color: white;
+  }
