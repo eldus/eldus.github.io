@@ -2,25 +2,64 @@
 
 <head>
     <style>
+        img {
+            max-width: 100%;
+        }
+
+        #wrap {
+            width: 100%;
+            margin: auto;
+            overflow: wrap;
+        }
+
         header {
             background-color: red;
             padding: 5px;
             display: none;
         }
 
-        nav {
+        #tab {
             background-color: blueviolet;
+            padding: 1px;
+        }
+
+        #tabmenu {
+            background-color: olive;
+            padding: 1px;
+            display: none;
+        }
+
+        nav {
+            background-color: violet;
             padding: 5px;
         }
 
-        section {
+        #strip {
+            background-color: greenyellow;
+            padding: 1px;
             display: block;
+        }
+
+        #main {
+            display: block;
+            background-color: blue;
+            padding: 2px;
         }
 
         article {
             background-color: whitesmoke;
             padding: 5px;
-            height: 200px;
+            min-height: 200px;
+        }
+
+        section {
+            background-color: bisque;
+            padding: 5px;
+        }
+
+        #side {
+            background-color: chocolate;
+            padding: 2px;
         }
 
         aside {
@@ -33,8 +72,12 @@
             padding: 5px;
         }
 
-        @media screen and (min-width: 600px) {
-            section {
+        @media screen and (min-width: 610px) {
+            #wrap {
+                width: 1000px;
+            }
+
+            #content {
                 display: flex;
             }
 
@@ -42,11 +85,15 @@
                 display: block;
             }
 
-            article {
+            #tabmenu {
+                display: block;
+            }
+
+            #main {
                 width: 60%;
             }
 
-            aside {
+            #side {
                 width: 40%;
             }
         }
@@ -56,28 +103,87 @@
 <body>
     <div id=wrap>
         <header>
-            HEADER
+            =header
         </header>
-        <nav>
-            NAV
-        </nav>
-        <section>
-            <article>
-                ARTICLE
-            </article>
-            <aside>
-                ASIDE
-            </aside>
-        </section>
+        <div id=tab>
+            <nav>#tab=nav</nav>
+        </div>
+        <div id=tabmenu>
+            <nav>#tabmenu=nav</nav>
+        </div>
+        <div id=strip>
+            <nav>#strip=nav</nav>
+        </div>
+        <div id=content>
+            <div id=main>
+                <nav>
+                    <p>#main=nav</p>
+                </nav>
+                <article>
+                    <p>#main=article</p>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book. Contrary to popular belief, Lorem Ipsum
+                        is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.
+                        Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
+                        Extremes of Good and Evil) by Marcus Tullius Cicero (106BC - 43BC).</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mattis dignissim arcu quis
+                        mattis. Morbi ex elit, consequat vel fringilla a, iaculis in est. Ut ultricies blandit semper.
+                        Nam tempus lobortis tortor, sodales malesuada mi condimentum nec. Sed eget purus at risus
+                        volutpat dapibus. Integer facilisis malesuada nulla, vel aliquam arcu porttitor sit amet.
+                        Maecenas pulvinar, nibh non rutrum euismod, dolor nunc cursus purus, ac bibendum turpis libero
+                        eu leo. Cras tristique ornare justo, non feugiat risus pellentesque quis. Curabitur enim
+                        sapien, pharetra a scelerisque viverra, imperdiet vitae lacus. Phasellus ullamcorper malesuada
+                        risus, eget lacinia mauris facilisis sed. Pellentesque et pretium metus, sit amet eleifend
+                        orci. Vestibulum consectetur augue turpis, non varius tortor imperdiet id.</p>
+                    <p><img src="http://placehold.it/400x400" class="responsive-image"></p>
+                    <p>Ut nulla est, finibus finibus eros sed, vestibulum blandit nisi. Phasellus vitae auctor turpis,
+                        vitae fermentum eros. Nunc aliquam mauris sed augue pulvinar imperdiet. Class aptent taciti
+                        sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer volutpat
+                        consectetur consequat. Curabitur et ultricies diam. Vivamus laoreet, velit vitae porttitor
+                        pharetra, erat nisi lobortis neque, sed tincidunt neque est vitae mauris. Fusce at eros
+                        pulvinar est convallis semper. Fusce malesuada mi a molestie accumsan. Pellentesque faucibus
+                        tempus massa, nec interdum nulla. Aliquam nisi lectus, fringilla et risus at, egestas feugiat
+                        nulla. Etiam sed enim eu lacus congue egestas. Maecenas bibendum nulla nibh, et condimentum mi
+                        rhoncus vel.</p>
+                    <p>Integer neque diam, viverra vel urna eget, finibus imperdiet ipsum. Ut ultrices ultrices cursus.
+                        Cras bibendum nunc sapien, in feugiat neque auctor quis. Cras dictum finibus leo, vitae semper
+                        sapien egestas eu. Etiam dignissim imperdiet tincidunt. Etiam neque ipsum, sollicitudin a
+                        scelerisque placerat, iaculis at risus. Curabitur blandit ipsum vel eros maximus luctus.
+                        Maecenas sed orci dolor.</p>
+                </article>
+                <section>#main=section</section>
+                <nav>#main=nav</nav>
+                <nav>#main=nav</nav>
+                <footer>#main=footer</footer>
+            </div>
+            <div id=side>
+                <nav>#side=nav</nav>
+                <aside>
+                    <p>#side=aside</p>
+                    <p>Nulla efficitur at libero dictum tincidunt. Proin placerat luctus est, in congue urna luctus
+                        eget. Duis consectetur turpis sed faucibus imperdiet. Donec viverra tempor justo vel laoreet.
+                        Curabitur laoreet sem risus. Nulla molestie nibh ut dui congue suscipit. Mauris sagittis non
+                        quam quis accumsan. Phasellus blandit bibendum nisi, non rutrum sapien efficitur eget. Quisque
+                        lobortis quis sem vitae malesuada. Pellentesque urna ligula, aliquam ac ex nec, laoreet
+                        ullamcorper mi. Mauris iaculis turpis a nisi tempus tempus. In sed risus ante. Phasellus quis
+                        nunc eget arcu egestas tempor.</p>
+                    <p>Aliquam eget aliquet lectus. Ut semper eleifend sem id auctor. Vestibulum a nisi dapibus,
+                        efficitur ex non, tincidunt risus. Etiam vitae felis eros. Nunc tempor sem cursus est ultrices
+                        blandit. Nulla finibus, ipsum et viverra faucibus, justo ligula vehicula metus, vel porttitor
+                        justo ex varius justo. Vivamus dapibus diam quam, non mollis nunc vehicula non.</p>
+                </aside>
+            </div>
+        </div>
         <footer>
-            FOOTER
+            =footer
         </footer>
     </div>
 </body>
 
 </html>
 <code>
-    https://www.html5-tutorial.net/new-section-tags/introduction/<br/>
+    https://www.html5-tutorial.net/new-section-tags/introduction/<br />
     https://stackoverflow.com/questions/4781077/html5-best-practices-section-header-aside-article-elements<br>
     https://www.w3schools.com/html/html5_semantic_elements.asp
 </code>
