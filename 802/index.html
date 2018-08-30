@@ -1,122 +1,82 @@
 <html>
-<header>
-  <style>
-    html,
-    body {
-      background-color: #ffeead;
-      margin: 10px;
-    }
 
-    .grid-container {
-      display: grid;
-      height: 100%;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: 40px 200px 40px;
-      grid-gap: 3px;
-    }
+<head>
+    <style>
+        header {
+            background-color: red;
+            padding: 5px;
+            display: none;
+        }
 
-    .grid-container>div:nth-child(1n) {
-      background-color: #96ceb4;
-    }
+        nav {
+            background-color: blueviolet;
+            padding: 5px;
+        }
 
-    .grid-container>div:nth-child(2n) {
-      background-color: #f1120a;
-    }
+        section {
+            display: block;
+        }
 
-    .grid-container>div:nth-child(3n) {
-      background-color: #88d8b0;
-    }
+        article  {
+            background-color: whitesmoke;
+            padding: 5px;
+            height: 200px;
+        }
 
-    .grid-container>div:nth-child(4n) {
-      background-color: #ff6f69;
-    }
+        aside {
+            background-color: coral;
+            padding: 5px;
+        }
 
-    .grid-container>div:nth-child(5n) {
-      background-color: #ffcc5c;
-    }
+        footer {
+            background-color: gray;
+            padding: 5px;
+        }
 
-    .top {
-      display: flex;
-      grid-column: 1 / -1;
-      justify-content: space-evenly;
-    }
+        @media screen and (min-width: 600px) {
+            section {
+                display: flex;
+            }
 
-    .top>div:nth-child(1) {
-      margin: auto;
-    }
+            header {
+                display: block;
+            }
 
-    .top>div:nth-child(2) {
-      margin: auto;
-      color: #298054;
-    }
+            article {
+                width: 60%;
+            }
 
-    .top>div:nth-child(3) {
-      margin: auto;
-      margin-left: auto;
-    }
+            aside {
+                width: 40%;
+            }
+        }
+    </style>
+</head>
 
-    .left {
-      grid-column: span 2;
-    }
-
-    .middle {
-      grid-column: span 8;
-    }
-
-    .right {
-      grid-column: span 2;
-    }
-
-    .bottom {
-      grid-column: 1 / -1;
-    }
-
-
-    @media screen and (max-width: 600px) {
-      .grid-container {
-        grid-template-rows: 40px 200px 40px 40px;
-      }
-      .top {
-        grid-column: span 10;
-      }
-      .left {
-        grid-row: 1 / -1;
-        grid-column: span 2;
-      }
-      .middle {
-        grid-column: span 10;
-      }
-      .right {
-        grid-column: span 10;
-      }
-      .bottom {
-        grid-column: span 10;
-      }
-    }
-  </style>
-
-  <body>
-
-    <p>Grid Page</p>
-    <div class="grid-container">
-      <div class="top">
-        <div>Home</div>
-        <div>Item 1</div>
-        <div>Item 2</div>
-      </div>
-
-      <div class="left">LLL Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-      </div>
-      <div class="middle">MMM Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-      </div>
-      <div class="right">RRR Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-      </div>
-      <div class="bottom">BBB Lorem ipsum dolor sit amet, idque mollis consetetur at vis
-      </div>
+<body>
+    <div id=wrap>
+        <header>
+            HEADER
+        </header>
+        <nav>
+            NAV
+        </nav>
+        <section>
+            <article >
+                ARTICLE
+            </article >
+            <aside>
+                ASIDE
+            </aside>
+        </section>
+        <footer>
+            FOOTER
+        </footer>
     </div>
-
-
-
-  </body>
+</body>
 
 </html>
+<code>
+https://stackoverflow.com/questions/4781077/html5-best-practices-section-header-aside-article-elements
+https://www.w3schools.com/html/html5_semantic_elements.asp
+</code>
