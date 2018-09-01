@@ -1,0 +1,171 @@
+<html>
+
+<head>
+    <style>
+
+        body {
+            font-family: 'Open Sans', 'Trebuchet MS', sans-serif;
+            color: #444;
+            background: #E6E6E6;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+        }
+
+        #header {
+            padding: 30px;
+            border-top: 1px solid #E6E6E6;
+            border-bottom: 1px solid #E6E6E6;
+        }
+
+        #site-title {
+            margin-bottom: 0;
+        }
+
+        #main {
+            padding: 30px;
+        }
+
+        a.go:after {
+            content: "\f344";
+            font-family: 'dashicons';
+            vertical-align: top;
+            margin-left: 0.5rem;
+            margin-left: 5px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #footer {
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #E6E6E6;
+        }
+
+        #footer p {
+            margin-bottom: 0;
+        }
+
+        /* === NAV === */
+
+        #menu-toggle-primary a {
+            display: block;
+            color: #fff;
+            background: #444;
+        }
+
+        #menu-toggle-primary a:before {
+            font-weight: 400;
+            font-size: 20px;
+            font-size: 2rem;
+            vertical-align: top;
+            margin-right: 0.5rem;
+            margin-right: 5px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        #menu-toggle-primary a.close-menu-primary:before {
+
+        }
+
+        /* Hide Menu */
+
+        #menu-primary-items {
+            display: none;
+        }
+
+        #menu-toggle-primary a.close-menu-primary {
+            display: none;
+        }
+
+        /* Show Menu */
+
+        #menu-primary:target #menu-primary-items {
+            display: block;
+        }
+
+        #menu-primary:target #menu-toggle-primary a.open-menu-primary {
+            display: none;
+        }
+
+        #menu-primary:target #menu-toggle-primary a.close-menu-primary {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <nav id="menu-primary">
+
+            <div class="menu-container">
+
+                <div id="menu-toggle-primary">
+                    <a class="open-menu-primary" href="#menu-primary">
+                        Menu
+                    </a>
+                    <a class="close-menu-primary" href="#">
+                        Close Menu
+                    </a>
+                </div>
+                <!-- .menu-toggle -->
+
+                <div class="wrap">
+                    <ul class="menu-items" id="menu-primary-items">
+                        <li class="menu-item">
+                            <a href="#">Menu 1</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Menu 2</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Menu 3</a>
+                            <ul class="sub-menu">
+                                <li class="menu-item">
+                                    <a href="#">Menu 3.1</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">Menu 3.2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#">Menu 4</a>
+                        </li>
+                        <li class="menu-item">
+                                <a href="#">Menu 4</a>
+                        </li>
+                        <li class="menu-item">
+                                <a href="#">Menu 4</a>
+                            </li>
+                    </ul>
+                </div>
+                <!-- .wrap -->
+
+            </div>
+            <!-- .menu-container -->
+
+        </nav>
+        <header id="header">
+            <div id="branding">
+                <h1 id="site-title">CSS Navigation Toggle</h1>
+            </div>
+        </header>
+        <!-- #header -->
+        <div id="main">
+            <div id="content">
+                <p>This demo page is to demonstrate a responsive navigation toggle with only CSS, no javascript needed. You
+                    can click "Open this menu" from the top menu to try it. </p>
+            </div>
+        </div>
+        <!-- #main -->
+        <footer id="footer">
+            <p>My Foot</p>
+        </footer>
+    </div>
+    <!-- #container -->
+</body>
+
+</html>
