@@ -1,14 +1,16 @@
 .wrapper {
-    width: 90%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+    height: auto;
 }
 
-
+.content {
+    display: relative;
+}
 
 body {
     line-height: 1.618;
-    background: #ddd;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -19,6 +21,8 @@ body {
 
 #menu .main-menu {
     display: none;
+    padding: 0;
+    margin: 0;
 }
 
 #tm:checked+.main-menu {
@@ -59,10 +63,12 @@ body {
     display: block;
     color: white;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .125);
+    background: #333;
 }
 
 #menu {
-    background-color: #09c;
+    /* background-color: #09c; */
+    background:  #333;
 }
 
 #toggle-menu {
@@ -113,9 +119,16 @@ body {
     color: rgba(255, 255, 255, .75);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
+    #menu {
+        width: 100%;
+        text-align: center;
+    }
+
     #menu .main-menu {
-        display: block;
+        /* display: block; */
+        display: flex;
+        justify-content: center;
     }
 
     #toggle-menu,
@@ -142,8 +155,9 @@ body {
         position: absolute;
         top: 100%;
         left: 0;
-        width: 12em;
-        z-index: 3000;
+        /* width: 12em; */
+        width: 100%;
+        /* z-index: 3000; */
     }
 
     #menu .sub-menu,
