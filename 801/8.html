@@ -1,0 +1,132 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+	padding:0;
+	margin:0;
+}
+
+body {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:18px;
+	background-color:#FFF
+}
+
+header {
+	width:100%;
+	background-color:#06C;
+	z-index:1000;
+}
+
+.menu-bar {
+	color:#FFF;
+	font-size:26px;
+	cursor:pointer;
+	padding:10px 12px;
+	margin-left:10px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+.menu-bar:hover {
+	background-color:rgba(0, 0, 0, 0.1);
+	border-radius:50px;
+}
+
+#tag-menu {
+	display:none;
+}
+
+
+#tag-menu:checked ~ div.drawer {
+ animation: slide-in 0.5s ease;
+ animation-fill-mode: forwards;
+}
+
+.drawer {
+	position:fixed;
+	left:-280px;
+	background-color:#06C;
+	height:100%;
+	z-index:100;
+	width:280px;
+	animation: slide-out 0.5s ease;
+	animation-fill-mode: forwards;
+}
+
+.drawer ul li {
+	list-style:none;
+}
+
+.drawer ul li a {
+	padding:10px 30px;
+	text-decoration:none;
+	display:block;
+	color:#FFF;
+	border-top:1px solid #039;
+}
+
+.drawer ul li a:hover{
+	background-color:rgba(0, 0, 0, 0.1);
+}
+
+.drawer ul li a i {
+	width:50px;
+	height:35px;
+	text-align:center;
+	padding-top:15px;
+}
+
+@keyframes slide-in {
+ from {left: -280px;}
+ to {left: 0;}
+}
+
+@keyframes slide-out {
+ from {left: 0;}
+ to {left: -280px;}
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <input type="checkbox" id="tag-menu" />
+        <label class="fa fa-bars menu-bar" for="tag-menu"></label>
+        <div class="drawer">
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fa fa-facebook"></i>&nbsp;&nbsp;Facebook</a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i>&nbsp;&nbsp;Google Plus</a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i>&nbsp;&nbsp;Twitter</a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i>&nbsp;&nbsp;LinkedIn</a></li>
+                    <li><a href="#"><i class="fa fa-pinterest"></i>&nbsp;&nbsp;Pinterest</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+            the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+            of type and scrambled it to make a type specimen book. Contrary to popular belief, Lorem Ipsum
+            is not simply random text. It has roots in a piece of classical Latin literature from 45 BC.
+            Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The
+            Extremes of Good and Evil) by Marcus Tullius Cicero (106BC - 43BC).</p>
+    </div>
+</body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className == "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+</script>
+
+</html>
