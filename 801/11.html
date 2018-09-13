@@ -1,0 +1,87 @@
+<!-- example of menu toggle -->
+<html>
+
+<head>
+
+  <style>
+    #nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    #nav-toggle {
+      cursor: pointer;
+      padding: 10px 35px 16px 0px;
+    }
+
+    #nav-toggle span,
+    #nav-toggle span:before,
+    #nav-toggle span:after {
+      cursor: pointer;
+      border-radius: 1px;
+      height: 5px;
+      width: 35px;
+      background: grey;
+      position: absolute;
+      display: block;
+      content: '';
+    }
+
+    #nav-toggle span:before {
+      top: -10px;
+    }
+
+    #nav-toggle span:after {
+      bottom: -10px;
+    }
+
+    #nav-toggle span,
+    #nav-toggle span:before,
+    #nav-toggle span:after {
+      transition: all 300ms ease-in-out;
+    }
+
+    #nav-toggle.active span {
+      background-color: transparent;
+    }
+
+    #nav-toggle.active span:before,
+    #nav-toggle.active span:after {
+      top: 0;
+    }
+
+    #nav-toggle.active span:before {
+      transform: rotate(45deg);
+    }
+
+    #nav-toggle.active span:after {
+      transform: rotate(-45deg);
+    }
+  </style>
+</head>
+
+<body>
+  <a id="nav-toggle" href="#"><span></span></a>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi mattis dignissim arcu quis
+    mattis. Morbi ex elit, consequat vel fringilla a, iaculis in est. Ut ultricies blandit semper.
+    Nam tempus lobortis tortor, sodales malesuada mi condimentum nec. Sed eget purus at risus
+    volutpat dapibus. Integer facilisis malesuada nulla, vel aliquam arcu porttitor sit amet.
+    Maecenas pulvinar, nibh non rutrum euismod, dolor nunc cursus purus, ac bibendum turpis libero
+    eu leo. Cras tristique ornare justo, non feugiat risus pellentesque quis. Curabitur enim
+    sapien, pharetra a scelerisque viverra, imperdiet vitae lacus. Phasellus ullamcorper malesuada
+    risus, eget lacinia mauris facilisis sed. Pellentesque et pretium metus, sit amet eleifend
+    orci. Vestibulum consectetur augue turpis, non varius tortor imperdiet id.</p>
+
+  <p>
+
+</body>
+<script>
+  document.querySelector("#nav-toggle")
+    .addEventListener("click", function () {
+      this.classList.toggle("active");
+    });
+</script>
+
+</html>
