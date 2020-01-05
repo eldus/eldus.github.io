@@ -1,9 +1,9 @@
 ## 703/2 All about Vue.js Routing
-
+```
 2/index.html  Vue.js Routing Concept
 2/iu1.html    Vue.js Routing CRUD
 2/iu2.html    Vue.js Routing Simple Foobar
-
+```
 #### HTML
 
 use router-link component for navigation. specify the link by passing the to prop. <router-link> will be rendered as an A tag by default. <router-view> is route outlet component matched by the route will render here.
