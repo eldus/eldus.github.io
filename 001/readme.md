@@ -1,0 +1,10 @@
+## 001 Local Storage
+2020.01.06 [HTML, CSS, JS]
+
+Test it https://eldus.github.io/001 or https://io.github.eldus.com/001
+
+#### Test vuejs code
+
+
+#### Reference
+*
