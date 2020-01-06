@@ -4,13 +4,15 @@ This is my GitHub home page for learning to write better codes in [HTML5](https:
 
 My Learning Strategy here: HTML, CSS, JavaScript, PHP, JSON (replace XML), SQL (MySQL) and finally Python.
 
-> For Python there is a uge potential for AI and machine learning applications - Tensorflow, Numpy, Keras, Theano, MXNet and PyTorch.
+> For Python there is a huge potential for AI and machine learning applications - Tensorflow, Numpy, Keras, Theano, MXNet and PyTorch.
 
 Projects here are divided into individual folders. Each project folder contains numerous html/css/js files related to that project.
 
-> The project folder is named with a six digits YearMonthDay the project was created (example [705](https://github.com/eldus/eldus.github.io/tree/master/705)). To spin-off another similar related topic by creating sub folder inside and with a running single alphanumeric name [705/1](https://github.com/eldus/eldus.github.io/tree/master/705/1), 705/2, etc.
+> The project folder is named with a three digits YearSequence the project was created (example [001](https://github.com/eldus/eldus.github.io/tree/master/001)). To earlier version by creating sub folder inside and with a running single alphanumeric name [001/0](https://github.com/eldus/eldus.github.io/tree/master/001/0), 001/1, etc.
 
 #### Project Folders:
+
+* 001 VueJS2
 * 701 Local Storage and PouchDB
 * 702 JSON
 * 703 VueJS2.3
