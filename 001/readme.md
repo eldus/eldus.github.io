@@ -1,4 +1,4 @@
-# 001 Local Storage with VueJS
+# 001 Local Storage with Vue.js
 
 2020.01.06 [HTML, CSS, JS]
 
@@ -12,3 +12,5 @@ Test it <https://eldus.github.io/001> or <https://io.github.eldus.com/001> or <h
 * integrate ckeditor
 
 ## Reference
+
+* Vue.js Documentation <https://vuejs.org/v2/cookbook/>
