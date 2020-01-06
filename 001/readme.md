@@ -14,3 +14,5 @@ Test it <https://eldus.github.io/001> or <https://io.github.eldus.com/001> or <h
 ## Reference
 
 * Vue.js Documentation <https://vuejs.org/v2/cookbook/>
+* Vue Route Documentation <https://router.vuejs.org/guide/>
+
