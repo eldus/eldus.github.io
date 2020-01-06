@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>001/0/index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="../../vendors/vue-2.6.11/vue.min.js"></script>
+    <script src="../../vendors/vue-router-3.1.3/vue-router.min.js"></script>
+</head>
+<body>
+    <div>
+        <h2>CRUD : Local Storage : Vue.js</h2>
+        <main id="app">
+            <router-view></router-view>
+        </main>
+    </div>
+    <template id="product-list">
+        <div>
+            <div>
+                <label for="search-element">Search:</label>
+                <input v-model="searchKey" id="search-element" requred placeholder="Product Name" />
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="product in filteredProducts">
+                        <td>
+                            <router-link :to="{name: 'product-view', params: {product_id: product._id}}">{{ product.name }}</router-link>
+                        </td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <router-link :to="{path: '/add'}">Add product</router-link>
+            </div>
+        </div>
+    </template>
+
+    <template id="product-view">
+        <div>
+            <h3>{{ product.name }}</h3>
+            <div>Description: <b>{{ product.description }}</b></div>
+            <div>Price: <b>{{ product.price }}</b></div>
+            <div>Rev: <b>{{ product._rev }}</b></div>
+            <div>
+                <router-link to="/">Back to list</router-link>
+                <router-link :to="{name: 'product-edit', params: {product_id: product._id}}">Edit</router-link>
+                <router-link :to="{name: 'product-delete', params: {product_id: product._id}}">Delete</router-link>
+            </div>
+        </div>
+    </template>
+
+    <template id="product-add">
+        <div>
+            <h2>Add new product</h2>
+            <form v-on:submit="createProduct">
+                <div>
+                    <label for="add-name">Name</label>
+                    <input id="add-name" v-model="product.name" required/>
+                </div>
+                <div>
+                    <label for="add-description">Description</label>
+                    <textarea id="add-description" rows="5" v-model="product.description"></textarea>
+                </div>
+                <div>
+                    <label for="add-price">Price</label>
+                    <input type="number" id="add-price" v-model="product.price" />
+                </div>
+                <button type="submit">Save</button>
+                <router-link to="/">Cancel</router-link>
+            </form>
+        </div>
+    </template>
+
+    <template id="product-edit">
+        <div>
+            <h2>Edit product</h2>
+            <form v-on:submit="updateProduct">
+                <div>
+                    <label for="edit-name">Name</label>
+                    <input id="edit-name" v-model="product.name" required/>
+                </div>
+                <div>
+                    <label for="edit-description">Description</label>
+                    <textarea id="edit-description" rows="5" v-model="product.description"></textarea>
+                </div>
+                <div>
+                    <label for="edit-price">Price</label>
+                    <input type="number" id="edit-price" v-model="product.price" />
+                </div>
+                <button type="submit">Save</button>
+                <router-link :to="{name: 'product-view', params: {product_id: product._id}}">Cancel</router-link>
+            </form>
+        </div>
+    </template>
+
+    <template id="product-delete">
+        <div>
+            <h2>Delete product {{ product.name }}</h2>
+            <form v-on:submit="deleteProduct">
+                <p>The action cannot be undone.</p>
+                <button type="submit">Delete</button>
+                <router-link :to="{name: 'product-view', params: {product_id: product._id}}">Cancel</router-link>
+            </form>
+        </div>
+    </template>
+</body>
+
+<script>
+    // var products = [{_id: '', name: '', description: '', price: 99}];
+    function getLocalStorage() {
+        var myArray = new Array;
+        var myObject = localStorage.getItem('local-products');
+        if (myObject !== null) {
+            myArray = JSON.parse(myObject);
+        }
+        return myArray;
+    }
+    var products = getLocalStorage();
+    console.log(products[0]);
+
+    function saveProducts() {
+        localStorage.setItem('local-products', JSON.stringify(products));
+    }
+
+    function findProduct(productId) {
+        return products[findProductKey(productId)];
+    };
+
+    function findProductKey(productId) {
+        for (var key = 0; key < products.length; key++) {
+            if (products[key]._id == productId) {
+                return key;
+            }
+        }
+    };
+
+    var ProductList = Vue.extend({
+        template: '#product-list',
+        data: function() {
+            return {
+                products: products,
+                searchKey: ''
+            };
+        },
+        computed: {
+            filteredProducts() {
+                return this.products.filter((product) => {
+                    return product.name.indexOf(this.searchKey) > -1
+                })
+            }
+        }
+    });
+
+    var ProductView = Vue.extend({
+        template: '#product-view',
+        data: function() {
+            return {
+                product: findProduct(this.$route.params.product_id)
+            };
+        }
+    });
+
+    var ProductAdd = Vue.extend({
+        template: '#product-add',
+        data: function() {
+            return {
+                product: {
+                    _rev: '0',
+                    name: '',
+                    description: '',
+                    price: ''
+                }
+            }
+        },
+        methods: {
+            createProduct: function() {
+                let product = this.product;
+                products.push({
+                    _id: new Date().toISOString(),
+                    _rev: product._rev,
+                    name: product.name,
+                    description: product.description,
+                    price: product.price
+                });
+                saveProducts();
+                router.push('/');
+            }
+        }
+    });
+
+    var ProductEdit = Vue.extend({
+        template: '#product-edit',
+        data: function() {
+            return {
+                product: findProduct(this.$route.params.product_id)
+            };
+        },
+        methods: {
+            updateProduct: function() {
+                let product = this.product;
+                products[findProductKey(product._id)] = {
+                    _id: product._id,
+                    _rev: product._rev,
+                    name: product.name,
+                    description: product.description,
+                    price: product.price
+                };
+                saveProducts();
+                router.push('/view/' + product._id);
+            }
+        }
+    });
+
+    var ProductDelete = Vue.extend({
+        template: '#product-delete',
+        data: function() {
+            return {
+                product: findProduct(this.$route.params.product_id)
+            };
+        },
+        methods: {
+            deleteProduct: function() {
+                products.splice(findProductKey(this.$route.params.product_id), 1);
+                saveProducts();
+                router.push('/');
+            }
+        }
+    });
+
+    var router = new VueRouter({
+        routes: [{
+            path: '/',
+            component: ProductList,
+            name: 'product-list'
+        }, {
+            path: '/add',
+            component: ProductAdd,
+            name: 'product-add'
+        }, {
+            path: '/view/:product_id',
+            component: ProductView,
+            name: 'product-view'
+        }, {
+            path: '/edit/:product_id',
+            component: ProductEdit,
+            name: 'product-edit'
+        }, {
+            path: '/delete/:product_id',
+            component: ProductDelete,
+            name: 'product-delete'
+        }]
+    });
+    var App = {}
+    new Vue({
+        router
+    }).$mount('#app')
+</script>
+<!--
+localStorage.clear(); to delete all Local Storage contents
+db.destroy(); to delete all PouchDB contents
+-->
+
+</html>
