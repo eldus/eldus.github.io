@@ -4,6 +4,11 @@
 
 Test it <https://eldus.github.io/001> or <https://io.github.eldus.com/001> or <http://localhost/eldus.github.io/001>
 
-## Test vuejs code
+## Todo
 
-### Reference
+* simple local storage with subject, textarea, check on/off
+* crud function
+* bootstrap UI
+* integrate ckeditor
+
+## Reference
