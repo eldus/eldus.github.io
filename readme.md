@@ -28,15 +28,15 @@ A GitHub account for storing and rendering static HTML, CSS and JS codes. Downlo
 
 ## Use GitHub Pages to "Demo" HTML/CSS/JS codes
 
-* On the project root: https://eldus.github.io
-* Or on https://io.github.eldus.com (remote backup)
-* Or on https://localhost (localhost)
+* On the project root: <https://eldus.github.io>
+* Or on <https://io.github.eldus.com> (remote backup)
+* Or on <https://localhost> (localhost)
 
 > GitHub Pages is designed to host project pages directly from a GitHub repository. GitHub Pages is a static site hosting service and doesn't support server-side code such as, PHP, Ruby, or Python. **Other Limitations:** Github Pages does not permits data to be written back to the host by the javascripts.
 
 ## References
 
-* Top Learn Tips [http://blog.teamtreehouse.com/top-5-learning-tips]
-* http://www.makeuseof.com/tag/8-tried-and-true-tips-for-learning-how-to-code/
+* Top Learn Tips <http://blog.teamtreehouse.com/top-5-learning-tips>
+* <http://www.makeuseof.com/tag/8-tried-and-true-tips-for-learning-how-to-code/>
 * https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics
 * https://www.w3schools.com/js/
