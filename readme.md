@@ -36,7 +36,7 @@ A GitHub account for storing and rendering static HTML, CSS and JS codes. Downlo
 
 ## References
 
-* Top Learn Tips <http://blog.teamtreehouse.com/top-5-learning-tips>
+* <http://blog.teamtreehouse.com/top-5-learning-tips>
 * <http://www.makeuseof.com/tag/8-tried-and-true-tips-for-learning-how-to-code/>
-* https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics
-* https://www.w3schools.com/js/
+* <https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics>
+* <https://www.w3schools.com/js/>
