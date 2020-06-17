@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bulma</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <style>
+        .container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+
+        @media screen and (max-width:600px) {
+            .container {
+                flex-direction: column
+            }
+
+            .box2 {
+                order: 1;
+            }
+
+            .box3 {
+                order: 3;
+            }
+
+            .box1 {
+                order: 2;
+            }
+
+
+
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            /*position: absolute;*/
+            margin: 10;
+            padding: 3;
+            border: 5px solid silver;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="box box1">
+
+                <p class="image is-64x64">
+
+                    <h1 class="title">Box 1</h1>
+                  </p>
+            </div>
+            <div class="box box2">
+                <p class="subtitle">
+                    Box 2 = Using <strong>leaflet</strong>!
+                </p>
+                <div id="map" ></div>
+            </div>
+            <div class="box box3">
+                <h1 class="title">Box 3</h1>
+            </div>
+
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          </p>
+        </div>
+      </footer>
+    <script>
+        var map = L.map('map', {
+            zoomControl: true
+        }).setView([1.409552, 103.895892], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.marker([1.409552, 103.895892]).addTo(map)
+            .bindPopup('Hi, I am here.<br>Hello world.')
+            .openPopup();
+    </script>
+
+</body>
+
+</html>

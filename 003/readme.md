@@ -1,4 +1,4 @@
-# 001 Plain CSS, Milligram and Flexbox
+# 002 Bootstrap CSS framework based on Flexbox
 
 2020.06.17 [HTML, CSS, JS]
 
@@ -10,5 +10,4 @@ Test it <https://eldus.github.io/001> or <https://io.github.eldus.com/001> or <h
 
 ## Reference
 
-* W3Schools <https://www.w3schools.com/css/default.asp>
-* Milligram <https://milligram.io>
+* Bootstrap 4 Documentation <https://www.w3schools.com/bootstrap4/default.asp>
