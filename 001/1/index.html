@@ -1,47 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
 
-	<title>Leaflet 1.6</title>
-	<meta charset="utf-8" />
+<head>
+    <title>Bulma</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
 
 </head>
+
 <body>
-
-    <div class="container-fluid">
-
-
-<h1>Maps</h1>
-
-<div id="map" style="width: 400px; height: 400px;"></div>
-
-
-    <p><strong>Reference:</strong></p>
-    <ol>
-        <li>https://getbootstrap.com/docs/4.5/getting-started/introduction/</li>
-        <li>https://leafletjs.com/plugins.html</li>
-        <li>https://github.com/domoritz/leaflet-locatecontrol</li>
-        <li>https://github.com/Norkart/Leaflet-MiniMap</li>
-        <li>pan map and mark + on the center with Lat/Lon http://xguaita.github.io/Leaflet.MapCenterCoord/</li>
-    </ol>
-
-  <p>The base type is 1.6rem (16px) over 1.6 line height (24px)</p>
-  <p><button class="button button-outline">Outlined Button</button></p>
-</div>
-<script>
-var map = L.map('map',{ zoomControl: true }).setView([1.409552,103.895892], 18);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-L.marker([1.409552,103.895892]).addTo(map)
-.bindPopup('Hi, I am here.<br>Hello world.')
-.openPopup();
-</script>
+    <section class="section">
+        <div class="container">
+            <h1>Maps</h1>
+            <div id="map" style="width: 400px; height: 400px;"></div>
+        </div>
+    </section>
+    <script>
+        var map = L.map('map', {
+            zoomControl: true
+        }).setView([1.409552, 103.895892], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.marker([1.409552, 103.895892]).addTo(map)
+            .bindPopup('Hi, I am here.<br>Hello world.')
+            .openPopup();
+    </script>
 
 </body>
+
 </html>

@@ -1,17 +1,14 @@
-# 001 Local Storage with Vue.js
+# 001 Bulma CSS framework based on Flexbox
 
-2020.01.06 [HTML, CSS, JS]
+2020.06.17 [HTML, CSS, JS]
 
 Test it <https://eldus.github.io/001> or <https://io.github.eldus.com/001> or <http://localhost/001>
 
 ## Todo
 
-* simple local storage with subject, textarea, check on/off
-* crud function
-* bootstrap UI
-* integrate ckeditor
+* Test our various Layouts
 
 ## Reference
 
-* Vue.js Documentation <https://vuejs.org/v2/cookbook/>
-* Vue Route Documentation <https://router.vuejs.org/guide/>
+* Bulma Documentation <https://bulma.io/documentation/>
+

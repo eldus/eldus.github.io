@@ -41,12 +41,28 @@
               Home
             </a>
 
-            <a class="navbar-item">
-              Documentation
-            </a>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
+            <div id="1" class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="index.html">
+                Documentation
+              </a>
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  About1
+                </a>
+                <a class="navbar-item">
+                  Jobs
+                </a>
+                <a class="navbar-item">
+                  Contact2
+                </a>
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  Report an issue3
+                </a>
+              </div>
+            </div>
+            <div id="2" class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="index.html">
                 More
               </a>
 
@@ -187,6 +203,15 @@ if ($navbarBurgers.length > 0) {
       </nav>
     </div>
   </section>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      </p>
+    </div>
+  </footer>
   <script>
     var map = L.map('map',{ zoomControl: true }).setView([1.409552,103.895892], 18);
     L.tileLayer('https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png').addTo(map);
