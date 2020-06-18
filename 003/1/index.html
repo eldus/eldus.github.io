@@ -1,81 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <title>Bootstrap 4 Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <title>Bulma</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <style>
+        .container {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+        }
+
+        @media screen and (max-width:600px) {
+            .container {
+                flex-direction: column
+            }
+
+            .box2 {
+                order: 1;
+            }
+
+            .box3 {
+                order: 3;
+            }
+
+            .box1 {
+                order: 2;
+            }
+
+
+
+        }
+
+        #map {
+            width: 100%;
+            height: 400px;
+            /*position: absolute;*/
+            margin: 10;
+            padding: 3;
+            border: 5px solid silver;
+        }
+    </style>
 </head>
 
 <body>
+    <section class="section">
+        <div class="container">
+            <div class="box box1">
 
-    <div class="container-fluid p-3 my-3 border">
-        <h1>My First Bootstrap Page</h1>
-        <p>This container has a border and some extra padding and margins.</p>
-        <div class="row">
-            <div class="col" style="background-color:lavender;">.col</div>
-            <div class="col" style="background-color:orange;">.col</div>
-            <div class="col" style="background-color:lavender;">.col</div>
+                <p class="image is-64x64">
+
+                    <h1 class="title">Box 1</h1>
+                  </p>
+            </div>
+            <div class="box box2">
+                <p class="subtitle">
+                    Box 2 = Using <strong>leaflet</strong>!
+                </p>
+                <div id="map" ></div>
+            </div>
+            <div class="box box3">
+                <h1 class="title">Box 3</h1>
+            </div>
+
         </div>
-        <dl>
-            <dt>DT Coffee</dt>
-            <dd>DD - black hot drink</dd>
-            <dt>Milk</dt>
-            <dd>- white cold drink</dd>
-        </dl>
-        <p><code>Code block</code></p>
-        <p><kbd>K E Y example</kbd></p>
-        <pre>
-            Text in a pre element
-            is displayed in a fixed-width
-            font, and it preserves
-            both      spaces and
-            line breaks.
-            </pre>
-        <p><mark>mark to highlight text</mark></p>
-        <p>Use the contextual classes to provide "meaning through colors":</p>
-        <p class="text-muted">This text is muted.</p>
-        <p class="text-primary">This text is important.</p>
-        <p class="text-success">This text indicates success.</p>
-        <p class="text-info">This text represents some information.</p>
-        <p class="text-warning">This text represents a warning.</p>
-        <p class="text-danger">This text represents danger.</p>
-        <p class="text-secondary">Secondary text.</p>
-        <p class="text-dark">This text is dark grey.</p>
-        <p class="text-light">This text is light grey (on white background).</p>
-        <p class="text-white">This text is white (on white background).</p>
-        <p class="text-body">Default body color (often black).</p>
-        <a href="#" class="text-muted">Muted link.</a>
-        <a href="#" class="text-primary">Primary link.</a>
-        <a href="#" class="text-success">Success link.</a>
-        <a href="#" class="text-info">Info link.</a>
-        <a href="#" class="text-warning">Warning link.</a>
-        <a href="#" class="text-danger">Danger link.</a>
-        <a href="#" class="text-secondary">Secondary link.</a>
-        <a href="#" class="text-dark">Dark grey link.</a>
-        <a href="#" class="text-body">Body/black link.</a>
-        <a href="#" class="text-light">Light grey link.</a>
-    </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+          <p>
+            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+          </p>
+        </div>
+      </footer>
+    <script>
+        var map = L.map('map', {
+            zoomControl: true
+        }).setView([1.409552, 103.895892], 18);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.marker([1.409552, 103.895892]).addTo(map)
+            .bindPopup('Hi, I am here.<br>Hello world.')
+            .openPopup();
+    </script>
 
-    <div class="container p-3 my-3 bg-dark text-white">
-        <h1>My First Bootstrap Page</h1>
-        <p>This container has a dark background color and a white text, and some extra padding and margins.</p>
-    </div>
-
-    <div class="container p-3 my-3 bg-primary text-white">
-        <h1>My First Bootstrap Page</h1>
-        <h1>h1 heading <small>smaller text</small></h1>
-        <h2>h2 Bootstrap heading (2rem = 32px)</h2>
-        <h3>h3 Bootstrap heading (1.75rem = 28px)</h3>
-        <h4>h4 Bootstrap heading (1.5rem = 24px)</h4>
-        <h5>h5 Bootstrap heading (1.25rem = 20px)</h5>
-        <h6>h6 Bootstrap heading (1rem = 16px)</h6>
-        <p>This container has a blue background color and a white text, and some extra padding and margins.</p>
-    </div>
 </body>
 
 </html>
