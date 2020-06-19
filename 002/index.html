@@ -1,151 +1,81 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <title>PureCSS 2.0.3</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A layout example that shows off a responsive product landing page.">
+  <title>Bulma 0.9</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <style>
+  </style>
+</head>
 
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    <link rel="stylesheet" href="styles.css">
-</head><body>
-
-    <div class="pure-menu pure-menu-horizontal">
-        <a href="#" class="pure-menu-heading">Your Logo</a>
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Pricing</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
-        </ul>
+<body>
+  <div class="tile is-ancestor">
+    <div class="tile is-vertical is-8">
+      <div class="tile">
+        <div class="tile is-parent is-vertical">
+          <article class="tile is-child notification is-primary">
+            <p class="title">Vertical...</p>
+            <p class="subtitle">Top tile</p>
+          </article>
+          <article class="tile is-child notification is-warning">
+            <p class="title">...tiles</p>
+            <p class="subtitle">Bottom tile</p>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-info">
+            <p class="title">Middle tile</p>
+            <p class="subtitle">With an image</p>
+            <figure class="image is-4by3">
+              <img src="https://bulma.io/images/placeholders/640x480.png">
+            </figure>
+          </article>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-danger">
+          <p class="title">Wide tile</p>
+          <p class="subtitle">Aligned with the right tile</p>
+          <div class="content">
+            <!-- Content -->
+          </div>
+        </article>
+      </div>
     </div>
+    <div class="tile is-parent">
+      <article class="tile is-child notification is-success">
+        <div class="content">
+          <p class="title">Tall tile</p>
+          <p class="subtitle">With even more content</p>
+          <div class="content">
+            <!-- Content -->
 
-    <div class="banner">
-        <h1 class="banner-head">
-            Simple Pricing.<br>
-            Try before you buy.
-        </h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper diam at erat pulvinar, at pulvinar felis blandit. Vestibulum volutpat tellus diam, consequat gravida libero rhoncus ut. Morbi maximus, leo sit amet vehicula eleifend, nunc dui porta orci, quis semper odio felis ut quam.</p>
+
+          <p>Suspendisse varius ligula in molestie lacinia. Maecenas varius eget ligula a sagittis. Pellentesque interdum, nisl nec interdum maximus, augue diam porttitor lorem, et sollicitudin felis neque sit amet erat. Maecenas imperdiet felis nisi, fringilla luctus felis hendrerit sit amet. Aenean vitae gravida diam, finibus dignissim turpis. Sed eget varius ligula, at volutpat tortor.</p>
+
+        </div>
+      </article>
     </div>
-
-    <div class="l-content">
-        <div class="pricing-tables pure-g">
-            <div class="pure-u-1 pure-u-md-1-3">
-                <div class="pricing-table pricing-table-free">
-                    <div class="pricing-table-header">
-                        <h2>Personal</h2>
-
-                        <span class="pricing-table-price">
-                            $5 <span>per month</span>
-                        </span>
-                    </div>
-
-                    <ul class="pricing-table-list">
-                        <li>Free setup</li>
-                        <li>Custom sub-domain</li>
-                        <li>Standard customer support</li>
-                        <li>1GB file storage</li>
-                        <li>1 database</li>
-                        <li>Unlimited bandwidth</li>
-                    </ul>
-
-                    <button class="button-choose pure-button">Choose</button>
-                </div>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-3">
-                <div class="pricing-table pricing-table-biz pricing-table-selected">
-                    <div class="pricing-table-header">
-                        <h2>Small Business</h2>
-
-                        <span class="pricing-table-price">
-                            $25 <span>per month</span>
-                        </span>
-                    </div>
-
-                    <ul class="pricing-table-list">
-                        <li>Free setup</li>
-                        <li>Use your own domain</li>
-                        <li>Standard customer support</li>
-                        <li>10GB file storage</li>
-                        <li>5 databases</li>
-                        <li>Unlimited bandwidth</li>
-                    </ul>
-
-                    <button class="button-choose pure-button">Choose</button>
-                </div>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-3">
-                <div class="pricing-table pricing-table-enterprise">
-                    <div class="pricing-table-header">
-                        <h2>Enterprise</h2>
-
-                        <span class="pricing-table-price">
-                            $45 <span>per month</span>
-                        </span>
-                    </div>
-
-                    <ul class="pricing-table-list">
-                        <li>Free setup</li>
-                        <li>Use your own domain</li>
-                        <li>Premium customer support</li>
-                        <li>Unlimited file storage</li>
-                        <li>25 databases</li>
-                        <li>Unlimited bandwidth</li>
-                    </ul>
-
-                    <button class="button-choose pure-button">Choose</button>
-                </div>
-            </div>
-        </div> <!-- end pricing-tables -->
-
-        <div class="information pure-g">
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">Get started today</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-                    </p>
-                </div>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">Pay monthly or annually</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                    </p>
-                </div>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">24/7 customer support</h3>
-                    <p>
-                        Cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    </p>
-                </div>
-            </div>
-
-            <div class="pure-u-1 pure-u-md-1-2">
-                <div class="l-box">
-                    <h3 class="information-head">Cancel your plan anytime</h3>
-                    <p>
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </div>
-            </div>
-        </div> <!-- end information -->
-    </div> <!-- end l-content -->
-
-    <div class="footer l-box">
-        <p>
-            <a href="#">Try now</a> for 14 days. No credit card required. Header image courtesy of <a href='http://unsplash.com/'>Unsplash</a>.
-        </p>
+  </div>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+        is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      </p>
     </div>
+  </footer>
+</body>
 
-    </body>
-    </html>
+</html>

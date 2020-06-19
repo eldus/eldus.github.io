@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>Leaflet - OneMap</title>
+  <title>Leaflet - Wikimedia</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
     integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
     crossorigin="" />
@@ -30,39 +30,23 @@
 
 <body>
   <div id="mapid1"></div>
-  <div id="text">OneMap with OpenRailwayMap and Stamen Design Toner Road.<br>
-    L.tileLayer('https://maps-{s}.onemap.sg/v3/Grey/{z}/{x}/{y}.png')<br>
-    L.tileLayer('https://maps-{s}.onemap.sg/v3/Original/{z}/{x}/{y}.png')<br>
-    L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png')
-
-  </div>
+  <div id="text">Wikimedia with OpenRailwayMap.</div>
 
 </body>
 
 <script>
   var map = L.map('mapid1', {
     zoomControl: true
-  }).setView([1.409552, 103.895892], 18);
-  L.tileLayer('https://maps-{s}.onemap.sg/v3/Default/{z}/{x}/{y}.png', {
-    attribution: 'OneMap.SG &copy; SLA'
-  }).addTo(map);
+  }).setView([1.409552, 103.895892], 15);
+  L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
+	attribution: '&copy; Wikimedia',maxZoom: 19}
+).addTo(map);
 
   var OpenRailwayMap = L.tileLayer('https://{s}.tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: 'OpenRailwayMap'
   }).addTo(map);
 
-  var Stamen_TonerHybrid = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-hybrid/{z}/{x}/{y}{r}.{ext}', {
-    attribution: 'Stamen Design',
-    subdomains: 'abcd',
-    minZoom: 0,
-    maxZoom: 20,
-    ext: 'png'
-  }).addTo(map);
-
-  L.marker([1.409552, 103.895892]).addTo(map)
-    .bindPopup('Hi, I am here.<br>@ waterway jewel.')
-    .openPopup();
 </script>
 
 </html>

@@ -10,5 +10,5 @@ Test it <https://eldus.github.io/001> or <https://io.github.eldus.com/001> or <h
 
 ## Reference
 
-* W3Schools <https://www.w3schools.com/css/default.asp>
-* Milligram <https://milligram.io>
+* W3Schools <https://www.w3schools.com/css/>
+* Milligram - Only 2kb gzipped! <https://milligram.io>

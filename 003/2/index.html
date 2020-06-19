@@ -2,15 +2,14 @@
 <html lang="en">
 
 <head>
-  <title>Bootstrap 4.5.0</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v4.0.1">
+  <title>Jumbotron Template · Bootstrap</title>
 
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -23,14 +22,7 @@
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
     crossorigin=""></script>
 
-  <!-- Favicons -->
-  <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-  <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-  <link rel="manifest" href="/docs/4.5/assets/img/favicons/manifest.json">
-  <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-  <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
-  <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+
   <meta name="theme-color" content="#563d7c">
 
 
@@ -63,7 +55,16 @@
       }
     }
 
-    #map {
+    #map1 {
+      width: 100%;
+      height: 400px;
+      /*position: absolute;*/
+      margin: 10;
+      padding: 3;
+      border: 5px solid silver;
+    }
+
+    #map2 {
       width: 100%;
       height: 400px;
       /*position: absolute;*/
@@ -72,8 +73,7 @@
       border: 5px solid silver;
     }
   </style>
-  <!-- Custom styles for this template -->
-  <link href="index.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -134,7 +134,7 @@
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
             condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
             Donec sed odio dui. </p>
-          <div id="map"></div>
+          <div id="map1"></div>
           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4 box-2">
@@ -150,6 +150,7 @@
             felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
             massa justo sit amet risus.</p>
           <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+          <div id="map2"></div>
         </div>
       </div>
 
@@ -172,10 +173,28 @@
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
   </script>
   <script>
-    var map = L.map('map', {
+  // create a map in the "map" div, set the view to a given place and zoom
+var map1 = L.map('map1').setView([48.858190, 2.294470], 16);
+
+// add an OpenStreetMap tile layer
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map1);
+
+L.marker([48.858190, 2.294470]).addTo(map1)
+    .bindPopup('This is the Eiffel Tower<br> Easily customizable.')
+    .openPopup();
+
+
+
+
+
+// create a map in the "map" div, set the view to a given place and zoom
+
+var map2 = L.map('map2', {
       zoomControl: true
     }).setView([1.409552, 103.895892], 18);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map2);
 
     var myIcon = new L.Icon({
       iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -188,12 +207,13 @@
 
     L.marker([1.409552, 103.895892], {
         icon: myIcon
-      }).addTo(map)
+      }).addTo(map2)
       .bindPopup('Hi, I am here.<br>Hello world.')
       .openPopup();
-    map.dragging.disable();
-    map.doubleClickZoom.disable();
-    map.scrollWheelZoom.disable();
+    map2.dragging.disable();
+    map2.doubleClickZoom.disable();
+    map2.scrollWheelZoom.disable();
+
   </script>
 </body>
 
