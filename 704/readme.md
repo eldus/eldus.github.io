@@ -1,6 +1,8 @@
 ## 1704 ReactJS
 2017.06.30 [HTML, CSS, JS]
 
+Test it http://eldus.github.io/704
+
 ReactJS is a library.
 
 ReactJS is simple and there is very little to learn about React once you realize that components are functions and JSX (a preprocessor step that adds XML syntax to JavaScript) is also functions.
